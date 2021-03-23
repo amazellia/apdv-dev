@@ -2,9 +2,10 @@ import '../styles/globals.scss'
 import React from 'react'
 import commentBox from 'commentbox.io'
 
-//import ReactDOM from 'react-dom'
-//import { Provider } from '@lyket/react'
-/*
+/* Lyket API - WIP
+import ReactDOM from 'react-dom'
+import { Provider } from '@lyket/react'
+
 ReactDOM.render(
   <Provider apiKey="c3fa0100ec0fc478a6c2233a06869e">
     <App />
@@ -24,6 +25,7 @@ class reactions extends Provider {
   }
 }*/
 
+// CommentBox.io API - WIP
 class commentbox extends React.Component {
 
     componentDidMount() {
