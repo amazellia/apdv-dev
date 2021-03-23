@@ -1,5 +1,5 @@
 import '../styles/globals.scss'
-import ReactDOM from 'react-dom'
+import ReactDOM from '@types/react-dom'
 import { Provider } from '@lyket/react'
 
 function MyApp({ Component, pageProps }) {
