@@ -4,6 +4,7 @@ import styles from '../../styles/Home.module.scss'
 import { useState } from 'react'
 import Image from 'next/image'
 
+
 //import { ClapButton } from '@lyket/react'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
