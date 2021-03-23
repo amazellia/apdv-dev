@@ -28,6 +28,21 @@ footer {
     margin: 2em 0 2em 0;
 }
 
+#disqus_thread {
+	width: 100%;
+	margin: 20px 0;
+}
+
+.comment {
+
+    text-align: center;
+    color: purple;
+}
+
+.comment:hover {
+    color: pink;
+}
+
 /* Content grid
 /* ---------------------------------------------------------- */
 

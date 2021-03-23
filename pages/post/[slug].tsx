@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.scss'
 import { useState } from 'react'
 import Image from 'next/image'
-
-
 //import { ClapButton } from '@lyket/react'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
@@ -61,6 +59,20 @@ const Post: React.FC<{ post: Post }> = (props) => {
 		return <h1>Loading...</h1>
 	}
 
+	function loadComments() {
+		setEnableLoadComments(false)
+		;(window as any).disqus_config = function () {
+			this.page.url = window.location.href
+			this.page.identifier = post.slug
+		}
+
+		const script = document.createElement('script')
+		script.src = 'https://apdv-dev.disqus.com/embed.js'
+		script.setAttribute('data-timestamp', Date.now().toString())
+
+		document.body.appendChild(script)
+	}
+
 	return (
 		<div className={styles.container}>
 
@@ -75,7 +87,14 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<div className={'${styles.gh-canvas} ${styles.gh-content}'} dangerouslySetInnerHTML={{ __html: post.html }}></div>
 
-			<div className="commentbox"/>
+			{enableLoadComments && (
+				<p className={styles.goback} onClick={loadComments}>
+					<div className='comment'>Comment!</div>
+				</p>
+			)}
+
+			<div id="disqus_thread"></div>
+
 
 			<footer>
 			<i>Amanda Patricia Dorado Viray © 2021</i>
