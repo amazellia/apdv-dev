@@ -11,6 +11,7 @@
     "@emotion/react": "^11.1.5",
     "closest": "^0.0.1",
     "dagre": "^0.8.5",
+    "hyvor-talk-react": "^1.0.3",
     "lodash": "^4.17.21",
     "mathjs": "^9.3.0",
     "next": "^10.0.7",

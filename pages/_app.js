@@ -1,6 +1,6 @@
 import '../styles/globals.scss'
 import React from 'react'
-import commentBox from 'commentbox.io'
+//import commentBox from 'commentbox.io'
 
 /* Lyket API - WIP
 import ReactDOM from 'react-dom'
@@ -25,7 +25,7 @@ class reactions extends Provider {
   }
 }*/
 
-
+/*
 // CommentBox.io API - WIP
 class commentbox extends React.Component {
 
@@ -46,7 +46,7 @@ class commentbox extends React.Component {
            * @param {string} boxId
            * @param {Location} pageLocation - a copy of the current window.location
            * @returns {string}
-           */
+           */ /*
           createBoxUrl(boxId, pageLocation) {
       
               pageLocation.search = ''; // removes query string!
@@ -58,7 +58,7 @@ class commentbox extends React.Component {
            * May fire multiple times in its lifetime.
            * 
            * @param {number} count
-           */
+           */ /*
           onCommentCount(count) {
       
           }
@@ -76,7 +76,7 @@ class commentbox extends React.Component {
           <div className="commentbox" />
       );
   }
-}
+} */
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />

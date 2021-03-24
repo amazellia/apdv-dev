@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.scss'
 import { useState } from 'react'
 import Image from 'next/image'
+import React from 'react'
+import HyvorTalk from 'hyvor-talk-react'
 //import { ClapButton } from '@lyket/react'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
@@ -87,6 +89,12 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<div className={'${styles.gh-canvas} ${styles.gh-content}'} dangerouslySetInnerHTML={{ __html: post.html }}></div>
 
+
+			<div>
+			<HyvorTalk.Embed websiteId={3611} loadMode="scroll"/>
+			</div>
+
+{/*  DISQUS 
 			{enableLoadComments && (
 				<p className={styles.goback} onClick={loadComments}>
 					<div className='comment'>Comment!</div>
@@ -94,7 +102,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 			)}
 
 			<div id="disqus_thread"></div>
-
+*/}
 
 			<footer>
 			<i>Amanda Patricia Dorado Viray © 2021</i>
