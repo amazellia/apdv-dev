@@ -61,6 +61,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 		return <h1>Loading...</h1>
 	}
 
+	/* -- comment funtion
 	function loadComments() {
 		setEnableLoadComments(false)
 		;(window as any).disqus_config = function () {
@@ -73,7 +74,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 		script.setAttribute('data-timestamp', Date.now().toString())
 
 		document.body.appendChild(script)
-	}
+	}*/
 
 	return (
 		<div className={styles.container}>
@@ -94,7 +95,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 			<HyvorTalk.Embed websiteId={3611} id={post.slug} loadMode="scroll"/>
 			</div>
 
-{/*  DISQUS 
+			{/*  DISQUS 
 			{enableLoadComments && (
 				<p className={styles.goback} onClick={loadComments}>
 					<div className='comment'>Comment!</div>
@@ -102,7 +103,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 			)}
 
 			<div id="disqus_thread"></div>
-*/}
+			*/}
 
 			<footer>
 			<i>Amanda Patricia Dorado Viray © 2021</i>
