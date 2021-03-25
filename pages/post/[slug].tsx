@@ -90,10 +90,8 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<div className={'${styles.gh-canvas} ${styles.gh-content}'} dangerouslySetInnerHTML={{ __html: post.html }}></div>
 
-
-			<div>
 			<HyvorTalk.Embed websiteId={3611} id={post.slug} loadMode="scroll"/>
-			</div>
+
 
 			{/*  DISQUS 
 			{enableLoadComments && (
