@@ -91,7 +91,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 
 			<div>
-			<HyvorTalk.Embed websiteId={3611} loadMode="scroll"/>
+			<HyvorTalk.Embed websiteId={3611} id={post.slug} loadMode="scroll"/>
 			</div>
 
 {/*  DISQUS 
