@@ -31,7 +31,7 @@ footer {
 /* Add a black background color to the top navigation */
 .topnav {
     overflow: hidden;
-    margin: 0;
+    margin: 3em 0 0;
     padding: 0;
   }
   
@@ -54,21 +54,21 @@ footer {
     color: white;
   }
 
-  #blognav { //[slug] nav 
-    margin: 3em;
-  }
-
 .aboutnav {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    font-size: 20px;
   }
   
   .aboutnav a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 20px;
+  }
+
+  #backblog {
+      font-size:larger;
   }
 /*
 #disqus_thread {

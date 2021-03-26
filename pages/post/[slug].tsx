@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.scss'
 import { useState } from 'react'
-import Image from 'next/image'
 import React from 'react'
 import HyvorTalk from 'hyvor-talk-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
 
@@ -63,7 +64,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 	return (
 		<div className={styles.container}>
 
-			<div className="topnav" id="blognav">
+			<div className="topnav">
 				<Link href="/">
 					<a>home</a>
 				</Link>
@@ -80,7 +81,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<p className={styles.goback}>
 				<Link href="/blog">
-					<a><Image src="/backArrow.png" alt="back" width="17" height="30"/></a>
+					<a id="backblog"><FontAwesomeIcon icon={faChevronLeft}/></a>
 				</Link>
 			</p>
 

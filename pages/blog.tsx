@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
 
+
 const { BLOG_URL, CONTENT_API_KEY } = process.env
 
 type Post = {

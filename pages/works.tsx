@@ -23,7 +23,7 @@ export default function Home() {
 			</div>
 
 			<h1>works</h1>
-			<a href="https://amazelliaart.tumblr.com"><FontAwesomeIcon icon={faPalette}/> art blog</a>
+			<a href="https://amazelliaart.tumblr.com"><FontAwesomeIcon icon={faPalette} size="xs"/> art blog</a>
 
 		</div>
 	)

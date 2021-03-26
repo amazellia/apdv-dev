@@ -25,7 +25,7 @@ export default function Home() {
 				</Link>
 			</div>
 
-			<h1>Amanda Patricia D. Viray</h1>
+			<h1>Amanda Patricia Viray</h1>
 
 		</div>
 	)
