@@ -10,20 +10,22 @@ export default function Home() {
 				<title>apdv</title>
 			</Head>
 
-			<h1>Amanda Patricia Viray</h1>
-			
-			<Link href="/works">
-				<a>works</a>
-			</Link>
+			<div className="topnav">
+				<Link href="/">
+					<a>home</a>
+				</Link>
+				<Link href="/works">
+					<a>works</a>
+				</Link>
+				<Link href="/blog">
+					<a>blog</a>
+				</Link>
+				<Link href="/about">
+					<a>about</a>
+				</Link>
+			</div>
 
-			<Link href="/blog">
-				<a>blog</a>
-			</Link>
-
-			<Link href="/about">
-				<a>about</a>
-			</Link>
-
+			<h1>Amanda Patricia D. Viray</h1>
 
 		</div>
 	)

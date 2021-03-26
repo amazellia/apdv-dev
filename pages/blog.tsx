@@ -1,6 +1,5 @@
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
 
@@ -34,18 +33,24 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 	return (
 		<div className={styles.container}>
         
-			<p className={styles.goback}>
+			<div className="topnav">
 				<Link href="/">
-					<a><Image src="/backArrow.png" alt="back" width="17" height="30"/></a>
+					<a>home</a>
 				</Link>
-			</p>
+				<Link href="/works">
+					<a>works</a>
+				</Link>
+				<Link href="/blog">
+					<a>blog</a>
+				</Link>
+				<Link href="/about">
+					<a>about</a>
+				</Link>
+			</div>
+
 			<h1>blog</h1>
 
-			<p>where content matters | 
-			<Link href="https://www.instagram.com/amazelliaart/">
-				<a> art blog</a>
-			</Link>
-			</p>
+			<p>where content matters</p>
 
 			<ul>
 				{posts.map((post, index) => {

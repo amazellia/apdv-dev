@@ -1,21 +1,29 @@
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
-import Image from 'next/image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faPalette} from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
 	return(
 		<div className={styles.container}>
 
-            <p className={styles.goback}>
+			<div className="topnav">
 				<Link href="/">
-					<a><Image src="/backArrow.png" alt="back" width="17" height="30"/></a>
+					<a>home</a>
 				</Link>
-			</p>
+				<Link href="/works">
+					<a>works</a>
+				</Link>
+				<Link href="/blog">
+					<a>blog</a>
+				</Link>
+				<Link href="/about">
+					<a>about</a>
+				</Link>
+			</div>
 
 			<h1>works</h1>
-
-            <p>coming soon...</p>
-
+			<a href="https://amazelliaart.tumblr.com"><FontAwesomeIcon icon={faPalette}/> art blog</a>
 
 		</div>
 	)

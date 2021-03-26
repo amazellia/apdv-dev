@@ -28,6 +28,49 @@ footer {
     margin: 2em 0 2em 0;
 }
 
+/* Add a black background color to the top navigation */
+.topnav {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: purple;
+    color: white;
+  }
+
+  #blognav { //[slug] nav 
+    margin: 3em;
+  }
+
+.aboutnav {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .aboutnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+/*
 #disqus_thread {
 	width: 100%;
 	margin: 20px 0;
@@ -41,7 +84,7 @@ footer {
 
 .comment:hover {
     color: pink;
-}
+}*/
 
 #hyvor-talk-view {
     width:700px; /* your width - 650px to 900px works very well */

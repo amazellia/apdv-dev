@@ -5,7 +5,6 @@ import { useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
 import HyvorTalk from 'hyvor-talk-react'
-//import { ClapButton } from '@lyket/react'
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env
 
@@ -61,29 +60,30 @@ const Post: React.FC<{ post: Post }> = (props) => {
 		return <h1>Loading...</h1>
 	}
 
-	/* -- comment funtion
-	function loadComments() {
-		setEnableLoadComments(false)
-		;(window as any).disqus_config = function () {
-			this.page.url = window.location.href
-			this.page.identifier = post.slug
-		}
-
-		const script = document.createElement('script')
-		script.src = 'https://apdv-dev.disqus.com/embed.js'
-		script.setAttribute('data-timestamp', Date.now().toString())
-
-		document.body.appendChild(script)
-	}*/
-
 	return (
 		<div className={styles.container}>
+
+			<div className="topnav" id="blognav">
+				<Link href="/">
+					<a>home</a>
+				</Link>
+				<Link href="/works">
+					<a>works</a>
+				</Link>
+				<Link href="/blog">
+					<a>blog</a>
+				</Link>
+				<Link href="/about">
+					<a>about</a>
+				</Link>
+			</div>
 
 			<p className={styles.goback}>
 				<Link href="/blog">
 					<a><Image src="/backArrow.png" alt="back" width="17" height="30"/></a>
 				</Link>
 			</p>
+
 			<h1>{post.title}</h1>
 			<p className={styles.blogdeets}>Published at {post.created_at}<br/>
 			{post.reading_time} minute(s) read</p>
@@ -92,22 +92,10 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<HyvorTalk.Embed websiteId={3611} id={post.slug} loadMode="scroll"/>
 
-
-			{/*  DISQUS 
-			{enableLoadComments && (
-				<p className={styles.goback} onClick={loadComments}>
-					<div className='comment'>Comment!</div>
-				</p>
-			)}
-
-			<div id="disqus_thread"></div>
-			*/}
-
 			<footer>
 			<i>Amanda Patricia Dorado Viray © 2021</i>
 			</footer>
 		</div>
 	)
 }
-// <ClapButton id="diy-fish-holder" namespace="post" />
 export default Post
