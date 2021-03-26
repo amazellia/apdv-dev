@@ -12,7 +12,7 @@ export default function Home() {
 					<a>home</a>
 				</Link>
 				<Link href="/works">
-					<a>works</a>
+					<a className="active">works</a>
 				</Link>
 				<Link href="/blog">
 					<a>blog</a>

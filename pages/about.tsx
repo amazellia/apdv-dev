@@ -19,7 +19,7 @@ export default function Home() {
 					<a>blog</a>
 				</Link>
 				<Link href="/about">
-					<a>about</a>
+					<a className="active">about</a>
 				</Link>
 			</div>
 

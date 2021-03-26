@@ -12,7 +12,7 @@ export default function Home() {
 
 			<div className="topnav">
 				<Link href="/">
-					<a>home</a>
+					<a className="active">home</a>
 				</Link>
 				<Link href="/works">
 					<a>works</a>

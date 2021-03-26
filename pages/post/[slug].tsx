@@ -58,7 +58,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 	const router = useRouter()
 
 	if (router.isFallback) {
-		return <h1>Loading...</h1>
+		return	<h1>turning pages...</h1>
 	}
 
 	return (
@@ -72,7 +72,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 					<a>works</a>
 				</Link>
 				<Link href="/blog">
-					<a>blog</a>
+					<a className="active">blog</a>
 				</Link>
 				<Link href="/about">
 					<a>about</a>
