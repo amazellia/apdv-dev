@@ -81,7 +81,7 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 			<p className={styles.goback}>
 				<Link href="/blog">
-					<a id="backblog"><FontAwesomeIcon icon={faChevronLeft}/></a>
+					<a id="backblog"><FontAwesomeIcon icon={faChevronLeft}/> back</a>
 				</Link>
 			</p>
 
