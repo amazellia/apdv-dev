@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
 
@@ -34,6 +35,10 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 	return (
 		<div className={styles.container}>
         
+			<Head>
+				<title>blog</title>
+			</Head>
+			
 			<div className="topnav">
 				<Link href="/">
 					<a>home</a>

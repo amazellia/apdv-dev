@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.scss'
@@ -63,6 +64,10 @@ const Post: React.FC<{ post: Post }> = (props) => {
 
 	return (
 		<div className={styles.container}>
+
+			<Head>
+				<title>{post.title}</title>
+			</Head>
 
 			<div className="topnav">
 				<Link href="/">

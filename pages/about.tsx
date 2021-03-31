@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,6 +8,10 @@ import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 export default function Home() {
 	return(
 		<div className={styles.container}>
+
+			<Head>
+				<title>about</title>
+			</Head>
 
 			<div className="topnav">
 				<Link href="/">
