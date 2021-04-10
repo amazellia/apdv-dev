@@ -8,12 +8,13 @@ const { BLOG_URL, CONTENT_API_KEY } = process.env
 type Post = {
 	title: string
 	slug: string
+
 }
 
 async function getPosts() {
 	// curl ""
 	const res = await fetch(
-		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,custom_excerpt`
+		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug`
 	).then((res) => res.json())
 
 	const posts = res.posts
