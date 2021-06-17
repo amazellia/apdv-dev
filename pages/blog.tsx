@@ -14,7 +14,7 @@ type Post = {
 async function getPosts() {
 	// curl ""
 	const res = await fetch(
-		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug`
+		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug&limit=all`
 	).then((res) => res.json())
 
 	const posts = res.posts
@@ -59,7 +59,7 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 
 			<p>where content matters</p>
 
-			<ul>
+			<ul className={styles.postcard}>
 				{posts.map((post, index) => {
 					return (
 						<li className={styles.postitem} key={post.slug}>

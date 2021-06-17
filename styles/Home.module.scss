@@ -13,7 +13,16 @@
 }
 
 .postitem {
-	padding: 10px 0;
+	//padding: 10px 0;
+	position: relative;
+    display: flex;
+	list-style-type: none;
+	flex: 1 1 301px;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 0 40px;
+    padding: 0 20px 40px;
+
 }
 
 .goback {
