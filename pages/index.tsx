@@ -5,6 +5,10 @@ import Link from 'next/link'
 export default function Home() {
 	return(
 		<div className={styles.container}>
+			
+			/** Home Page
+  			*  This is where the first page opens
+  			*/
 			<Head>
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>apdv</title>
