@@ -9,17 +9,20 @@
 	justify-content: center;
 	align-items: center;
 }
-
+.postcard {
+	padding-inline-start: 0%;
+}
 .postitem {
-	//padding: 10px 0;
+	//padding: 10px 0 0 0;
 	position: relative;
     display: flex;
 	list-style-type: none;
 	flex: 1 1 301px;
     flex-direction: column;
     overflow: hidden;
-    margin: 0 0 40px;
-    padding: 0 20px 40px;
+    margin: 20px;
+    padding: 20px;
+	text-align: center;
 
 }
 

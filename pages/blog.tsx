@@ -8,13 +8,15 @@ const { BLOG_URL, CONTENT_API_KEY } = process.env
 type Post = {
 	title: string
 	slug: string
-
+	custom_excerpt: string
+	feature_image: string
+	created_at: string
 }
 
 async function getPosts() {
 	// curl ""
 	const res = await fetch(
-		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug&limit=all`
+		`${BLOG_URL}/ghost/api/v4/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,custom_excerpt,feature_image,created_at&limit=all`
 	).then((res) => res.json())
 
 	const posts = res.posts
@@ -64,8 +66,11 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 					return (
 						<li className={styles.postitem} key={post.slug}>
 							<Link href="/post/[slug]" as={`/post/${post.slug}`}>
-								<a>{post.title}</a>
+								<a>{post.title}</a>								
 							</Link>
+							<p>{post.created_at}</p>
+							<p>{post.custom_excerpt}</p>
+							{!!post.feature_image && <img src={post.feature_image} />}
 						</li>
 					)
 				})}
