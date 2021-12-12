@@ -30,8 +30,6 @@ export default function Home() {
 				</Link>
 			</div>
 
-			
-
 			<h2>
 				She is an artist that codes.
 			</h2>
@@ -50,7 +48,7 @@ export default function Home() {
 				</Link>
 
 				<Link href="https://github.com/amazellia">
-					<a><FontAwesomeIcon icon={faGithub}  /></a>
+					<a><FontAwesomeIcon icon={faGithub}  /> coding projects</a>
 				</Link>
 
 				<Link href="https://amazellia.tumblr.com">
@@ -61,7 +59,7 @@ export default function Home() {
 					<a><FontAwesomeIcon icon={faTwitter} /></a>
 				</Link>
 
-				<Link href="https://www.instagram.com/amazelliaart/">
+				<Link href="https://www.instagram.com/_amazellia/">
 					<a><FontAwesomeIcon icon={faInstagram}/></a>
 				</Link>
 

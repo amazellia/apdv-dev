@@ -57,8 +57,6 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 				</Link>
 			</div>
 
-			
-
 			<p>where content matters</p>
 
 			<ul className={styles.postcard}>
