@@ -9,6 +9,10 @@ export default function Home() {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>apdv</title>
 			</Head>
+			
+			<h1>
+				👋 Hi, I'm Amanda Viray!
+			</h1>
 
 			<div className="topnav">
 				<Link href="/">
@@ -24,8 +28,6 @@ export default function Home() {
 					<a>about</a>
 				</Link>
 			</div>
-
-			<h1>Amanda Patricia Viray</h1>
 
 		</div>
 	)

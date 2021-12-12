@@ -41,7 +41,7 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 			<Head>
 				<title>blog</title>
 			</Head>
-			
+			<h1>blog</h1>
 			<div className="topnav">
 				<Link href="/">
 					<a>home</a>
@@ -57,7 +57,7 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 				</Link>
 			</div>
 
-			<h1>blog</h1>
+			
 
 			<p>where content matters</p>
 

@@ -13,6 +13,8 @@ export default function Home() {
 				<title>about</title>
 			</Head>
 
+			<h1>Amanda Patricia Dorado Viray</h1>
+
 			<div className="topnav">
 				<Link href="/">
 					<a>home</a>
@@ -28,7 +30,7 @@ export default function Home() {
 				</Link>
 			</div>
 
-			<h1>Amanda Patricia Dorado Viray</h1>
+			
 
 			<h2>
 				She is an artist that codes.

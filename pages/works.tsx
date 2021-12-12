@@ -10,7 +10,7 @@ export default function Home() {
 			<Head>
 				<title>works</title>
 			</Head>
-			
+			<h1>works</h1>
 			<div className="topnav">
 				<Link href="/">
 					<a>home</a>
@@ -25,8 +25,8 @@ export default function Home() {
 					<a>about</a>
 				</Link>
 			</div>
-
-			<h1>works</h1>
+			
+			<p>my works in coding, art, everything in-between, and outside the box. </p>
 			<a href="https://amazelliaart.tumblr.com"><FontAwesomeIcon icon={faPalette} size="xs"/> art blog</a>
 
 		</div>
