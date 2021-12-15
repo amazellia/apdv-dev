@@ -10,13 +10,13 @@ export default function Home() {
 		<div className={styles.container}>
 			<Head>
 				<link rel="shortcut icon" href="/favicon.ico" />
-				<title>apdv</title>
+				<title>amanda viray | dev + art</title>
 			</Head>
 			
-			<h1>
+			<h1 className="headingColor">
 				👋 Hi, I'm Amanda Viray!
 			</h1>
-
+			
 			<div className="topnav">
 				<Link href="/">
 					<a className="active">home</a>
@@ -29,7 +29,10 @@ export default function Home() {
 				</Link>
 			</div>
 
-			
+			<p>studying <b>code</b> and <b>interactive media</b> at the University of Newcastle.</p>
+			<p>I love programming, art, business analysis, and stories. <br/>Let's talk at AmandaPatricia.Viray@uon.edu.au!</p>
+
+
 			<div className="aboutnav">
 				<Link href="https://www.linkedin.com/in/apdv">
 					<a><FontAwesomeIcon icon={faLinkedinIn}/></a>

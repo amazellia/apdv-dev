@@ -39,7 +39,7 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 		<div className={styles.container}>
         
 			<Head>
-				<title>blog</title>
+				<title>amanda viray | blog</title>
 			</Head>
 			<h1>blog</h1>
 			<div className="topnav">

@@ -9,7 +9,7 @@ export default function Home() {
 	return(
 		<div className={styles.container}>
 			<Head>
-				<title>works</title>
+				<title>amanda viray | works</title>
 			</Head>
 			<h1>works</h1>
 			<div className="topnav">
