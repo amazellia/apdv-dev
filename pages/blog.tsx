@@ -52,9 +52,6 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 				<Link href="/blog">
 					<a className="active">blog</a>
 				</Link>
-				<Link href="/about">
-					<a>about</a>
-				</Link>
 			</div>
 
 			<p>where content matters</p>

@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faInstagram, faLinkedinIn, faTumblr, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
 	return(
@@ -24,10 +27,31 @@ export default function Home() {
 				<Link href="/blog">
 					<a>blog</a>
 				</Link>
-				<Link href="/about">
-					<a>about</a>
+			</div>
+
+			
+			<div className="aboutnav">
+				<Link href="https://www.linkedin.com/in/apdv">
+					<a><FontAwesomeIcon icon={faLinkedinIn}/></a>
+				</Link>
+
+				<Link href="https://github.com/amazellia">
+					<a><FontAwesomeIcon icon={faGithub}  /></a>
+				</Link>
+
+				<Link href="https://amazellia.tumblr.com">
+					<a><FontAwesomeIcon icon={faTumblr} /></a>
+				</Link>
+
+				<Link href="https://twitter.com/amazellia">
+					<a><FontAwesomeIcon icon={faTwitter} /></a>
+				</Link>
+
+				<Link href="https://www.instagram.com/_amazellia/">
+					<a><FontAwesomeIcon icon={faInstagram}/></a>
 				</Link>
 			</div>
+			
 
 		</div>
 	)

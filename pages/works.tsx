@@ -22,9 +22,6 @@ export default function Home() {
 				<Link href="/blog">
 					<a>blog</a>
 				</Link>
-				<Link href="/about">
-					<a>about</a>
-				</Link>
 			</div>
 			
 			<p>my works in coding, art, everything in-between, and outside the box. </p>
