@@ -18,17 +18,23 @@ export interface PostType {
 	tag: string | null
 	reading_time: string | null
 	html: string | null
-
+	meta: {
+		pagination:{
+			pages: number
+			page: number
+		}
+	}
 } 
 
 export async function getPosts(setFilter?: string, setPage?:number) {	 //export const getStaticProps
 	const page = setPage || 1
+	const filter = setFilter || ''
 		
 		const apiData = await api.posts.browse({
 			limit: setLimit, 
 			fields: 'title,slug,custom_excerpt,feature_image,created_at,tag',
 			page: page,
-			filter: setFilter
+			filter: filter
 		}).then((res) => {
 			const posts = res
 			const pages = res.meta?.pagination?.pages

@@ -1,3 +1,7 @@
+@import "./mediaQueries.scss";
+// https://www.youtube.com/watch?v=r9fZZpcfdXg
+$mainColor: #ec5b9b;
+
 html,
 body {
 	padding: 0;
@@ -7,7 +11,7 @@ body {
 }
 
 a {
-	color: rgb(236, 91, 115);
+	color: $mainColor;
 	text-decoration: none;
 
 	&:hover {
@@ -34,7 +38,6 @@ footer {
     background-color: #ec5b9b;
 }
 
-
 .navigation {
     margin: 2.5rem;
     justify-content: center;
@@ -54,7 +57,6 @@ footer {
       }
 }
 
-
 .storyboard {
     height: 87vh;
     max-height: 100vh;
@@ -66,8 +68,8 @@ footer {
     //align-items: center;
     grid-auto-columns: minmax(auto, auto);
         .one {
-        grid-row: 1/2;
-        padding: 10% 0;
+        grid-row: 2/3;
+        padding: 0 0 10% 0;
             .introduction { 
                 h1 {
                     font-size: 400%;
@@ -77,20 +79,19 @@ footer {
                 }   
             }
         }
-        .two {
-            //padding-top: 5%;
-            grid-row: 2/ 2;
-        }
+        // .two {
+        //     //padding-top: 5%;
+        //     grid-row: 3/ 3;
+        // }
     .aboutnav {
-        font-size: 5vh;
-        text-align: center;
+        font-size: 200%;
         display:flex;
-        justify-content:center;
+        //justify-content:center;
         align-items: center;
         a {
             display: block;
             text-align: center;
-            padding: 0 4vw;
+            padding: 0 7% 0 0;
             text-decoration: none;
         }
     }
@@ -111,7 +112,7 @@ footer {
         display: block;
       }
       button:hover {
-        color:rgb(236, 91, 115);
+        color:$mainColor;
         transition: 0.7s;
     }
 }

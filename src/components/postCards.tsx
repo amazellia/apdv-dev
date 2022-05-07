@@ -4,8 +4,7 @@ import moment from 'moment'
 import Pagination from "@material-ui/lab/Pagination";
 import { PostType } from '../api/ghostCMS';
 
-//const postCards = (props: PostType[] , page?, totalPages?, onPageChange?) => {
-export default function postCards(posts?, page?, totalPages?, onPageChange?) { 
+export default function postCards(posts: PostType[], page:number, totalPages:number, onPageChange?) { 
 return (
         <div className={styles.worksContainer}>
             <div className={styles.gridContainer}> {/**className={styles.gridContainer} */}

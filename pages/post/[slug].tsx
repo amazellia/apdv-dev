@@ -7,12 +7,13 @@ import HyvorTalk from 'hyvor-talk-react'
 import moment from 'moment'
 import NavBar from '../../src/components/nav'
 import { useState} from 'react'
+const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID as number
 
 // Ghost CMS Request
 export const getStaticProps = async ({ params }) => {
     const post = await getPostSlug(params.slug)
 	return {
-		 props :{post} ,
+		 props: {post},
 		revalidate: 10 
 	}
 }
@@ -26,11 +27,10 @@ export const getStaticPaths = () => {
 
 const Post: React.FC<{post: PostType[]}> = (props) => {
 	const [enableLoadComments, setEnableLoadComments] = useState<boolean>(true)
-	const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID
 	const {post} = props
 	const router = useRouter()
 	if (router.isFallback) {
-		return	<h1>turning pages...</h1>
+		return	<h1 className='server'>turning pages...</h1>
 	}
 	
 	return (
@@ -40,7 +40,7 @@ const Post: React.FC<{post: PostType[]}> = (props) => {
 			<>
             {post?.map((p, index) => {
                 return (
-                    <div className={styles.container} key={p?.slug}>
+                    <div className={styles.slugContainer} key={p?.slug}>
                         <Head> <title>{p?.title}</title> </Head>
 
                         <h1>{p?.title}</h1>
@@ -51,7 +51,7 @@ const Post: React.FC<{post: PostType[]}> = (props) => {
 
                         <HyvorTalk.Embed websiteId={HYVOR_ID} id={p?.slug} loadMode="scroll"/>
 
-                        <footer><i>Amanda Patricia Dorado Viray © 2021</i></footer>
+                        <footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
                     </div>
                 )
             })}

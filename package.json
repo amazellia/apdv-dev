@@ -20,6 +20,7 @@
     "dotenv": "^16.0.0",
     "framer-motion": "^6.3.0",
     "hyvor-talk-react": "^1.0.3",
+    "include-media": "^1.4.10",
     "moment": "^2.29.2",
     "next": "^12.1.0",
     "nprogress": "^0.2.0",

@@ -15,7 +15,7 @@ interface TagType {
 
 const timeline = [];
 
-async function timelineSet(d) {
+function timelineSet(d) {
     d.forEach(d => {
         timeline.push(moment(d?.created_at).format('YYYY'));
     });
@@ -28,7 +28,7 @@ async function timelineSet(d) {
 }
 //const timelineFinal = timeline.filter((f, index, arr) => arr.indexOf(f) == index);
 
-const Archive:React.FC = () => { 
+const Archive = () => { 
     const [tags, setTags] = useState<TagType[] | null>(null);
     const [timelineStatus, setTimelineStatus] = useState(false);
     //const [year, setYear] = React.useState<DateType[] | null>();
@@ -95,6 +95,8 @@ const Archive:React.FC = () => {
                     )
                 })} 
             </div>}
+            
+            <footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
 
         </div> // End of Container
     ) 
