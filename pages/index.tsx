@@ -2,18 +2,19 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import NavBar from '../src/components/nav'
 import AboutLinks from '../src/components/aboutlinks'
-import {  getPosts, PostType } from "../src/api/ghostCMS"
+import {  getPosts, PostType, initialization } from "../src/api/ghostCMS"
 import { useState } from 'react'
 import PostCards from '../src/components/postCards'
-var works = "tag:works"
 import NProgress from 'nprogress'; //nprogress module
 
+var works = "tag:works"
 export const getStaticProps = async () => {
-    const data = await getPosts(works)
-	const initialPosts = data.posts
-	const totalPages = data.pages
-
-    if (!data) {return {notFound: true,}}
+	// ✨ to wake-up my heroku app 
+	await initialization(); // (its a free app plan that sleeps after an hour of inactivity and takes ~30 secs to start-up)
+    const data = await getPosts(works);
+	const initialPosts = data.posts;
+	const totalPages = data.pages;
+    if (!data) {return {notFound: true,}};
     return {props: { initialPosts, totalPages}}
 }
 
@@ -24,17 +25,17 @@ const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 	const [filter, setFilter] = useState('')
 	const [pages, setTotalPages] = useState(totalPages)
 
-	const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = (e:React.FocusEvent<HTMLButtonElement>) => {
 		NProgress.start()
 		e.stopPropagation();
 		const dataFilter = e?.currentTarget.value
 		getPosts(dataFilter).then(res=>{
 			setPosts(res.posts); 
 			setTotalPages(res.pages); 
+			setFilter(dataFilter);
+			setPage(1);
+			NProgress.done()
 		}).catch(err=>console.log(err));
-		setFilter(dataFilter);
-		setPage(1);
-		NProgress.done()
 	};
 
 	const pagginationHandler = (event, value) => {
@@ -43,8 +44,8 @@ const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 		setPage(value)
 		getPosts(filter, value).then(res=>{
 			setPosts(res.posts);
+			NProgress.done()
 		}).catch(err=>console.log(err));
-		NProgress.done()
     };
 
 	// ⌛ TO-DO: Add new section called 'experience' + 'education' and a button called 'resume'
@@ -69,11 +70,11 @@ const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 			<div className={styles.subContainer} >
 				<h1 className='worksTitle gradient' id='works'>works</h1>
 				<div className="filterNav"> 
-					<button value={works} onClick={(e) => handleClick(e)}>all</button>
-					<button value={works + "+tag:code"} onClick={(e) => handleClick(e)}>code</button> 
-					<button value={works + "+tag:art"} onClick={(e) => handleClick(e)}>art</button>
-					<button value={works + "+tag:games"} onClick={(e) => handleClick(e)}>games</button> 
-					<button value={"tag:expart"} onClick={(e) => handleClick(e)}>experimental</button>
+					<button value={works} onFocus={(e) => handleClick(e)}>all</button>
+					<button value={works + "+tag:code"} onFocus={(e) => handleClick(e)}>code</button> 
+					<button value={works + "+tag:art"} onFocus={(e) => handleClick(e)}>art</button>
+					<button value={works + "+tag:games"} onFocus={(e) => handleClick(e)}>games</button> 
+					<button value={"tag:expart"} onFocus={(e) => handleClick(e)}>experimental</button>
 					{/* <button value={"tag:blog"} onClick={(e) => handleClick(e)}>write</button> */}
 			</div>
 

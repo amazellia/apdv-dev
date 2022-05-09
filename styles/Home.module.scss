@@ -1,3 +1,5 @@
+@import "./mediaQueries.scss";
+
 .server {
 	display: flex;
 	align-items: center;
@@ -40,6 +42,9 @@
 	margin: 0 auto;
 	//justify-content: center;
 	align-items: center;
+	@include media('<=phone'){
+		width:100vw;
+	}
 }
 
 .worksContainer {

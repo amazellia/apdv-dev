@@ -1,4 +1,3 @@
-import { useRouter} from 'next/router'
 import { PostType } from '../../src/api/ghostCMS'
 import { getPostSlug } from '../../src/api/ghostCMS'
 import Head from 'next/head'
@@ -7,13 +6,12 @@ import HyvorTalk from 'hyvor-talk-react'
 import moment from 'moment'
 import NavBar from '../../src/components/nav'
 import { useState} from 'react'
-const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID as number
 
-// Ghost CMS Request
 export const getStaticProps = async ({ params }) => {
     const post = await getPostSlug(params.slug)
+    const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID as number
 	return {
-		 props: {post},
+		 props: {post, HYVOR_ID},
 		revalidate: 10 
 	}
 }
@@ -25,14 +23,9 @@ export const getStaticPaths = () => {
 	}
 }
 
-const Post: React.FC<{post: PostType[]}> = (props) => {
+const Post: React.FC<{post: PostType[], HYVOR_ID: number}> = (props) => {
 	const [enableLoadComments, setEnableLoadComments] = useState<boolean>(true)
-	const {post} = props
-	const router = useRouter()
-	if (router.isFallback) {
-		return	<h1 className='server'>turning pages...</h1>
-	}
-	
+	const {post, HYVOR_ID} = props
 	return (
 		<div>
             <NavBar/>

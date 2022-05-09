@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import NavBar from '../src/components/nav'
 import {getPosts} from "../src/api/ghostCMS"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { PostType } from '../src/api/ghostCMS'
 import postCards from '../src/components/postCards'
 import Link from 'next/link'
@@ -29,8 +29,8 @@ const Blog: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 		setPage(value)
 		getPosts(blog, value).then(res=>{
 			setPosts(res.posts);
+			NProgress.done()
 		}).catch(err=>console.log(err));
-		NProgress.done()
     };
 	
 	// ⌛ TO-DO: retain page history when going back from post slug

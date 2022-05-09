@@ -54,7 +54,12 @@ footer {
         a:hover {
         color: black;
         }
-      }
+
+        @include media("<=phone") {
+            font-size: 150%;
+        }
+    }
+    
 }
 
 .storyboard {
@@ -67,16 +72,22 @@ footer {
     gap: 0.5vh;
     //align-items: center;
     grid-auto-columns: minmax(auto, auto);
+    @include media ('<=phone'){
+        justify-content: center;
+    }
         .one {
         grid-row: 2/3;
         padding: 0 0 10% 0;
+        @include media ('<=phone'){
+            padding: 0 0 20vh 0;
+        }
             .introduction { 
-                h1 {
-                    font-size: 400%;
-                } 
-                p {
-                    font-size: 150%;
-                }   
+                h1 {font-size: 400%;} 
+                p {font-size: 150%;}   
+                @include media('<=phone') {
+                    h1 {font-size: 12vw;}
+                    p {font-size: 5vw;}
+                }
             }
         }
         // .two {
@@ -86,7 +97,6 @@ footer {
     .aboutnav {
         font-size: 200%;
         display:flex;
-        //justify-content:center;
         align-items: center;
         a {
             display: block;
@@ -94,13 +104,21 @@ footer {
             padding: 0 7% 0 0;
             text-decoration: none;
         }
+        @include media('<=phone'){
+            font-size: 10vw;
+            justify-content:center;
+        }
     }
 }
 
 .filterNav {
     display:flex;
-    justify-content:center;
     align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 100%;
+    margin: 0 auto;
     button {
         font-size: 150%;
         text-decoration: none;
@@ -108,12 +126,15 @@ footer {
         color: black;
         background-color:white;
         border-radius: 20%;
-        margin: 3vw 5vw;
+        margin: 1.5vw 3vw;
         display: block;
-      }
-      button:hover {
+    }
+    button:hover {
         color:$mainColor;
         transition: 0.7s;
+    }
+    button:focus {
+        color:$mainColor;
     }
 }
   

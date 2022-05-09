@@ -32,27 +32,27 @@ $mainColor: #ec5b9b;
   }
   
   /* Remove these to get rid of the spinner */
-  #nprogress .spinner {
-    display: block;
-    position: fixed;
-    z-index: 1031;
-    top: 15px;
-    right: 15px;
-  }
+  // #nprogress .spinner {
+  //   display: block;
+  //   position: fixed;
+  //   z-index: 1031;
+  //   top: 15px;
+  //   right: 15px;
+  // }
   
-  #nprogress .spinner-icon {
-    width: 18px;
-    height: 18px;
-    box-sizing: border-box;
+  // #nprogress .spinner-icon {
+  //   width: 18px;
+  //   height: 18px;
+  //   box-sizing: border-box;
   
-    border: solid 2px transparent;
-    border-top-color: $mainColor;
-    border-left-color: $mainColor;
-    border-radius: 50%;
+  //   border: solid 2px transparent;
+  //   border-top-color: $mainColor;
+  //   border-left-color: $mainColor;
+  //   border-radius: 50%;
   
-    -webkit-animation: nprogress-spinner 400ms linear infinite;
-            animation: nprogress-spinner 400ms linear infinite;
-  }
+  //   -webkit-animation: nprogress-spinner 400ms linear infinite;
+  //           animation: nprogress-spinner 400ms linear infinite;
+  // }
   
   .nprogress-custom-parent {
     overflow: hidden;
