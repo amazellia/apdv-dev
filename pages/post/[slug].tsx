@@ -6,12 +6,12 @@ import HyvorTalk from 'hyvor-talk-react'
 import moment from 'moment'
 import NavBar from '../../src/components/nav'
 import { useState} from 'react'
+const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID as number
 
 export const getStaticProps = async ({ params }) => {
     const post = await getPostSlug(params.slug)
-    const HYVOR_ID = process.env.NEXT_PUBLIC_HYVOR_TALK_ID as number
 	return {
-		 props: {post, HYVOR_ID},
+		props: {post},
 		revalidate: 10 
 	}
 }
@@ -23,9 +23,9 @@ export const getStaticPaths = () => {
 	}
 }
 
-const Post: React.FC<{post: PostType[], HYVOR_ID: number}> = (props) => {
+const Post: React.FC<{post: PostType[]}> = (props) => {
 	const [enableLoadComments, setEnableLoadComments] = useState<boolean>(true)
-	const {post, HYVOR_ID} = props
+	const {post} = props
 	return (
 		<div>
             <NavBar/>

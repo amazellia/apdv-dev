@@ -9,7 +9,7 @@ import NProgress from 'nprogress'; //nprogress module
 export const getStaticProps = async ({params}) => {
 	const slugify = async (slug:string) => {
 		if ( /\d/.test(`${slug}`) == true ) {
-			const slugName = (`created_at:>=${slug}-01-0+created_at:<=${slug}-12-31`);
+			const slugName = (`created_at:>='${slug}-01-01'+created_at:<='${slug}-12-31'`);
 			return slugName
 		} else {const slugName = (`tag:${slug}`); return slugName}
 	}
@@ -20,7 +20,7 @@ export const getStaticProps = async ({params}) => {
 	const title = params.archiveSlug
 
     if (!data) {return {notFound: true,}}
-    return {props: { title, slug, initialPosts, totalPages}}
+    return {props: { title, slug, initialPosts, totalPages}, revalidate: 10}
 }
 
 export const getStaticPaths = () => {return {paths: [], fallback: true,}}

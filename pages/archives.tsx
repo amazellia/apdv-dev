@@ -15,7 +15,7 @@ interface TagType {
 export const getStaticProps = async () => {
     const tags = await getTags().then((res) => {return res.tags})
     const dates = await getDates().then((res)=> timelineSet(res.dates))
-    return {props: {tags, dates}}
+    return {props: {tags, dates}, revalidate: 10}
 }
 
 const Archive: React.FC<{tags: TagType[], dates:[]}> = (props) => { 

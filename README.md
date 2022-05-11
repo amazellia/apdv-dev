@@ -1,6 +1,6 @@
 # Introduction
 
-This headless CMS (Content Management System) website was created in March 2021. I wanted to create a website that required less money to pay but still learn how to code emerging technologies, hence I have found a video called [Build a Blog with Next.js and Ghost](https://youtu.be/1SYU1GorO6Y). I only had to pay for my domain name ($0.98) and comment API called HyvorTalk ($5) compared to other website builders.
+This headless CMS (Content Management System) website was created in March 2021. I wanted to create a website that required less money to pay but still learn how to code emerging technologies, hence I have found a video called [Build a Blog with Next.js and Ghost](https://youtu.be/1SYU1GorO6Y). I only had to pay for my domain name ($0.98/month) and comment API called HyvorTalk ($5/month) compared to other website builders.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

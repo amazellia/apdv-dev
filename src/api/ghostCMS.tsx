@@ -31,10 +31,8 @@ export interface PostType {
 export async function initialization(){
 	// 🛏️ fetching BLOG_URL to 'poke' Heroku apps awake first (using Free plan)
 	await fetch(BLOG_URL).then((res) => { 
-		console.log('=== Response status: ' + res.status + ' ===');
-		// 💤 If asleep (server error 503), setting <30 secs timeout to wait for app to wake up before requesting work
-		//  FYI: increase seconds (<30 secs) if response delay occurs in the future 
-		if (res.status !== 200 ) {const data = setTimeout(() => {initialization()}, 27000); clearTimeout(data)}
+		// 💤 If asleep (server error 503), setting <5 secs timeout to wait for app to wake up before requesting work
+		if (res.status !== 200 ) {const data = setTimeout(() => {initialization()}, 5000); clearTimeout(data)}
 	}) // ☕ if Heroku apps are already awake
 } 
 

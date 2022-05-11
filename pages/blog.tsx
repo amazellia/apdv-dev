@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
 	const totalPages = data.pages
 
     if (!data) {return {notFound: true,}}
-    return {props: { initialPosts, totalPages}}
+    return {props: { initialPosts, totalPages}, revalidate: 10}
 }
 
 const Blog: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) => {

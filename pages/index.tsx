@@ -9,13 +9,13 @@ import NProgress from 'nprogress'; //nprogress module
 
 var works = "tag:works"
 export const getStaticProps = async () => {
-	// ✨ to wake-up my heroku app 
-	await initialization(); // (its a free app plan that sleeps after an hour of inactivity and takes ~30 secs to start-up)
+	// ✨ to wake-up my heroku app (free plan sleeps after an hour of inactivity and takes ~30 secs to start-up)
+	// await initialization(); // comment when using DigitalOcean droplet
     const data = await getPosts(works);
 	const initialPosts = data.posts;
 	const totalPages = data.pages;
     if (!data) {return {notFound: true,}};
-    return {props: { initialPosts, totalPages}}
+    return {props: { initialPosts, totalPages}, revalidate: 10}
 }
 
 const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) => {
