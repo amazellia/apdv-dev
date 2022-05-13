@@ -42,7 +42,7 @@ const Post: React.FC<{post: PostType[]}> = (props) => {
 
                         <div className={'${styles.gh-canvas} ${styles.gh-content}'} dangerouslySetInnerHTML={{ __html: p?.html }}></div>
 
-                        <HyvorTalk.Embed websiteId={HYVOR_ID} id={p?.slug} loadMode="scroll"/>
+                        <HyvorTalk.Embed websiteId={HYVOR_ID} id={p?.slug}/>
 
                         <footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
                     </div>

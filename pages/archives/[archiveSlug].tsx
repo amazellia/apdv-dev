@@ -5,19 +5,24 @@ import styles from '../../styles/Home.module.scss'
 import navBar from '../../src/components/nav'
 import postCards from '../../src/components/postCards'
 import NProgress from 'nprogress'; //nprogress module
+import moment from 'moment'
 
 export const getStaticProps = async ({params}) => {
+	var title = ''
 	const slugify = async (slug:string) => {
-		if ( /\d/.test(`${slug}`) == true ) {
+		if ( /^\d{4}$/.test(`${slug}`) == true ) {
 			const slugName = (`created_at:>='${slug}-01-01'+created_at:<='${slug}-12-31'`);
-			return slugName
-		} else {const slugName = (`tag:${slug}`); return slugName}
+			title = slug; return slugName;
+		} else if (/\d{4}-\d{2}/.test(`${slug}`) == true ) {
+			const lastDay = moment(moment(slug).endOf('month')).format('D');
+			const slugName = (`created_at:>='${slug}-01'+created_at:<='${slug}-${lastDay}'`);
+			title = moment(slug).format('MMMM YYYY'); return slugName;
+		} else {const slugName = (`tag:${slug}`); title = slug; return slugName}
 	}
 	const slug = await slugify(params.archiveSlug)
 	const data = await getArchivedPosts(slug)
 	const initialPosts = data.posts
 	const totalPages = data.pages
-	const title = params.archiveSlug
 
     if (!data) {return {notFound: true,}}
     return {props: { title, slug, initialPosts, totalPages}, revalidate: 10}
@@ -25,7 +30,6 @@ export const getStaticProps = async ({params}) => {
 
 export const getStaticPaths = () => {return {paths: [], fallback: true,}}
 
-//const ArchiveSlug: React.FC<{posts: PostType[]}> = (props) => {
 const ArchiveSlug: React.FC<{title: string, slug: string, initialPosts: PostType[], totalPages: number}> = (props) => {
 	const {title, slug, initialPosts, totalPages} = props
 	const [posts, setPosts] = useState<PostType[] | null>(initialPosts);
