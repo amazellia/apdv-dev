@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { getArchivedPosts, PostType } from '../../src/api/ghostCMS'
 import Head from 'next/head'
 import styles from '../../styles/Home.module.scss'
-import navBar from '../../src/components/nav'
+import NavBar from '../../src/components/nav'
 import postCards from '../../src/components/postCards'
 import NProgress from 'nprogress'; //nprogress module
 import moment from 'moment'
@@ -45,14 +45,16 @@ const ArchiveSlug: React.FC<{title: string, slug: string, initialPosts: PostType
     };
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Head>
 				<title>blog | {title}</title>
 			</Head>
-			{navBar()}
-			<h1>{title}</h1>
+			<NavBar/>
+			<div className={styles.container}>
+				<h1>{title}</h1>
 
-			{posts && postCards(posts, page, totalPages, pagginationHandler)}
+				{posts && postCards(posts, page, totalPages, pagginationHandler)}
+			</div>
 		</div> //end of return
 	);
 };

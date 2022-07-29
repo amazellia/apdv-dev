@@ -25,12 +25,13 @@ const Blog: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 	//const [filter, setFilter] = React.useState('')
 	
 	const pagginationHandler = (event, value) => {
-		NProgress.start()
-		setPage(value)
+		NProgress.start();
+		setPage(value);
 		getPosts(blog, value).then(res=>{
 			setPosts(res.posts);
-			NProgress.done()
+			NProgress.done();
 		}).catch(err=>console.log(err));
+		window.scrollTo({top: 0, behavior: 'smooth'})
     };
 	
 	// ⌛ TO-DO: retain page history when going back from post slug

@@ -2,53 +2,24 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import NavBar from '../src/components/nav'
 import AboutLinks from '../src/components/aboutlinks'
-import {  getPosts, PostType, initialization } from "../src/api/ghostCMS"
-import { useState } from 'react'
+import {  getPosts, PostType } from "../src/api/ghostCMS"
 import PostCards from '../src/components/postCards'
-import NProgress from 'nprogress'; //nprogress module
+import Link from 'next/link'
 
-var works = "tag:works"
+var works = "featured:true"
 export const getStaticProps = async () => {
 	// ✨ to wake-up my heroku app (free plan sleeps after an hour of inactivity and takes ~30 secs to start-up)
 	// await initialization(); // comment when using DigitalOcean droplet
     const data = await getPosts(works);
-	const initialPosts = data.posts;
-	const totalPages = data.pages;
+	const posts = data.posts;
     if (!data) {return {notFound: true,}};
-    return {props: { initialPosts, totalPages}, revalidate: 10}
+    return {props: { posts}, revalidate: 10}
 }
 
-const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) => {
-	const {initialPosts, totalPages} = props
-	const [posts, setPosts] = useState<PostType[] | null>(initialPosts);
-	const [page, setPage] = useState(1) 
-	const [filter, setFilter] = useState('')
-	const [pages, setTotalPages] = useState(totalPages)
+const Home: React.FC<{posts: PostType[]}> = (props) => {
+	const {posts} = props
 
-	const handleClick = (e:React.FocusEvent<HTMLButtonElement>) => {
-		NProgress.start()
-		e.stopPropagation();
-		const dataFilter = e?.currentTarget.value
-		getPosts(dataFilter).then(res=>{
-			setPosts(res.posts); 
-			setTotalPages(res.pages); 
-			setFilter(dataFilter);
-			setPage(1);
-			NProgress.done()
-		}).catch(err=>console.log(err));
-	};
-
-	const pagginationHandler = (event, value) => {
-		NProgress.start()
-		event.preventDefault();
-		setPage(value)
-		getPosts(filter, value).then(res=>{
-			setPosts(res.posts);
-			NProgress.done()
-		}).catch(err=>console.log(err));
-    };
-
-	// ⌛ TO-DO: Add new section called 'experience' + 'education' and a button called 'resume'
+	// ⌛ TO-DO: a button called 'resume'
 	return (
 		<div>
 			<Head>
@@ -67,21 +38,17 @@ const Home: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 					<AboutLinks/>
 				</div>
 			</div>
-			<div className={styles.subContainer} >
-				<h1 className='worksTitle gradient' id='works'>works</h1>
-				<div className="filterNav"> 
-					<button value={works} onFocus={(e) => handleClick(e)}>all</button>
-					<button value={works + "+tag:code"} onFocus={(e) => handleClick(e)}>code</button> 
-					<button value={works + "+tag:art"} onFocus={(e) => handleClick(e)}>art</button>
-					<button value={works + "+tag:games"} onFocus={(e) => handleClick(e)}>games</button> 
-					<button value={"tag:expart"} onFocus={(e) => handleClick(e)}>experimental</button>
-					{/* <button value={"tag:blog"} onClick={(e) => handleClick(e)}>write</button> */}
+			<div className={styles.container} >
+				<h1 className='projectsTitle gradient' id='projects'>projects</h1>
+
+				{posts && PostCards(posts)} 
+
+				<Link href="/archives/projects">
+					<a>see more</a>								
+				</Link>
 			</div>
-
-			{posts && PostCards(posts, page, pages, pagginationHandler)} 
-
+			
 			<footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
-			</div>
 		</div>
 	);
 };

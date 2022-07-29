@@ -7,7 +7,7 @@
 	height: 100vh;
 }
 .slugContainer {
-	padding: 1.3vw; 
+	//padding: 1.3vw; 
 	display: flex;
 	position: relative;
 	flex-direction: column;
@@ -52,7 +52,9 @@
 	position: relative;
 	flex-direction: column;
 	width: 100%;
+	max-width: 100%;
 	align-items: center;
+	justify-content: center;
 }
 
 .postcard {
@@ -64,6 +66,9 @@
 	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 	padding-inline-start: 0%;
 	width: 100%;
+	position: relative;
+	place-items: center;
+
 }
 
 .gridItem {
@@ -73,16 +78,34 @@
 }
 
 .postitem {
-	//padding: 10px 0 0 0;
+	margin: 1rem;
 	position: relative;
     display: flex;
+	width: 19.5rem;
+	height: 19.5rem;
+	overflow: hidden;
+	border-radius: 10%;
 	list-style-type: none;
 	flex: 1 1 301px;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 20px;
-    padding: 20px;
-	text-align: left;
+	flex-direction: column;
+	a:hover {
+		opacity: 0.2;
+		transition: 0.2s ease;
+	}
+	a {
+		color: white;
+		font-weight: bold;
+	}
+	
+}
+
+.DateMap {
+	ul {list-style-type: none;}
+	display: grid; 
+	grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+	padding-inline-start: 0%;
+	width: 100%;
+	//text-align: center;
 }
 
 .main {

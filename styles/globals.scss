@@ -2,13 +2,23 @@
 @use "./_color-themes.scss" as c;
 // https://www.youtube.com/watch?v=r9fZZpcfdXg
 
+//PAGINATION CUTOMISATION
+//Text Color
+button.MuiPaginationItem-root {color: white;}
 
-html,
-body {
+//Border Color
+button.MuiPaginationItem-outlined {border: 1px solid c.$mainColor;}
+
+//Selection active
+button.MuiPaginationItem-page.Mui-selected {background-color: c.$mainColor;}
+
+html, body {
 	padding: 0;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
 		Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: c.$mainBG;
+    color: #f0f6f9;
 }
 
 a {
@@ -39,28 +49,57 @@ footer {
     background-color: c.$mainColor;
 }
 
+//for the post title in the middle of the picture
+.postTitle {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none   
+}
+
+a:hover + .postTitle {
+    display:initial;
+}
+
 .navigation {
-    margin: 2.5rem;
+    overflow: hidden;
+    // margin: 2.5rem;
     justify-content: center;
 	align-items: center;
-    position: relative;
+    //position: relative;
     display: flex;
+    .icon {
+        display: none;
+      }
     a {
         display: block;
-        padding: 0 7vw;
         text-decoration: none;
         font-size: 200%;
         text-align: center;
-        
-        a:hover {
-        color: black;
-        }
-
-        @include media("<=phone") {
-            font-size: 150%;
-        }
+        padding: 40px 5vw;
+    }    
+}
+@include media ('<=tablet') {
+    .navigation {display: block;}
+    .navigation a {display: none;}
+    .navigation a.icon {
+        display: block;
+        float: right;
     }
-    
+    .navigation.responsive {position: relative;}
+    .navigation.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .navigation.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+      background-color: rgb(89, 34, 128);
+    }
 }
 
 .storyboard {
@@ -78,13 +117,14 @@ footer {
     }
         .one {
         grid-row: 2/3;
-        padding: 0 0 10% 0;
+        padding: 0 10% 10% 10%;
         @include media ('<=phone'){
             padding: 0 0 20vh 0;
         }
             .introduction { 
-                h1 {font-size: 400%;} 
-                p {font-size: 150%;}   
+                display: grid;
+                h1 {font-size: 9vmin;} 
+                p {font-size: 4.5vmin;}   
                 @include media('<=phone') {
                     h1 {font-size: 12vw;}
                     p {font-size: 5vw;}
@@ -124,11 +164,11 @@ footer {
         font-size: 150%;
         text-decoration: none;
         border: none;
-        color: black;
-        background-color:white;
+        color: white;
         border-radius: 20%;
         margin: 1.5vw 3vw;
         display: block;
+        background-color: c.$mainBG;
     }
     button:hover {
         color: c.$mainColor;
@@ -139,9 +179,9 @@ footer {
     }
 }
   
-  .worksTitle {
+  .worksTitle, .projectsTitle {
       font-size: 500%;
-      text-align: left;
+      text-align: center;
       margin: 0;
       padding: 0;
   }

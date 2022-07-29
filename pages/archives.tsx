@@ -4,6 +4,7 @@ import NavBar from '../src/components/nav'
 import { getDates, getTags } from '../src/api/ghostCMS'
 import Link from 'next/link'
 import moment from 'moment'
+import Image from 'next/image'
 
 interface TagType {
     slug: string
@@ -21,9 +22,10 @@ export const getStaticProps = async () => {
 const Archive: React.FC<{tags: TagType[], dates:TimelineType[]}> = (props) => { 
     const {tags, dates} = props
     return (
-        <div className={styles.subContainer}>
-            <Head><title>amanda viray | archives</title></Head>
+        <div>
             <NavBar/>
+            <Head><title>amanda viray | archives</title></Head>
+            <div className={styles.subContainer}>
             <h1>/archives</h1>
             <p>in the depths of my mind</p>
 
@@ -32,20 +34,24 @@ const Archive: React.FC<{tags: TagType[], dates:TimelineType[]}> = (props) => {
                 {tags?.map((t, index) => {
                     return (
                         <li className={styles.postitem} key={index}> 
-                            <Link href="/archives/[archiveSlug]" as={`/archives/${t?.slug}`}>
-                                <a>{t?.name}</a>								
+                            {!!t?.feature_image && <Link href="/archives/[archiveSlug]" as={`/archives/${t?.slug}`}>
+                                <a> <Image src={t?.feature_image} layout='fill' objectFit='cover' objectPosition='center center' quality={70}/> </a>
                             </Link>
-                            <p>{t?.description}</p>
-                            {!!t?.feature_image && <img src={t?.feature_image} />}
+                            }
+                            <div className='postTitle'>
+                                <a>{t?.name}</a>								
+                                <p>{t?.description}</p>
+                            </div>
+                              
                         </li>
                     );
                 })} 
             </div>}
 
-            {dates && <div>
+            {dates && <div className={styles.DateMap} >
                 {dates?.map((y, index) => {
                     return ( 
-                        <ul className={styles.postitem} key={index}> 
+                        <ul key={index}> 
                             <li key={y.year}> <h2>
                             <Link href="/archives/[archiveSlug]" as={`/archives/${y.year}`}>
                                 <a>{y.year}</a>								
@@ -64,6 +70,8 @@ const Archive: React.FC<{tags: TagType[], dates:TimelineType[]}> = (props) => {
                     )
                 })} 
             </div>}
+            </div>
+            
             <footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
         </div> // End of Container
     )
