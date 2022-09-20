@@ -23,6 +23,8 @@ const Home: React.FC<{posts: PostType[]}> = (props) => {
 	return (
 		<div>
 			<Head>
+				<meta charSet='utf-8' name='description' content='Amanda Patricia Viray, 
+				aka Amazellia, codes by day and draws by night'/>
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>amanda viray | dev + art</title>
 			</Head>
@@ -31,9 +33,11 @@ const Home: React.FC<{posts: PostType[]}> = (props) => {
 			<div className='storyboard'>
 				<div className='one'>
 					<div className='introduction'>
-						<h1>✨<a className='gradient'>Hi, I'm Amanda Viray!</a></h1>
-						<p>studying <b className='gradient'>code</b> + <b className='gradient'>interactive media</b> at Newcastle. <br/>
-						Let's talk at AmandaPatricia.Viray@uon.edu.au!</p>
+						<h1>✨<span className='gradient'>Hi, I'm Amanda Viray!</span></h1>
+						<p>Information Technology graduate majoring in interactive media
+						at the University of Newcastle.
+						<br/>
+						Let's talk at <b className='gradient'><a href="mailto:amanda@apdv.dev">amanda@apdv.dev</a></b>!</p>
 					</div>
 					<AboutLinks/>
 				</div>
@@ -42,9 +46,10 @@ const Home: React.FC<{posts: PostType[]}> = (props) => {
 				<h1 className='projectsTitle gradient' id='projects'>projects</h1>
 
 				{posts && PostCards(posts)} 
-
 				<Link href="/archives/projects">
-					<a>see more</a>								
+					<button className={styles.seeMoreButton}>
+						see more
+					</button>
 				</Link>
 			</div>
 			

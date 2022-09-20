@@ -48,6 +48,7 @@ const ArchiveSlug: React.FC<{title: string, slug: string, initialPosts: PostType
 		<div>
 			<Head>
 				<title>blog | {title}</title>
+				<meta charSet='utf-8' name='description' content="Amanda's blog by midnight"/>
 			</Head>
 			<NavBar/>
 			<div className={styles.container}>

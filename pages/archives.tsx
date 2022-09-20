@@ -24,7 +24,10 @@ const Archive: React.FC<{tags: TagType[], dates:TimelineType[]}> = (props) => {
     return (
         <div>
             <NavBar/>
-            <Head><title>amanda viray | archives</title></Head>
+            <Head>
+                <title>amanda viray | archives</title>
+                <meta charSet='utf-8' name='description' content="Amanda's archives by dawn"/>
+            </Head>
             <div className={styles.subContainer}>
             <h1>/archives</h1>
             <p>in the depths of my mind</p>

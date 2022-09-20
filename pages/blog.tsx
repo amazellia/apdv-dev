@@ -4,6 +4,8 @@ import NavBar from '../src/components/nav'
 import {getPosts} from "../src/api/ghostCMS"
 import { useState } from 'react'
 import type { PostType } from '../src/api/ghostCMS'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faArchive} from'@fortawesome/free-solid-svg-icons'
 import postCards from '../src/components/postCards'
 import Link from 'next/link'
 import NProgress from 'nprogress'; //nprogress module
@@ -39,18 +41,21 @@ const Blog: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) =
 		<div>
 			<Head>
 				<title>amanda viray | blog</title>
+				<meta charSet='utf-8' name='description' content="Amanda's blog by midnight"/>
 			</Head>
 
 			<NavBar/>
 
 			<div className={styles.container}>
-				<h1>✏️ <a className='gradient'>blog</a></h1>
+				<h1>✏️ <span className='gradient'>blog</span></h1>
 
 				<p>in the depths of my mind</p>
 
 				 {posts && postCards(posts, page, totalPages, pagginationHandler)}
 				<Link href="/archives">
-					<a>archives</a>
+					<button className={styles.seeMoreButton}>
+						<FontAwesomeIcon icon={faArchive}/> archives
+					</button>
 				</Link>
 
 				<footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>

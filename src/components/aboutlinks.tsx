@@ -8,23 +8,23 @@ function aboutLinks() {
     return (
     <div className="aboutnav">
         <Link href="https://www.linkedin.com/in/apdv">
-            <a><FontAwesomeIcon icon={faLinkedinIn}/></a>
+            <div className='icon'><FontAwesomeIcon icon={faLinkedinIn}/></div>
         </Link>
 
         <Link href="https://github.com/amazellia">
-            <a><FontAwesomeIcon icon={faGithub}  /></a>
+        <div className='icon'><FontAwesomeIcon icon={faGithub}  /></div>
         </Link>
 
         <Link href="https://amazellia.tumblr.com">
-            <a><FontAwesomeIcon icon={faTumblr} /></a>
+        <div className='icon'><FontAwesomeIcon icon={faTumblr} /></div>
         </Link>
 
         <Link href="https://twitter.com/amazellia">
-            <a><FontAwesomeIcon icon={faTwitter} /></a>
+        <div className='icon'><FontAwesomeIcon icon={faTwitter} /></div>
         </Link>
 
         <Link href="https://www.instagram.com/_amazellia/">
-            <a><FontAwesomeIcon icon={faInstagram}/></a>
+        <div className='icon'><FontAwesomeIcon icon={faInstagram}/></div>
         </Link>
     </div>
     )}

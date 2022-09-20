@@ -51,6 +51,7 @@ const Works: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) 
 			<div className={styles.container}>
 				<Head>
 					<title>archive | projects</title>
+					<meta charSet='utf-8' name='description' content="Amanda's projects"/>
 				</Head>
 				
 				<div className={styles.subContainer} >

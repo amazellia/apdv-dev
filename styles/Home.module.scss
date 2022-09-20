@@ -1,3 +1,4 @@
+@use "./_color-themes.scss" as c;
 @import "./mediaQueries.scss";
 
 .server {
@@ -6,6 +7,7 @@
 	justify-content: center;
 	height: 100vh;
 }
+
 .slugContainer {
 	//padding: 1.3vw; 
 	display: flex;
@@ -13,9 +15,28 @@
 	flex-direction: column;
 	max-width: 42rem;
 	width: 60%;
+	font-size: larger;
 	margin: 0 auto;
 	justify-content: center;
 	align-items: center;
+}
+
+.about {
+	display: flex;
+	position: relative;
+	flex-direction: row;
+	width: 70%;
+	font-size: larger;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	.pfp {border-radius: 20%;}
+	.desc {	padding-left:5%}
+	@include media('<=desktop'){
+		flex-direction: column;
+		.pfp{max-width: 360px;}
+		.desc{padding-left: 0;}
+	}
 }
 
 .container {
@@ -92,7 +113,7 @@
 		opacity: 0.2;
 		transition: 0.2s ease;
 	}
-	a {
+	span {
 		color: white;
 		font-weight: bold;
 	}
@@ -107,6 +128,19 @@
 	width: 100%;
 	//text-align: center;
 }
+
+.seeMoreButton {
+	background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);
+    background-size: 100%;
+    -webkit-background-clip:initial;
+    -moz-background-clip:initial;
+    background-clip:initial;
+	border-radius: 20px;
+	padding: 2vmin 3vmin;
+	margin: 5vmin;
+	color: white;
+	font-size: large;
+} 	.seeMoreButton:hover {color: rgb(255, 218, 218); transition: 0.3s ease; cursor: pointer;}
 
 .main {
 	padding: 5rem 0;

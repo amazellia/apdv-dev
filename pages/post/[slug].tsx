@@ -34,7 +34,10 @@ const Post: React.FC<{post: PostType[]}> = (props) => {
             {post?.map((p, index) => {
                 return (
                     <div className={styles.slugContainer} key={p?.slug}>
-                        <Head> <title>{p?.title}</title> </Head>
+                        <Head> 
+                            <title>{p?.title}</title> 
+                            <meta charSet='utf-8' name='description' content="{p?.title}"/>
+                        </Head>
 
                         <h1>{p?.title}</h1>
                         <p className={styles.blogdeets}>Published at {moment(p?.created_at).format('MMMM D, YYYY [●] h:mm a')}<br/>
