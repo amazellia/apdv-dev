@@ -36,17 +36,17 @@ const Archive: React.FC<{tags: TagType[], dates:TimelineType[]}> = (props) => {
             {tags && <div className={styles.gridContainer}>
                 {tags?.map((t, index) => {
                     return (
-                        <li className={styles.postitem} key={index}> 
+                        <div className={styles.postitem} key={index}> 
                             {!!t?.feature_image && <Link href="/archives/[archiveSlug]" as={`/archives/${t?.slug}`}>
-                                <a> <Image src={t?.feature_image} layout='fill' objectFit='cover' objectPosition='center center' quality={70}/> </a>
+                                <a href="#" aria-label='{p?.name}'> <Image src={t?.feature_image} alt='{p?.name}' layout='fill' objectFit='cover' objectPosition='center center' quality={70}/> </a>
                             </Link>
                             }
                             <div className='postTitle'>
-                                <a>{t?.name}</a>								
+                                <span>{t?.name}</span>								
                                 <p>{t?.description}</p>
                             </div>
                               
-                        </li>
+                        </div>
                     );
                 })} 
             </div>}

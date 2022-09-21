@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import { getPosts, PostType } from '../../src/api/ghostCMS'
 import Head from 'next/head'
 import styles from '../../styles/Home.module.scss'
@@ -64,7 +64,6 @@ const Works: React.FC<{initialPosts: PostType[], totalPages: number}> = (props) 
 							<button value={"tag:expart"} onFocus={(e) => handleClick(e)}>experimental</button>
 							{/* <button value={"tag:blog"} onClick={(e) => handleClick(e)}>write</button> */}
 					</div>
-
 					{posts && postCards(posts, page, pages, pagginationHandler)}
 				</div>
 			</div>

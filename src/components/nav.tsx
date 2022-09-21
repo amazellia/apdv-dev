@@ -19,10 +19,10 @@ function navBar() {
 				<Link href="/about">about</Link>
 				<Link href="/#projects">projects</Link>
 				<Link href="/blog">blog</Link>
-			<a href="#!" className="icon" onClick={e => openMobileNav(e)} >
+			<a href="#!" aria-label='navigation menu' className="icon" onClick={e => openMobileNav(e)} >
 				<FontAwesomeIcon icon={faBars}/>
 			</a>
-			<a href="#!" className="closeIcon" onClick={e => openMobileNav(e)}>
+			<a href="#!" aria-label='navigation menu' className="closeIcon" onClick={e => openMobileNav(e)}>
 				&times;
 			</a>
 			{/* <a onClick={() => setTheme(theme == 'light'? 'dark': 'light')}>

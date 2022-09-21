@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import NavBar from '../src/components/nav'
+import Image from 'next/image';
 
 const Home = () => {
 
@@ -15,9 +16,9 @@ const Home = () => {
 			</Head>
 
             <div className={styles.about}>
-				<img className={styles.pfp} src='/pfp.png'/>
+				<Image alt='Picture of Amanda - dressed in pink checkered shirt' className={styles.pfp} src='/pfp.png' width="433px" height="577px"/>
 				<div className={styles.desc}>
-					<h1><a className='gradient'>About</a></h1>
+					<h1><span className='gradient'>About</span></h1>
 					<p>	
 						Hi, I'm Amanda Patricia Dorado Viray! (take a wild guess on where the
 						<b> apdv</b> came from for my website). I graduated at the University of Newcastle
