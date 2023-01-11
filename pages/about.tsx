@@ -1,28 +1,29 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import NavBar from '../src/components/nav'
+import Layout from '../components/Layout';
 import Image from 'next/image';
+import { getStoryblokApi, StoryblokComponent, useStoryblokState  } from "@storyblok/react"
 
-const Home = () => {
+export default function About ({story, preview, config}:any) {
+	story = useStoryblokState(story, {}, preview);
 
 	// ⌛ TO-DO: Add new section called 'education' + 'experience' & a button called 'resume'
 	return (
 		<div>
-			<NavBar/>
 			<Head>
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>amanda viray | dev + art</title>
-				<meta charSet='utf-8' name='description' content="Amanda's bio"/>
+				<meta charSet="utf-8" name="description" content="Amanda's bio"/>
 			</Head>
-
-            <div className={styles.about}>
-				<Image alt='Picture of Amanda - dressed in pink checkered shirt' className={styles.pfp} src='/pfp.png' width="433px" height="577px"/>
+      <Layout story={config}> 
+	  <div className={styles.about}>
+				<Image alt="Picture of Amanda - dressed in pink checkered shirt" className={styles.pfp} src="/pfp.png" width={433} height={577}/>
 				<div className={styles.desc}>
-					<h1><span className='gradient'>About</span></h1>
+					<h1><span className="gradient">About</span></h1>
 					<p>	
-						Hi, I'm Amanda Patricia Dorado Viray! (take a wild guess on where the
-						<b> apdv</b> came from for my website). I graduated at the University of Newcastle
-						with Bachelor of Information Technology majoring in Interactive Media (High Distiction average, 6.7).
+						Hi, I&#39;m Amanda Patricia Dorado Viray! &#40;take a wild guess on where the
+						<b> apdv</b> came from for my website&#41;. I graduated at the University of Newcastle
+						with Bachelor of Information Technology majoring in Interactive Media &#40;High Distiction average, 6.7&#41;.
 						I love mixing my passion and skills for creativity, 
 						communications, problem-solving, and technology together to create meaningful impact 
 						on people, organisations, decisions, stories, and interactive experiences. 
@@ -50,14 +51,38 @@ const Home = () => {
 					<p>
 						You can contact me at <a href="mailto:amanda@apdv.dev">amanda@apdv.dev</a>.
 						As for my work, volunteer, club, and education experiences, you can look here at 
-						<a href='https://www.linkedin.com/in/apdv/'> LinkedIn</a>.
+						<a href="https://www.linkedin.com/in/apdv/"> LinkedIn</a>.
 					</p>
 				</div>
             </div>
-
-			<footer>Amanda Patricia Dorado Viray © 2022 <br/>Made with 💖 + Next.js</footer>
-			
+			</Layout>
 			</div>
 	);
 };
-export default Home
+
+export async function getStaticProps(context?:any) {
+  // home is the default slug for the homepage in Storyblok
+  let slug = "pages/about";
+ 
+  let sbParams = {
+    version: "published",
+    resolve_links: "url",
+  };
+ 
+  if (context.preview) {
+    sbParams.version = "draft";
+  }
+ 
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  let { data: config } = await storyblokApi.get('cdn/stories/config');
+  return {
+    props: {
+      story: data ? data.story : false,
+      key: data ? data.story.id : false,
+      preview: context.preview || false,
+      config: config ? config.story : false,
+    },
+    revalidate: 3600, // revalidate every hour
+  };
+}
