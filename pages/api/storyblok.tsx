@@ -96,7 +96,7 @@ export function setDates(data:any) {
     first_published_at_lt: $before, 
     first_published_at_gt: $after,
     with_tag: $search_tag,
-    starts_with: "projects/",
+    starts_with: "artworks/",
     per_page: $limit
     page: $currentPage) 
     {

@@ -7,10 +7,11 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 const Gallery = ({blok}:any) => {
-  const columns = blok.columns || (Math.ceil(((blok.images).length)/3)) ;
+  var columns:any = (columns === undefined) ?  blok.columns : (Math.ceil(((blok.images).length)/3));
+  var type:any = (typeof type === undefined) ? blok.variant: "masonry" ;
   return ( 
     <ImageList 
-    variant="masonry" cols={columns} gap={8}
+    variant={type} cols={columns} gap={8}
     >
       {blok.images.map((img:any) => (
         <ImageListItem key={img.filename}  >
@@ -23,10 +24,6 @@ const Gallery = ({blok}:any) => {
             quality={80}
             />
             <ImageListItemBar
-              sx={{
-                background:
-                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-              }}
               actionIcon={
                 <a target="_blank" href={img.filename} rel="noopener noreferrer">
                 <IconButton

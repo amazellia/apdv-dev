@@ -9,10 +9,10 @@
  import Grid from "@mui/material/Unstable_Grid2"
 import { ListItem } from "@mui/material";
 
- const Featured = ({ blok }:any) => {
+ const FeaturedArticles = ({ blok }:any) => {
    return (
      <>
-     <h2 className='centerTitle gradient' {...storyblokEditable(blok)}>{blok.name}</h2>
+     <h2 className="centerTitle" {...storyblokEditable(blok)}><span className='gradient'>{blok.name}</span></h2>
       <Grid container columns={3}>
       {blok.articles.map((article:any) => {
           //article.content.slug = article.slug
@@ -25,10 +25,12 @@ import { ListItem } from "@mui/material";
           )
         })}        
       </Grid>
-       <Link className={styles.seeMoreButton} href={blok.name}>
-					<button>View more</button>
-				</Link>
+      <div className={styles.seeMoreButton} > 
+      <Link href={blok.url}><button>
+            View more
+        </button></Link>
+      </div>
      </>
    );
  };
- export default Featured;
+ export default FeaturedArticles;

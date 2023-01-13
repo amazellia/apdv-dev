@@ -11,6 +11,8 @@ e.g. "blog/", "blog/2021".
 import { ListItem } from "@mui/material";
 import styles from '../styles/Home.module.scss';
 import Artworks from './Artworks'
+import Link from "next/link";
+import Header from "./Header";
  
  const query = gql`
  query AllArticles($currentPage: Int, $limit: Int, $search_tag: String)
@@ -75,7 +77,8 @@ import Artworks from './Artworks'
  
    return (
      <>
-     <h1>🌸<span  className='gradient'>Works</span></h1>
+     <Header name='amanda viray | works'/>
+     <h1 className={styles.centerHeading}>🌸<span  className='gradient'>Projects</span></h1>
      <div className={styles.filterNav}> 
         <button value="" onClick={(e) => handleClick(e)}>all</button>
         <button value="code" onClick={(e) => handleClick(e)}>code</button> 
@@ -106,9 +109,11 @@ import Artworks from './Artworks'
         shape="rounded"
         onChange={handleChangePage}
         />
-          
-        {(tag == "art" || tag == "") && <Artworks/>}
 
+        {(tag == "art" || tag == "") && <><Artworks/>
+        <div className={styles.seeMoreButton} > 
+        <Link href='/archive'><button>🗂️ view in archive</button></Link>
+      </div></>}
         </>
       }
      </>

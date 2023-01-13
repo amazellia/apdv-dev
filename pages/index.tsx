@@ -17,7 +17,7 @@ export default function Home({story, preview, config}:any) {
             <p><abbr title="XR/AR/VR + emerging technologies">Digital Technologist</abbr> of the School of Architecture and 
               Built Environment - <abbr title='NSW, Australia'>University of Newcastle</abbr>
             <br/>
-            Let&#39;s talk at <b className="gradient"><a href="mailto:amanda@apdv.dev">amanda@apdv.dev</a></b>!</p>
+            Let&#39;s talk at <b className="gradient"><a href="mailto:amanda@apdv.dev">amanda@apdv.dev</a></b> or learn more <a href='about'>here</a>!</p>
           </div>
         <AboutLinks/>
       </div>
@@ -34,7 +34,7 @@ export async function getStaticProps(context?:any) {
   let sbParams = {
     version: "published",
     resolve_links: "url",
-    resolve_relations: ["featured-articles.articles"],
+    resolve_relations: ["featured-articles.articles", "featured-artworks.artworks"],
   };
  
   if (context.preview) {

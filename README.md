@@ -1,34 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+<h1 style="color:pink">🌸Amanda Viray's website</h1>
+<h3>｡･:*˚:✧｡ <a href="https://apdv.dev">apdv.dev</a> ✧˖*°࿐</h3>
+<h3>Tech Stack</h3>
+<a  href='https://nextjs.org/' target="_blank"><img alt='Next.js' src='https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white'/></a>
+<a href='https://www.typescriptlang.org/' target="_blank"><img alt='typescript' src='https://img.shields.io/badge/Typescript-100000?style=for-the-badge&logo=typescript&logoColor=44AAFF&labelColor=000000&color=000000'/></a>
+<a href='https://www.storyblok.com/' target="_blank"><img alt='storyblok' src='https://img.shields.io/badge/Storyblok-100000?style=for-the-badge&logo=storyblok&logoColor=32E4B4&labelColor=FFFFFF&color=FFFFFF'/></a>
+<a href='https://sass-lang.com/' target="_blank"><img alt='sass' src='https://img.shields.io/badge/Sass-100000?style=for-the-badge&logo=sass&logoColor=F43C85&labelColor=FFFFFF&color=FFFFFF'/></a>
+<a  href='https://www.apollographql.com/' target="_blank"><img alt='Apollo GraphQL' src='https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql'/></a>
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 🐞 Found a ladybug? [Report here](https://github.com/amazellia/apdv-dev/issues)
+─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───
+</div>

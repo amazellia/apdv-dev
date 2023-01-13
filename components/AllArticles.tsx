@@ -9,7 +9,9 @@ import Grid from "@mui/material/Unstable_Grid2"
 import { useState } from "react";
 import { Pagination } from "@mui/material";
 import { ListItem } from "@mui/material";
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/Home.module.scss';
+import Link from 'next/link'
+import Header from "./Header";
 //import NProgress from "nprogress";
 
 /*add  
@@ -79,7 +81,8 @@ const AllArticles = ( {blok} :any) => {
 
   return (
     <>
-      <h1>✏️<span className='gradient' >{blok.title}</span></h1>
+    <Header name='amanda viray | blog'/>
+      <h1 className={styles.centerHeading}>✏️<span className='gradient' > {blok.title}</span></h1>
       <div className={styles.filterNav}> 
         <button value="" onClick={(e) => handleClick(e)}>all</button>
         <button value="tech" onClick={(e) => handleClick(e)}>tech</button> 
@@ -111,7 +114,11 @@ const AllArticles = ( {blok} :any) => {
       shape="rounded"
       onChange={handleChangePage}
       />
-      </>}
+      <div className={styles.seeMoreButton} > 
+      <Link href='/archive'><button>🗂️ view in archive</button></Link>
+      </div>
+      </>
+      }
     </>
   );
 };

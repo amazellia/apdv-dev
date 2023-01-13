@@ -7,33 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
-let url = 'https://res.cloudinary.com/hizgjp0fn/image/upload/'
-
 const  ArticleImage = (blok:any) => {
   let img = blok.blok;
-//  let obj:any = null;
-//   async function imgInfo() { 
-//     try {
-//       obj = await ( await fetch(`${url}fl_getinfo/${img.src.split(url).join('')}`)).json()} 
-//       catch(e) {
-//       console.log('error');
-//     } console.log(obj);
-// }
-//   imgInfo();
   return (
     <div>
       <ImageList variant="masonry" cols={1} gap={0}>
         <ImageListItem >
-            <img 
+        <Image 
             src={img.src}
             alt={img.alt}
+            width={800}
+            height={800}
             loading="lazy"
+            quality={80}
             />
             <ImageListItemBar
-              sx={{
-                background:
-                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-              }}
               actionIcon={
                 <a target="_blank" href={img.src} rel="noopener noreferrer">
                 <IconButton

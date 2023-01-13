@@ -52,7 +52,7 @@ const ArchiveSlug = (props:any) => {
 		<>
 		<Header name={"archives | " + src?.title}/>
 		<main>
-			<Link href="/archives" className={styles.closeArchive}><FontAwesomeIcon icon={faXmark}/></Link> 
+			<Link href="/archive" className={styles.closeArchive}><FontAwesomeIcon icon={faXmark}/></Link> 
 			<h1>{src?.title}</h1>
 			{/* <p>{src?.description}</p> */}
 			<div className={styles.filterNav}> 

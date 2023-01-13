@@ -38,13 +38,15 @@ import MenuLink from "../components/MenuLink";
 import Layout from "../components/Layout";
 import AllArticles from "../components/AllArticles";
 import ArticleTeaser from "../components/ArticleTeaser";
-import Featured from "../components/Featured"
+import FeaturedArticles from "../components/FeaturedArticles"
 import FilterTags from "../components/FilterTags"
 import Video from "../components/Video"
 import Artwork from '../components/Artwork';
 import Artworks from '../components/Artworks';
-import Archives from '../components/Archives'
+import Archive from '../components/Archive'
 import Tags from '../components/Tags'
+import About from '../components/AboutMe';
+import FeaturedArt from '../components/FeaturedArt';
 
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
@@ -61,7 +63,7 @@ storyblokInit({
     article: Article,
     config: Config,
     layout: Layout,
-    "featured-articles": Featured,
+    "featured-articles": FeaturedArticles,
     "all-articles": AllArticles,
     articleTeaser: ArticleTeaser,
     "header_menu": HeaderMenu,
@@ -70,8 +72,10 @@ storyblokInit({
     video: Video,
     artwork: Artwork,
     artworks: Artworks,
-    archives: Archives,
+    archive: Archive,
     name_tag: Tags,
+    about: About,
+    "featured-artworks": FeaturedArt,
   },
 });
 

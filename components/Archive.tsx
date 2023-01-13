@@ -4,15 +4,15 @@ import { useQuery } from "@apollo/client";
 import ArchivesDates from "./ArchivesDates";
 import Header from './Header';
 
-const Archives = ({blok} :any) => {
+const Archive = ({blok} :any) => {
   const {data, error, loading} = useQuery(getArchivesOverview);
   if (error) return <div>errors</div>;
   return (
     <>
     {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> :
     <>
-      <Header/>
-      <h1>🗂️ <span className='gradient'>Archives</span></h1>
+      <Header name="amanda viray | archive"/>
+      <h1>🗂️ <span className='gradient'>Archive</span></h1>
       <h2>Tags</h2>
       <Tags data={data?.TagsItems?.items[0]}/>
 
@@ -23,4 +23,4 @@ const Archives = ({blok} :any) => {
   )
 };
 
-export default Archives;
+export default Archive;

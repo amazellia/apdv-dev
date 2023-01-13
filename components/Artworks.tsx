@@ -51,8 +51,8 @@ import { ArtworkItems } from "../pages/api/storyblok";
   //console.log(`${tag} and ${blok?.tag}`)
  
    return (
-     <>  
-      <h1 id="artworks">🎨<span className="gradient">Artworks</span></h1>
+    <div className={styles.artworks}>  
+      <h1 id="artworks" className={styles.centerHeading}>🎨<span className="gradient">Artworks</span></h1>
         <div>
           <div className={styles.filterNav}> 
             <button value=" " onClick={(e) => handleClick(e)}>all</button>
@@ -84,7 +84,7 @@ import { ArtworkItems } from "../pages/api/storyblok";
         />
          </div>}
         </div>
-        </>
+    </div>
     );
  };
  export default Artworks;

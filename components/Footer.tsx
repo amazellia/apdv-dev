@@ -4,7 +4,7 @@ function Footer() {
         <div>
             <footer>
                 Amanda Patricia Dorado Viray © {moment().format('YYYY')} <br/>
-                Made with 💖 + Next.js + Storyblok CMS</footer>
+                Made with 💖 + Next.js</footer>
         </div>
     )
 }
