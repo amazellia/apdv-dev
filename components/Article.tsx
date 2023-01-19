@@ -8,15 +8,19 @@ import { Embed } from 'hyvor-talk-react'
 import { useRouter } from 'next/router';
 import ArticleImage from './ArticleImage'
 import styles from '../styles/Home.module.scss'
+import Header from './Header';
 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
+
+export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
 const Article = ({ blok }:any) => {
   const { asPath } = useRouter()
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   return (
     <div key={blok.title}>
+    <Header name={blok.title} meta={blok.title}/>
       <div className={styles.articleBanner}>
         <div>
           <Image 

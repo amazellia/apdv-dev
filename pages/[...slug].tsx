@@ -6,8 +6,8 @@ import {
   StoryblokComponent,
 } from "@storyblok/react";
 
-export default function Page({ story, config }:any) {
-  story = useStoryblokState(story, config);
+export default function Page({ story, preview, config }:any) {
+  story = useStoryblokState(story, {}, preview);
 
   return (
     <div>
@@ -22,13 +22,18 @@ export default function Page({ story, config }:any) {
   );
 }
 
-export async function getStaticProps({ params }:any) {
+export async function getStaticProps({ params}:any, context?:any) {
   let slug = params.slug ? params.slug.join("/") : "home";
 
   let sbParams = {
-    version: "draft",
+    version: "published", // version: "draft",
     resolve_links:"url",
+    resolve_relations: ["featured-articles.articles"],
   };
+
+  if (context?.preview) {
+    sbParams.version = "draft";
+  }
 
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
@@ -39,8 +44,9 @@ export async function getStaticProps({ params }:any) {
       story: data ? data.story : false,
       key: data ? data.story.id : false,
       config: config ? config.story : false,
+      preview: context?.preview || false,
     },
-    revalidate: 3600,
+    revalidate: 3600, // revalidate every hour
   };
 }
 

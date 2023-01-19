@@ -10,5 +10,9 @@ const nextConfig = {
     domains: ['res.cloudinary.com'],
   }
 }
-
-module.exports = nextConfig
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+//export default withBundleAnalyzer(nextConfig)
+//module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)

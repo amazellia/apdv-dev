@@ -10,12 +10,14 @@ import Header from './Header';
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
 
+export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
+
 const Artwork = ({blok}:any) => {
   const { asPath } = useRouter()
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   return (
     <>
-    <Header name={blok.name}/>
+    <Header name={blok.name} meta={blok.name}/>
     <Grid container columns={2}>
       
       <Grid xs={3} sm={2} md={1.4} lg={1.5} xl={1.5} >

@@ -23,27 +23,27 @@ export const getArchivesOverview = gql`
       }
 }  
 `
-export const slugify = async (archives:string) => {
+export const slugify = async (archive:string) => {
 	var title:string
 	var after:string
 	var before:string
 	var tag:string 
-	if ( /^\d{4}$/.test(`${archives}`) == true ) {
-		after = (`${archives}-01-01`)
-		before = (`${archives}-12-31`);
-		title = archives; 
+	if ( /^\d{4}$/.test(`${archive}`) == true ) {
+		after = (`${archive}-01-01`)
+		before = (`${archive}-12-31`);
+		title = archive; 
     tag = '';
 		return {after, before, title, tag};
-	} else if (/\d{4}-\d{2}/.test(`${archives}`) == true )  {
-		const lastDay = moment(moment(archives).endOf('month')).format('D');
-		after = (`${archives}-01`)
-		before = (`${archives}-${lastDay}`);
-		title = moment(archives).format('MMMM YYYY'); 
+	} else if (/\d{4}-\d{2}/.test(`${archive}`) == true )  {
+		const lastDay = moment(moment(archive).endOf('month')).format('D');
+		after = (`${archive}-01`)
+		before = (`${archive}-${lastDay}`);
+		title = moment(archive).format('MMMM YYYY'); 
     tag = '';
 		return {after, before, title, tag};
 	} else {
-    title = (`${archives}`)
-    tag = (`${archives}`)
+    title = (`${archive}`)
+    tag = (`${archive}`)
     before = ''
     after = ''
     return {after, before, title, tag};
@@ -92,32 +92,36 @@ export function setDates(data:any) {
   $before: String,
   $after: String,)
   {
-  ArtworkItems(
-    first_published_at_lt: $before, 
-    first_published_at_gt: $after,
-    with_tag: $search_tag,
-    starts_with: "artworks/",
-    per_page: $limit
-    page: $currentPage) 
-    {
-    total
-    items {
-      uuid
-      full_slug
-      first_published_at
-      content {
-        _uid
-        name
-        component
-        description
-        software_used
-        tags
-        content
+    ArtworkItems(
+      first_published_at_lt: $before, 
+      first_published_at_gt: $after,
+      with_tag: $search_tag,
+      starts_with: "artworks/",
+      per_page: $limit
+      page: $currentPage) 
+      {
+      total
+      items {
+        uuid
+        full_slug
+        first_published_at
+        content {
+          _uid
+          name
+          component
+          description
+          software_used
+          tags
+          content
+        }
       }
     }
-  }
+    ConfigItem(id: "8404") {
+      content {
+        artwork_buttons
+      }
+    }
   }`
-
 
 export const getArchives = gql`
 query ArticleDates(
@@ -186,4 +190,89 @@ query ArticleDates(
         total
     }
 }
+`
+
+export const BlogArticles = gql`
+query AllArticles($currentPage: Int, $limit: Int, $search_tag: String)
+  {
+    ArticleItems(
+      with_tag: $search_tag,
+      starts_with: "blog/",
+      sort_by:"items.content.published_at", 
+      per_page: $limit
+      page: $currentPage) 
+      {
+        items {
+          id
+          name
+          content {
+            comments
+            component
+            cover_image {
+              filename
+              copyright
+              focus
+            }
+            content
+            published_at
+            subtitle
+            teaser
+            title
+            updated_at
+          }
+          meta_data
+          full_slug
+          uuid
+          slug
+        }
+        total
+    }
+    ConfigItem(id: "8404") {
+      content {
+        blog_buttons
+    }
+  }
+}
+`
+
+export const WorkArticles = gql`
+query AllArticles($currentPage: Int, $limit: Int, $search_tag: String)
+ {
+   ArticleItems(
+     with_tag: $search_tag,
+     starts_with: "projects/",
+     sort_by:"items.content.published_at", 
+     per_page: $limit
+     page: $currentPage) 
+     {
+       items {
+         id
+         name
+         content {
+           comments
+           component
+           cover_image {
+             filename
+             copyright
+             focus
+           }
+           content
+           published_at
+           subtitle
+           teaser
+           title
+           updated_at
+         }
+         meta_data
+         full_slug
+         uuid
+       }
+       total
+   }
+   ConfigItem(id: "8404") {
+     content {
+       work_buttons
+     }
+   }
+ }
 `

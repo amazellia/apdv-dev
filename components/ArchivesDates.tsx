@@ -13,14 +13,14 @@ const ArchivesDates = ({data}:any) => {
             return ( 
             <ul key={index}> 
             <li key={y.year}> <h2>
-                <Link href="/archives/[archives]" as={`/archives/${y.year}`}>
+                <Link href="/archive/[archive]" as={`/archive/${y.year}`}>
                 {y.year}						
                 </Link>
             </h2></li>
             {y.months.map( (y:any) => {
             return (
             <li key={y}> <h3>
-                <Link href="/archives/[archives]" as={`/archives/${y}`}>
+                <Link href="/archive/[archive]" as={`/archive/${y}`}>
                 {moment(y).format('MMM')}						
                 </Link>
             </h3> </li>

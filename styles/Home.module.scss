@@ -1,6 +1,5 @@
 @use "./_color-themes.scss" as c;
 @import "./mediaQueries.scss";
-
 .server {
 	display: flex;
 	align-items: center;
@@ -9,21 +8,33 @@
 }
 
 .storyboard {
-    height: 87vh;
+	display: inline-block;
+    height: 100vh;
     max-height: 100vh;
-    min-height: 85vh;
+    //min-height: 85vh;
     margin: 0 20%;
     align-items: center;
     justify-content: center;
 
+	@include media('<=tablet'){
+		margin: 0 20%;
+	}
+	@include media('>=LGdesktop'){
+		margin: 0 20%;
+	}
     .introduction { 
         display: grid;
-        h1 {font-size: 4.5rem;} 
-        p {font-size: 2rem;}   
+		//padding-top: 7%;
+        h1 {font-size: 4.5rem; margin:2.5rem 0 2rem 0;} 
+        p {font-size: 2em; margin:1rem 0 1rem 0;}   
         @include media('<=tablet') {
-            h1 {font-size: 3rem;}
-            p {font-size: 1.5rem;}
+            h1 {font-size: 3rem;margin:0 ;}
+            p {font-size: 1.5rem; margin:0.5rem 0;}
         }
+		@include media('>=LGdesktop') {
+			h1 {font-size: 5vw;}
+            p {font-size: 2vw;}
+		}
     }
     .aboutnav {
         font-size: 200%;
@@ -38,6 +49,10 @@
             font-size: 10vw;
             justify-content:center;
         }
+		@include media('>=LGdesktop') {
+			font-size: 2.5vw;
+            justify-content:center;
+		}
     }
 }
 
@@ -150,12 +165,11 @@
 	margin: 0.5rem;
 	position: relative;
     display: flex;
-	width: 23rem;
-	height: 20rem;
+	aspect-ratio: 1 / 1;
 	overflow: hidden;
 	border-radius: 7%;
 	list-style-type: none;
-	flex: 1 1 301px;
+	flex: 1 0 auto;
 	flex-direction: column;
 	a:hover {
 		opacity: 0.2;
@@ -164,10 +178,6 @@
 	span {
 		color: white;
 		font-weight: bold;
-	}
-	@include media('<=tablet') {
-		width: 15rem;
-		height: 17rem;
 	}
 	
 }
@@ -265,17 +275,6 @@
 	font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
 		Bitstream Vera Sans Mono, Courier New, monospace;
 }
-
-.grid {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-
-	max-width: 800px;
-	margin-top: 3rem;
-}
-
 .card {
 	margin: 1rem;
 	flex-basis: 45%;
@@ -365,14 +364,16 @@
 	align-content: center;
 }
 
-.artworks {
-	padding-top: 3rem;
-}
-
 .articleBanner {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 	img {height: 480px; width: auto; float: right ;}
 	align-content:  center;
 	column-gap: 0.5rem;
+}
+
+.GridContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

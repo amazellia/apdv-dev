@@ -7,10 +7,9 @@ e.g. "blog/", "blog/2021".
  import { useState } from "react";
  import { Pagination } from "@mui/material";
  import Grid from "@mui/material/Unstable_Grid2"
-import { ListItem } from "@mui/material";
-import ArtworkTeaser from "./ArtworkTeaser";
 import styles from '../styles/Home.module.scss'
 import { ArtworkItems } from "../pages/api/storyblok";
+import ArticleTeaser from "./ArticleTeaser";
  
  const Artworks = ({blok}:any) => {
    const [page, setPage]= useState(1)
@@ -28,7 +27,12 @@ import { ArtworkItems } from "../pages/api/storyblok";
       }
    });
    if (error) return <div>error</div>;
- 
+   
+   var buttons = [] as any;
+   data?.ConfigItem?.content?.artwork_buttons.forEach((x:any, index:any) => {
+    buttons.push(<button value={x} onClick={(e) => handleClick(e)}><b>{x}</b></button>); 
+  })
+
    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
      setPage(value);
      const element = document.getElementById("artworks") as HTMLElement
@@ -49,41 +53,33 @@ import { ArtworkItems } from "../pages/api/storyblok";
     else {return setTag(filter)} 
   };
   //console.log(`${tag} and ${blok?.tag}`)
- 
+ console.log(data);
    return (
-    <div className={styles.artworks}>  
-      <h1 id="artworks" className={styles.centerHeading}>🎨<span className="gradient">Artworks</span></h1>
-        <div>
-          <div className={styles.filterNav}> 
-            <button value=" " onClick={(e) => handleClick(e)}>all</button>
-            <button value="traditional" onClick={(e) => handleClick(e)}>traditional</button> 
-            <button value="digital" onClick={(e) => handleClick(e)}>digital</button>
-            <button value="3D" onClick={(e) => handleClick(e)}>3D</button>
-          </div>
-          {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> :
-          <div>
-          <Grid container columns={3}>
-            {data?.ArtworkItems?.items?.map((x:any) => (
-            <Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x.uuid} >
-            <ListItem>
-            <ArtworkTeaser artwork={x.content} key={x.uuid} slug={x.full_slug}/>
-            </ListItem>
-            </Grid>
-            ))}
-          </Grid>
+    <div> 
+      {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> :<div>
+      <div className={styles.filterNav}> 
+        <button value=" " onClick={(e) => handleClick(e)}><b>all</b></button>
+        {buttons}
+      </div>
+      <Grid container columns={3}>
+        {data?.ArtworkItems?.items?.map((x:any) => (
+        <Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x.uuid} >
+        <ArticleTeaser article={x.content} slug={x.full_slug}/>
+        </Grid>
+        ))}
+      </Grid>
 
-        <Pagination
-        className="pagination"
-        count={Math.ceil(data.ArtworkItems.total/ limit)}
-        page={page}
-        siblingCount={1}
-        boundaryCount={1}
-        variant="outlined"
-        shape="rounded"
-        onChange={handleChangePage}
-        />
-         </div>}
-        </div>
+    <Pagination
+    className="pagination"
+    count={Math.ceil(data.ArtworkItems.total/ limit)}
+    page={page}
+    siblingCount={1}
+    boundaryCount={1}
+    variant="outlined"
+    shape="rounded"
+    onChange={handleChangePage}
+    />
+    </div>}
     </div>
     );
  };

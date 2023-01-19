@@ -9,16 +9,16 @@ const Archive = ({blok} :any) => {
   if (error) return <div>errors</div>;
   return (
     <>
+    <Header name={blok.metaName} meta={blok.metaDescription}/>
     {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> :
     <>
-      <Header name="amanda viray | archive"/>
-      <h1>🗂️ <span className='gradient'>Archive</span></h1>
+      <h1>🗂️ Archive</h1>
       <h2>Tags</h2>
       <Tags data={data?.TagsItems?.items[0]}/>
 
       <h2>Dates</h2>
       <ArchivesDates data={data}/>
-      </>}
+    </>}
   </>
   )
 };

@@ -13,7 +13,8 @@ const About = ( {blok} :any) => {
 	// ⌛ TO-DO: Add new section called 'education' + 'experience' & a button called 'resume'
 	return (
 	<div>
-		<Header name='amanda viray | about'/>
+		<Header name='amanda viray | about' meta={blok.meta}/>
+		<h1 className={styles.centerHeading}>About her.</h1>
 		<div className={styles.about}>
 			<Image alt="Picture of Amanda - dressed in pink checkered shirt" className={styles.pfp} src="/pfp.png" width={433} height={577}/>
 		<div className={styles.desc}>

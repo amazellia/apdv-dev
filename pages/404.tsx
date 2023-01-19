@@ -1,16 +1,12 @@
 import Layout from '../components/Layout';
 import { getStoryblokApi, StoryblokComponent, useStoryblokState  } from "@storyblok/react"
-import Header from '../components/Header';
 
-export default function Home({story, preview, config}:any) {
+export default function Error404({story, preview, config}:any) {
   story = useStoryblokState(story, {}, preview);
   return (
-    <>
-    <Header/>
-    <Layout story={config}>     
-      <StoryblokComponent blok={story.content} />
-    </Layout>
-    </>
+  <Layout story={config}>     
+    <StoryblokComponent blok={story.content} />
+  </Layout>
   )
 }
 export async function getStaticProps(context?:any) {

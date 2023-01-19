@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false; /* eslint-disable import/first */
+
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.scss'; //styles of nprogress
@@ -16,37 +17,30 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
 Router.events.on('routeChangeError', () => NProgress.done());
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  ApolloLink,
-  concat,
-  HttpLink
-} from "@apollo/client";
- 
+import { ApolloProvider} from "@apollo/client";
+import Apollo_Client from './api/apollo';
+import dynamic from 'next/dynamic'
 import { storyblokInit, apiPlugin } from "@storyblok/react";
-import Feature from "../components/Feature";
-import Grid from "../components/Grid";
-import Gallery from "../components/Gallery"
-import Page from "../components/Page";
-import Teaser from "../components/Teaser";
-import Article from "../components/Article";
-import Config from "../components/Config";
-import HeaderMenu from "../components/HeaderMenu";
-import MenuLink from "../components/MenuLink";
-import Layout from "../components/Layout";
-import AllArticles from "../components/AllArticles";
-import ArticleTeaser from "../components/ArticleTeaser";
-import FeaturedArticles from "../components/FeaturedArticles"
-import FilterTags from "../components/FilterTags"
-import Video from "../components/Video"
-import Artwork from '../components/Artwork';
-import Artworks from '../components/Artworks';
-import Archive from '../components/Archive'
-import Tags from '../components/Tags'
-import About from '../components/AboutMe';
-import FeaturedArt from '../components/FeaturedArt';
+
+const Feature = dynamic(() => import('../components/Feature'))
+const Grid = dynamic(() => import("../components/Grid"))
+const Gallery = dynamic(() => import("../components/Gallery"))
+const Page = dynamic(() => import("../components/Page"))
+const Teaser = dynamic(() => import("../components/Teaser"))
+const Article = dynamic(() => import("../components/Article"))
+const Config = dynamic(() => import("../components/Config"))
+const HeaderMenu = dynamic(() => import("../components/HeaderMenu"))
+const MenuLink = dynamic(() => import("../components/MenuLink"))
+const Layout = dynamic(() => import("../components/Layout"))
+const ArticleTeaser = dynamic(() => import("../components/ArticleTeaser"))
+const FeaturedArticles = dynamic(() => import("../components/FeaturedArticles"))
+const Video = dynamic(() => import("../components/Video"))
+const Artwork = dynamic(() => import('../components/Artwork'))
+const Archive = dynamic(() => import("../components/Archive"))
+const Tags = dynamic(() => import('../components/Tags'))
+const About = dynamic(() => import("../components/AboutMe"))
+const ArticleItems = dynamic(() => import("../components/ContentItems"))
+const Intro = dynamic(() => import("../components/Intro"))
 
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
@@ -64,43 +58,23 @@ storyblokInit({
     config: Config,
     layout: Layout,
     "featured-articles": FeaturedArticles,
-    "all-articles": AllArticles,
     articleTeaser: ArticleTeaser,
     "header_menu": HeaderMenu,
     "menu_link": MenuLink,
-    "filter_tags": FilterTags,
     video: Video,
     artwork: Artwork,
-    artworks: Artworks,
     archive: Archive,
     name_tag: Tags,
     about: About,
-    "featured-artworks": FeaturedArt,
+    ArticleItems: ArticleItems,
+    intro: Intro,    
   },
-});
-
-const httpLink = new HttpLink({ uri: "https://gapi-us.storyblok.com/v1/api" });
- 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext(({ headers = {} }) => ({
-    headers: {
-      ...headers,
-      token: process.env.storyblokApiToken,
-      version: "published",
-    },
-  }));
-  return forward(operation);
-});
- 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: concat(authMiddleware, httpLink),
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={Apollo_Client}>
       <Component {...pageProps} />
     </ApolloProvider>
   )

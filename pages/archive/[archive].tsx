@@ -1,7 +1,7 @@
 import { useState} from "react";
 import Link from "next/link";
 import Grid from "@mui/material/Unstable_Grid2"
-import { ListItem, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { getArchives, slugify } from "../api/storyblok";
 import styles from '../../styles/Home.module.scss';
@@ -12,16 +12,14 @@ import Artworks from "../../components/Artworks";
 import Header from "../../components/Header";
 
 export const getStaticProps = async ({params}:any) => {
-	const src = await slugify(params.archives)
+	const src = await slugify(params.archive)
     if (!src) {return {notFound: true,}}
-
     return {props: { src }, revalidate: 10}
 }
 
 export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
 const ArchiveSlug = (props:any) => {
-//const ArchiveSlug: React.FC<{src:any}> = (props) => {
 	const {src} = props
 	const [page, setPage]= useState(1)
 	const [tag, setTag] = useState("")
@@ -63,12 +61,11 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
+			{(!data) && <div>no data found</div>}
 			<Grid container columns={3}>
 				{data?.ArticleItems?.items?.map((x:any) => (
 				<Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x.uuid}>
-				<ListItem key={x.uuid}>
 				<ArticleTeaser article={x.content} key={x.uuid} slug={x.full_slug}/>
-				</ListItem>
 				</Grid>
 				))}
 			</Grid>
@@ -85,6 +82,7 @@ const ArchiveSlug = (props:any) => {
 			/>
 			</>}
 			
+			<h2 id="artworks" className={styles.centerHeading}>🎨 Artworks</h2>
 			{(tag == "artworks" || tag == "") && 
 			<Artworks blok={src}/>
 			}
