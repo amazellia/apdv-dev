@@ -37,7 +37,6 @@ const FeaturedArticles = dynamic(() => import("../components/FeaturedArticles"))
 const Video = dynamic(() => import("../components/Video"))
 const Artwork = dynamic(() => import('../components/Artwork'))
 const Archive = dynamic(() => import("../components/Archive"))
-const Tags = dynamic(() => import('../components/Tags'))
 const About = dynamic(() => import("../components/AboutMe"))
 const ArticleItems = dynamic(() => import("../components/ContentItems"))
 const Intro = dynamic(() => import("../components/Intro"))
@@ -64,7 +63,6 @@ storyblokInit({
     video: Video,
     artwork: Artwork,
     archive: Archive,
-    name_tag: Tags,
     about: About,
     ArticleItems: ArticleItems,
     intro: Intro,    

@@ -8,8 +8,8 @@ import styles from '../../styles/Home.module.scss';
 import ArticleTeaser from "../../components/ArticleTeaser";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import Artworks from "../../components/Artworks";
 import Header from "../../components/Header";
+import moment from 'moment'
 
 export const getStaticProps = async ({params}:any) => {
 	const src = await slugify(params.archive)
@@ -21,31 +21,29 @@ export const getStaticPaths = async (props:any) => {return {paths: [], fallback:
 
 const ArchiveSlug = (props:any) => {
 	const {src} = props
-	const [page, setPage]= useState(1)
 	const [tag, setTag] = useState("")
-	const limit = 12;
 	const {data, error, loading} = useQuery(getArchives, {
         variables: { 
 		after: src?.after,
 		before: src?.before,
-		currentPage: page,
-		limit: limit,
+		limit: 100,
 		slug: tag,
+		artworkItems: tag,
 		tag: src?.tag,
         }
       });
 	if (error) return <div>errors</div>;
-
+	if (data) { CombineContent(data)}
+	var content_all:any;
+	function CombineContent(data:any) {
+		const raw = [...data?.ArticleItems?.items, ...data?.ArtworkItems?.items]
+		content_all = raw.sort((a:any,b:any) => moment(b.first_published_at).diff(a.first_published_at));
+	}
 	  const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const filter = e?.currentTarget.value
-		setTag(filter);}
-	
-	  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
-		setPage(value);
-		window.scrollTo({top: 0, behavior: 'smooth'})
-	  };
-
+		setTag(filter); }
+	  
 	return (
 		<>
 		<Header name={"archives | " + src?.title}/>
@@ -61,31 +59,17 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
-			{(!data) && <div>no data found</div>}
-			<Grid container columns={3}>
-				{data?.ArticleItems?.items?.map((x:any) => (
-				<Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x.uuid}>
-				<ArticleTeaser article={x.content} key={x.uuid} slug={x.full_slug}/>
+				{(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
+				<Grid container columns={3}>
+					{content_all.map((x:any) => (
+					<Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x._uid}>
+					<ArticleTeaser article={x.content} slug={x.full_slug}/>
+					</Grid>
+					))}
 				</Grid>
-				))}
-			</Grid>
-
-			<Pagination
-			className="pagination"
-			count={Math.ceil(data.ArticleItems.total/ limit)}
-			page={page}
-			siblingCount={1}
-			boundaryCount={1}
-			variant="outlined"
-			shape="rounded"
-			onChange={handleChangePage}
-			/>
+				</>}
 			</>}
 			
-			<h2 id="artworks" className={styles.centerHeading}>🎨 Artworks</h2>
-			{(tag == "artworks" || tag == "") && 
-			<Artworks blok={src}/>
-			}
 		</main> 
 		</>
 		//end of return

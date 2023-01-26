@@ -3,9 +3,10 @@ import styles from '/styles/Home.module.scss'
 import Image from "next/legacy/image";
 import { motion } from "framer-motion";
 
-const ArticleTeaser = ({ article, slug }:any) => {
-var filename:any = (article.cover_image === undefined) ?  article.content[0].images[0].filename : article.cover_image.filename;
-
+const ArticleTeaser = ({ article, slug, tag}:any ) => {
+  var ref:any = (tag === true) ?  "/archive/[archive]": "/[...slug]";
+  var asURL:any = (tag === true) ? `/archive/${slug}` : `/${slug}`;
+  var filename:any = (article.cover_image === undefined) ?  article.content[0].images[0].filename : article.cover_image.filename;
 return (
   <motion.div
   initial={{ opacity: 0, scale: 0.5 }}
@@ -14,7 +15,7 @@ return (
   transition={{ duration: 0.5 }}
 >
 <div className={styles.postitem}>
-    <Link legacyBehavior href="/[...slug]" as={`/${slug}`}>
+    <Link legacyBehavior href={ref} as={asURL}>
         <a href="#" aria-label={article.title || article.name}>
           <Image 
           alt={article.title || article.name}

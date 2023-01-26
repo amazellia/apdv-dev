@@ -42,14 +42,13 @@ export const slugify = async (archive:string) => {
     tag = '';
 		return {after, before, title, tag};
 	} else {
-    title = (`${archive}`)
+    title = (`${archive.replaceAll("-"," ")}`)
     tag = (`${archive}`)
     before = ''
     after = ''
     return {after, before, title, tag};
   };
 }
-
 
 interface TimelineType { year: string; months: []}
 export function setDates(data:any) {
@@ -84,53 +83,15 @@ export function setDates(data:any) {
     return (timeline as TimelineType[]);
  }
 
- export const ArtworkItems = gql`
- query AllArt(
-  $currentPage: Int,
-  $limit: Int,
-  $search_tag: String,
-  $before: String,
-  $after: String,)
-  {
-    ArtworkItems(
-      first_published_at_lt: $before, 
-      first_published_at_gt: $after,
-      with_tag: $search_tag,
-      starts_with: "artworks/",
-      per_page: $limit
-      page: $currentPage) 
-      {
-      total
-      items {
-        uuid
-        full_slug
-        first_published_at
-        content {
-          _uid
-          name
-          component
-          description
-          software_used
-          tags
-          content
-        }
-      }
-    }
-    ConfigItem(id: "8404") {
-      content {
-        artwork_buttons
-      }
-    }
-  }`
-
 export const getArchives = gql`
 query ArticleDates(
     $after: String, 
     $before: String, 
-    $currentPage: Int,
-    $limit: Int,
     $slug: String,
-    $tag: String)
+    $offset: Int, 
+    $limit: Int,
+    $tag: String,
+    $artworkItems: String)
   {  
     ArticleItems(
         first_published_at_gt: $after, 
@@ -138,10 +99,10 @@ query ArticleDates(
         starts_with: $slug,
         sort_by:"items.content.published_at", 
         per_page: $limit,
-        page: $currentPage,
+        page: $offset,
         with_tag: $tag,
         ) {
-        items {
+        items{
             id
             name
             first_published_at
@@ -170,13 +131,20 @@ query ArticleDates(
     ArtworkItems(
         first_published_at_gt: $after, 
         first_published_at_lt: $before,
-        starts_with: $slug,
-        sort_by:"items.content.published_at", 
+        sort_by:"items.content.published_at",
+        starts_with: $artworkItems,
         per_page: $limit,
-        page: $currentPage,
+        page: $offset,
+        with_tag: $tag,
     ) {
         items {
-            first_published_at
+          id
+          name
+          first_published_at
+          meta_data
+          full_slug
+          uuid
+          slug
             content {
               tags
               software_used
@@ -189,90 +157,13 @@ query ArticleDates(
         }
         total
     }
-}
-`
-
-export const BlogArticles = gql`
-query AllArticles($currentPage: Int, $limit: Int, $search_tag: String)
-  {
-    ArticleItems(
-      with_tag: $search_tag,
-      starts_with: "blog/",
-      sort_by:"items.content.published_at", 
-      per_page: $limit
-      page: $currentPage) 
-      {
-        items {
-          id
-          name
-          content {
-            comments
-            component
-            cover_image {
-              filename
-              copyright
-              focus
-            }
-            content
-            published_at
-            subtitle
-            teaser
-            title
-            updated_at
-          }
-          meta_data
-          full_slug
-          uuid
-          slug
-        }
-        total
-    }
     ConfigItem(id: "8404") {
       content {
+        artwork_buttons
+        work_buttons
         blog_buttons
+        archive_buttons
+      }
     }
-  }
 }
-`
-
-export const WorkArticles = gql`
-query AllArticles($currentPage: Int, $limit: Int, $search_tag: String)
- {
-   ArticleItems(
-     with_tag: $search_tag,
-     starts_with: "projects/",
-     sort_by:"items.content.published_at", 
-     per_page: $limit
-     page: $currentPage) 
-     {
-       items {
-         id
-         name
-         content {
-           comments
-           component
-           cover_image {
-             filename
-             copyright
-             focus
-           }
-           content
-           published_at
-           subtitle
-           teaser
-           title
-           updated_at
-         }
-         meta_data
-         full_slug
-         uuid
-       }
-       total
-   }
-   ConfigItem(id: "8404") {
-     content {
-       work_buttons
-     }
-   }
- }
 `

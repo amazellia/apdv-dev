@@ -21,6 +21,8 @@ const Article = ({ blok }:any) => {
   return (
     <div key={blok.title}>
     <Header name={blok.title} meta={blok.title}/>
+    {(!blok) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
+
       <div className={styles.articleBanner}>
         <div>
           <Image 
@@ -50,6 +52,7 @@ const Article = ({ blok }:any) => {
       },
 
     })}
+    
     <div className='hyvorTalk'>
     <Embed 
       websiteId={HYVOR_ID}
@@ -58,6 +61,7 @@ const Article = ({ blok }:any) => {
     />
     </div>
   </Container>
+  </>}
   </div>
   );
 };

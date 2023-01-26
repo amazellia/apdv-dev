@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faInstagram, faLinkedinIn, faTumblr, faTwitter} from '@fortawesome/free-brands-svg-icons'
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { storyblokEditable } from "@storyblok/react";
 import styles from '../styles/Home.module.scss'
 export default function aboutLinks({ blok }:any) {
@@ -8,6 +9,10 @@ export default function aboutLinks({ blok }:any) {
     <div className={styles.aboutnav} {...storyblokEditable(blok)}>
         <a href="https://www.linkedin.com/in/apdv" aria-label='LinkedIn'>
             <FontAwesomeIcon icon={faLinkedinIn}/>
+        </a>
+
+        <a href="mailto:amanda@apdv.dev" aria-label='E-mail'>
+            <FontAwesomeIcon icon={faEnvelope}/>
         </a>
 
         <a href="https://github.com/amazellia" aria-label='Github'>

@@ -7,8 +7,8 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 const Gallery = ({blok}:any) => {
-  var columns:any = (columns === undefined) ?  blok.columns : (Math.ceil(((blok.images).length)/3));
-  var type:any = (typeof type === undefined) ? blok.variant: "masonry" ;
+  var columns:any = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
+  var type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
   return ( 
     <ImageList 
     variant={type} cols={columns} gap={8}

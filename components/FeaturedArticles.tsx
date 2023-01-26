@@ -20,7 +20,7 @@ import Grid from "@mui/material/Unstable_Grid2"
 
    return (
      <>
-     <h2 className="centerTitle" {...storyblokEditable(blok)}><span className='gradient'>{blok.name}</span></h2>
+     <h2 className="centerTitle" {...storyblokEditable(blok)}><span className={styles.gradient}>{blok.name}</span></h2>
       <Grid container columns={3}>
           {featuredItems}
       </Grid>
