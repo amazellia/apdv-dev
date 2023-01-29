@@ -1,4 +1,4 @@
-import {getArchivesOverview } from "../pages/api/storyblok";
+import {getContentItems } from "../pages/api/apollo";
 import { useQuery } from "@apollo/client";
 import ArchivesDates from "./ArchivesDates";
 import Header from './Header';
@@ -7,7 +7,12 @@ import { storyblokEditable } from "@storyblok/react";
 import ArticleTeaser from "./ArticleTeaser";
 
 const Archive = ({blok} :any) => {
-  const {data, error, loading} = useQuery(getArchivesOverview);
+  const {data, error, loading} = useQuery(getContentItems, {
+    variables: { 
+    slugs: "projects/*,artworks/*,blog/*",
+    limit: 100
+    }
+  });
   if (error) return <div>errors</div>;
   return (
     <>

@@ -1,7 +1,3 @@
- /*
- Showing Featured articles and artworks at the home page.
- */
-
 import ArticleTeaser from "./ArticleTeaser";
 import { storyblokEditable } from "@storyblok/react";
 import styles from '/styles/Home.module.scss'
@@ -9,7 +5,6 @@ import Link from "next/link";
 import Grid from "@mui/material/Unstable_Grid2"
 
  const FeaturedArticles = ({ blok }:any) => {
-
   const featuredItems = [] as any;
   blok.articles.forEach((article:any) => {
     featuredItems.push(

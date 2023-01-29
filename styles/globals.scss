@@ -15,17 +15,6 @@
     font-family: Sunroll-Regular;
     src: url(../public/sunroll/Sunroll.ttf) format("truetype");
   }
-
-//PAGINATION CUTOMISATION ===================================
-//Text Color
-button.MuiPaginationItem-root {color: white;}
-
-//Border Color
-button.MuiPaginationItem-outlined {border: 1px solid c.$mainColor;}
-
-//Selection active
-button.MuiPaginationItem-page.Mui-selected {background-color: c.$mainColor;}
-// PAGINATION CUSTOMISATION END ============================
 .loading{
     display: flex;
     justify-content: center;
@@ -119,22 +108,9 @@ img {
 	height: auto;
     width: 100%;
 }
-
-abbr {
-    text-decoration: none;
-    color: c.$mainColor;
-    abbr[title]
-   {
-      cursor:help;
-   }
-
-   abbr[title]:after
-   {
-      content: "";
-   }
-}
-
 footer {
+  text-align: center;
+  font-family: Sunroll-Regular;
     margin: 2em 0 2em 0;
 }
 
@@ -256,10 +232,6 @@ a:hover + .postTitle {
   .active {
     color: lightgray;
   }
-
-footer {
-    text-align: center;
-}
 
   #backblog {
       font-size:larger;

@@ -1,28 +1,5 @@
-import { gql } from "@apollo/client";
 import moment from 'moment'
 
-export const getArchivesOverview = gql`
-{
-    ArticleItems {
-      items {
-        first_published_at
-      }
-      total
-    }
-    ArtworkItems {
-      items {
-        first_published_at
-      }
-    }
-    TagsItems {
-        items {
-          content {
-            tag
-          }
-        }
-      }
-}  
-`
 export const slugify = async (archive:string) => {
 	var title:string
 	var after:string
@@ -44,8 +21,7 @@ export const slugify = async (archive:string) => {
 	} else {
     title = (`${archive.replaceAll("-"," ")}`)
     tag = (`${archive}`)
-    before = ''
-    after = ''
+    before = ''; after = ''
     return {after, before, title, tag};
   };
 }
@@ -56,12 +32,7 @@ export function setDates(data:any) {
     const yearsList = [] as any;
     const monthsList = [] as any;
 
-    // combining articles and artworks
-    const articles = data?.ArticleItems.items
-    const artworks = data?.ArtworkItems.items
-
-    const raw = [...articles, ...artworks]
-
+    const raw = data?.ContentNodes?.items
     // getting years
     raw.forEach((e:any) => {yearsList.push(moment(e?.first_published_at).format('YYYY'));});
     const year = yearsList.filter((f:any, index:any, arr:any) => arr.indexOf(f) == index)
@@ -82,88 +53,3 @@ export function setDates(data:any) {
 
     return (timeline as TimelineType[]);
  }
-
-export const getArchives = gql`
-query ArticleDates(
-    $after: String, 
-    $before: String, 
-    $slug: String,
-    $offset: Int, 
-    $limit: Int,
-    $tag: String,
-    $artworkItems: String)
-  {  
-    ArticleItems(
-        first_published_at_gt: $after, 
-        first_published_at_lt: $before,
-        starts_with: $slug,
-        sort_by:"items.content.published_at", 
-        per_page: $limit,
-        page: $offset,
-        with_tag: $tag,
-        ) {
-        items{
-            id
-            name
-            first_published_at
-            meta_data
-            full_slug
-            uuid
-            slug
-            content {
-                title
-                updated_at
-                teaser
-                subtitle
-                published_at
-                cover_image {
-                    filename
-                    copyright
-                    focus
-                }
-            content
-            component
-            comments
-            }
-        }
-        total
-    }
-    ArtworkItems(
-        first_published_at_gt: $after, 
-        first_published_at_lt: $before,
-        sort_by:"items.content.published_at",
-        starts_with: $artworkItems,
-        per_page: $limit,
-        page: $offset,
-        with_tag: $tag,
-    ) {
-        items {
-          id
-          name
-          first_published_at
-          meta_data
-          full_slug
-          uuid
-          slug
-            content {
-              tags
-              software_used
-              name
-              description
-              content
-              component
-              _uid
-            }
-        }
-        total
-    }
-    ConfigItem(id: "8404") {
-      content {
-        artwork_buttons
-        work_buttons
-        blog_buttons
-        archive_buttons
-      }
-    }
-}
-`
