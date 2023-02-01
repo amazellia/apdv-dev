@@ -6,6 +6,7 @@
 	font-family: Sunroll-Bold;
 	src: url(../public/sunroll/Sunroll_Bold.ttf) format("truetype");
   font-weight: bold;
+  font-display: swap;
 	// url(../styles/fonts/sunroll/Sunroll_Bold.otf) format("otf"),
 	// url(../styles/fonts/sunroll/Sunroll.ttf) format("ttf"),
 	// url(../styles/fonts/sunroll/Sunroll_Bold.ttf) format("ttf"),
@@ -14,6 +15,7 @@
   @font-face {
     font-family: Sunroll-Regular;
     src: url(../public/sunroll/Sunroll.ttf) format("truetype");
+    font-display: swap;
   }
 .loading{
     display: flex;
@@ -114,23 +116,11 @@ footer {
     margin: 2em 0 2em 0;
 }
 
-//for the post title in the middle of the picture
-.postTitle {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
 
 .ArticleItem {
     padding: 20rem;
 }
 
-a:hover + .postTitle {
-    display:initial;
-}
 .wrapper {
     display: grid;
     grid-template-columns: repeat(2, 0fr);

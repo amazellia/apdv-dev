@@ -40,6 +40,7 @@ const Archive = dynamic(() => import("../components/Archive"))
 const About = dynamic(() => import("../components/AboutMe"))
 const ArticleItems = dynamic(() => import("../components/ContentItems"))
 const Intro = dynamic(() => import("../components/Intro"))
+const Footer = dynamic(()=> import("../components/Footer"))
 
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
@@ -65,7 +66,8 @@ storyblokInit({
     archive: Archive,
     about: About,
     ArticleItems: ArticleItems,
-    intro: Intro,    
+    intro: Intro,   
+    footer: Footer,   
   },
 });
 

@@ -20,7 +20,7 @@ const Artwork = ({blok}:any) => {
     <Header name={blok.name} meta={blok.name}/>
     <Grid container columns={2}>
       
-      <Grid xs={3} sm={2} md={1.4} lg={1.5} xl={1.5} >
+      <Grid xs={3} sm={2} md={1.4} lg={1.5} xl={1.5} item={true}>
       <ListItem >
             <Container maxWidth="md"  {...storyblokEditable(blok)}>
                 {blok.content.map((blok:any) => (
@@ -30,7 +30,7 @@ const Artwork = ({blok}:any) => {
       </ListItem>
         </Grid>
       
-      <Grid xs={3} sm={2} md={0.6} lg={0.5} xl={0.5} ><ListItem>
+      <Grid xs={3} sm={2} md={0.6} lg={0.5} xl={0.5} item={true}><ListItem>
             <Container maxWidth="xs">
             <h1 className='title'>{blok.name}</h1>
             <p>{blok.description}</p>

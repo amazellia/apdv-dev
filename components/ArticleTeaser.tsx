@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from '/styles/Home.module.scss'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const ArticleTeaser = ({ article, slug, tag}:any ) => {
@@ -14,28 +14,28 @@ return (
   animate={{ opacity: 1, scale: 1 }}
   transition={{ duration: 0.5 }}
 >
-<div className={styles.postitem}>
-    <Link legacyBehavior href={ref} as={asURL}>
-        <a href="#" aria-label={article.title || article.name}>
-          <Image 
-          alt={article.title || article.name}
-          src={filename} 
-          placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 700))}`} //475
-          layout='fill' 
-          objectFit='cover' 
-          objectPosition='center center' 
-          quality={70}
-          priority
-          />
-        </a>
+<div className={styles.itemContainer}>
+  <div className={styles.postitem}>
+    <Link href={ref} as={asURL} aria-label={article.title || article.name}>
+      <Image 
+      alt={article.title || article.name}
+      src={filename}
+      fill
+      sizes="70vw"
+      style={{objectFit:"cover", objectPosition: "center center"}}
+      placeholder="blur"
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 700))}`} //475
+      quality={70}
+      priority
+      />
     </Link>
-    <div className='postTitle'>
+    <div className={styles.postTitle}>
       <span>{article.title || article.name}</span>
       <p>{article.published_at || ''}</p>
       {/* <p>{p?.custom_excerpt}</p> */}
     </div>
   </div>
+</div>
   </motion.div>
 )
 };

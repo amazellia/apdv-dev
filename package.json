@@ -35,6 +35,7 @@
     "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "sass": "^1.56.1",
     "storyblok-rich-text-react-renderer": "^2.6.1",
     "typescript": "4.8.4"

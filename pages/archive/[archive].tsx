@@ -9,6 +9,8 @@ import ArticleTeaser from "../../components/ArticleTeaser";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Footer from "../../components/Footer";
 
 export const getStaticProps = async ({params}:any) => {
 	const src = await slugify(params.archive)
@@ -32,20 +34,17 @@ const ArchiveSlug = (props:any) => {
 		const filter = e?.currentTarget.value
 		setTag(`${filter}/*`); }
 	  
-		const fetchMoreButton = () => {
-			var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
-			if (setPage > Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length == data?.ContentNodes?.total) {
-			  return console.log("end of page!")
-			} else {
-			  fetchMore({
-				variables: {  page: setPage },
-				updateQuery: (prevResult, {fetchMoreResult}) => {
-				  fetchMoreResult.ContentNodes.items =[...prevResult.ContentNodes.items, ...fetchMoreResult.ContentNodes.items]; 
-				  return fetchMoreResult;
-				}
-			  })
-			}
-		  }
+	const fetchMoreButton = () => {
+		var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
+		fetchMore({
+		variables: {  page: setPage },
+		updateQuery: (prevResult, {fetchMoreResult}) => {
+			fetchMoreResult.ContentNodes.items =[...prevResult.ContentNodes.items, ...fetchMoreResult.ContentNodes.items]; 
+			return fetchMoreResult;
+		}
+		})
+		
+	}
 	return (
 		<>
 		<Header name={"archives | " + src?.title}/>
@@ -61,6 +60,12 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
+			 <InfiniteScroll
+          dataLength={data?.ContentNodes?.items.length}
+          next={fetchMoreButton}
+          hasMore={(Math.ceil(data?.ContentNodes?.items.length/limit) + 1 < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)}
+          loader={<div className="loading"><div className="lds-heart"><div></div></div></div>}
+        >
 				{(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
 				<Grid container columns={3}>
 					{content_all.map((x:any) => (
@@ -70,9 +75,10 @@ const ArchiveSlug = (props:any) => {
 					))}
 				</Grid>
 				</>}
+				</InfiniteScroll>
 			</>}
-			<button onClick={() => fetchMoreButton()} >load more</button>
 		</main> 
+		<Footer/>
 		</>
 	);
 };

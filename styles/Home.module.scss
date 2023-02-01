@@ -93,18 +93,19 @@
 	}
 }
 
+.itemContainer {
+	position: relative;
+	width: auto;
+	height: auto;
+  }
 .postitem {
 	margin: 0.5rem;
 	position: relative;
-    display: flex;
-	aspect-ratio: 1 / 1;
-	overflow: hidden;
+	overflow:hidden;
 	border-radius: 7%;
-	list-style-type: none;
-	flex: 1 0 auto;
-	flex-direction: column;
-	a:hover {
-		opacity: 0.2;
+	aspect-ratio: 1 / 1;
+	:hover {
+		opacity: 0.5;
 		transition: 0.2s ease;
 	}
 	span {
@@ -112,6 +113,19 @@
 		font-weight: bold;
 	}
 }
+//for the post title in the middle of the picture
+.postTitle {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+a:hover + .postTitle {
+  display:initial;
+}
+
 .DateMap {
 	ul {list-style-type: none;}
 	display: grid; 
