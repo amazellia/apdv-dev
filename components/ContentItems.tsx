@@ -51,7 +51,8 @@ const ArticleItems = ( {blok} :any) => {
       <p className={styles.centerHeading}>
         {(blok.mode === 'work') && <><Link href='/artworks'>🎨 view artworks</Link> | </>}
         {(blok.mode === 'artworks') && <><Link href='/works'>🌸 view all works</Link> | </>}
-        <Link href='/archive'>🗂️ view in archive</Link>
+        <Link href='/archive'>🗂️ view in archive</Link> |  
+        <Link href="https://dashboard.mailerlite.com/forms/406995/85796975888303772/share"> 💌 subscribe</Link>
       </p>
       <div className={styles.filterNav}> 
          <button value="" onClick={(e) => handleTag(e)}><b>all</b></button>
@@ -62,6 +63,7 @@ const ArticleItems = ( {blok} :any) => {
           next={fetchMoreButton}
           hasMore={(Math.ceil(data?.ContentNodes?.items.length/limit) + 1 < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)}
           loader={<div className="loading"><div className="lds-heart"><div></div></div></div>}
+          endMessage={<h3 className={styles.centerHeading}>★・・・・・・★・・・・・・★・・・・・・★</h3>}
         >
       {(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
         <Grid container columns={3}>

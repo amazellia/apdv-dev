@@ -23,7 +23,7 @@ const Archive = ({blok} :any) => {
       <h2>Tags</h2>
       <Grid container columns={3} >
     {data?.TagsItems?.items[0].content.tag.map((x:any) => {return (
-      <Grid xs={3} sm={1.5} md={1} lg={1} xl={1}  {...storyblokEditable(data)} key={x.uuid}>
+      <Grid xs={3} sm={1.5} md={1} lg={1} xl={0.5}  {...storyblokEditable(data)} key={x.uuid}>
       <ArticleTeaser article={x} slug={x.slug} tag={true} />
       </Grid>
     )})}

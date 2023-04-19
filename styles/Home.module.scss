@@ -23,16 +23,17 @@
 .storyboard {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content:space-between;
     height: 80vh;
-    margin: 0 20%;
+    margin: 0 15%;
     align-items: center;
 	text-align: center;
-	h1 {font-size: 5.5vw;} 
+	h1 {font-size: 6.5vw;} //4rem
 
 	@include media('<=tablet'){
-		margin: 0 20%;
-		h1 {font-size: 3rem;}
+		justify-content:center;
+		margin: 0 5%;
+		h1 {font-size: 8.5vw;} //2.5rem
 
 	}
 	@include media('>=LGdesktop'){
@@ -121,6 +122,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+	@include media('<desktop'){
+		font-size: 125%;
+	}
 }
 a:hover + .postTitle {
   display:initial;
@@ -227,4 +231,15 @@ a:hover + .postTitle {
 	text-align: center;
 	align-items: center;
 	align-content: center;
+}
+
+.articleBanner{
+	margin: 0 15%;
+	align-items: center;
+	display: grid;
+	grid-template-columns: 1.5fr 2fr;
+	padding: 2rem;
+	.articleBanner_desc{
+		padding: 2rem;
+	}
 }

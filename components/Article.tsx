@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import ArticleImage from './ArticleImage'
 import styles from '../styles/Home.module.scss'
 import Header from './Header';
+import SubButton from './Subscribe';
 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
@@ -33,7 +34,7 @@ const Article = ({ blok }:any) => {
             quality={100}
           />
         </div>
-        <div>
+        <div className={styles.articleBanner_desc}>
           <h1 className='title'>{blok.title}</h1>
           <h2>{blok.subtitle}</h2>
           <b>Published at {blok.published_at}</b>
@@ -52,7 +53,7 @@ const Article = ({ blok }:any) => {
       },
 
     })}
-    
+    <SubButton/>
     <div className='hyvorTalk'>
     <Embed 
       websiteId={HYVOR_ID}
