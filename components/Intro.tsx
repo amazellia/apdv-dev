@@ -5,7 +5,7 @@ export default function Intro() {
     return (
     <div className={styles.storyboard}>
       <div>
-        <h1 className={styles.gradient}>
+        <h1 className={styles.gradient} >
           AMANDA VIRAY <br/>
           DIGITAL & CREATIVE <br/>
           TECHNOLOGIST <br/>

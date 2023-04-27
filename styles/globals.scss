@@ -2,21 +2,6 @@
 @use "./_color-themes.scss" as c;
 // https://www.youtube.com/watch?v=r9fZZpcfdXg
 
-@font-face {
-	font-family: Sunroll-Bold;
-	src: url(../public/sunroll/Sunroll_Bold.ttf) format("truetype");
-  font-weight: bold;
-  font-display: swap;
-	// url(../styles/fonts/sunroll/Sunroll_Bold.otf) format("otf"),
-	// url(../styles/fonts/sunroll/Sunroll.ttf) format("ttf"),
-	// url(../styles/fonts/sunroll/Sunroll_Bold.ttf) format("ttf"),
-  }
-
-  @font-face {
-    font-family: Sunroll-Regular;
-    src: url(../public/sunroll/Sunroll.ttf) format("truetype");
-    font-display: swap;
-  }
 .loading{
     display: flex;
     justify-content: center;
@@ -113,7 +98,7 @@ img {
 }
 footer {
   text-align: center;
-  font-family: Sunroll-Regular;
+  font-family: var(--sunroll-font);
     margin: 2em 0 2em 0;
 }
 
@@ -173,7 +158,7 @@ footer {
 }
   
 .Config_Menu {
-  font-family: Sunroll-Regular;
+  font-family: var(--sunroll-font);
     a.icon, a.closeIcon {display: none;}
     overflow: hidden;
     justify-content: center;
@@ -239,4 +224,3 @@ footer {
 .reactions-title {
   color: white;
 }
-

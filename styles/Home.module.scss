@@ -2,7 +2,8 @@
 @import "./mediaQueries.scss";
 
 .gradient {
-	font-family: Sunroll-Bold;
+	font-family: var(--sunroll-font);
+	font-weight: bold;
 	  background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);
 	  background-color: c.$mainBG;
 	  background-size: 300% 300%;
@@ -34,7 +35,6 @@
 		justify-content:center;
 		margin: 0 5%;
 		h1 {font-size: 8.5vw;} //2.5rem
-
 	}
 	@include media('>=LGdesktop'){
 		margin: 0 20%;
@@ -46,7 +46,7 @@
 		justify-content: center;
         svg {
             text-align: center;
-		padding: 0 2rem;
+		padding: 0 1.8rem;
 		color: c.$mainColor;
 		@include media('<=phone'){padding: 0 1rem}
         }
@@ -98,6 +98,7 @@
 	position: relative;
 	width: auto;
 	height: auto;
+	pointer-events: all;
   }
 .postitem {
 	margin: 0.5rem;
@@ -145,7 +146,7 @@ a:hover + .postTitle {
 	display: flex;
 	margin-top: 5vmin;
 	button {
-	font-family: Sunroll-Bold;
+	font-family: var(--sunroll-font);
 		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
 		animation: animate 7s ease infinite;
 		background-size: 200%;
@@ -161,6 +162,29 @@ a:hover + .postTitle {
 	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
 
 } 	
+
+.SubButton {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	button {
+	font-family: var(--sunroll-font);
+		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
+		animation: animate 7s ease infinite;
+		background-size: 200%;
+		-webkit-background-clip:initial;
+		-moz-background-clip:initial;
+		background-clip:initial;
+		border-radius: 3rem;
+		padding: 1rem 7vmin;
+		color: white;
+		font-size: large;
+		cursor: pointer; 
+	}
+	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
+
+} 	
+
 
 .main {
 	padding: 5rem 0;
@@ -234,12 +258,35 @@ a:hover + .postTitle {
 }
 
 .articleBanner{
-	margin: 0 15%;
+	margin: 0 10%;
 	align-items: center;
 	display: grid;
 	grid-template-columns: 1.5fr 2fr;
 	padding: 2rem;
 	.articleBanner_desc{
-		padding: 2rem;
+		padding: 1.5rem;
+	}
+	@include media('<=tablet'){
+	grid-template-columns: 2fr;
+	padding: 1rem ;
+	display: block;
+	margin: 0;
+		.articleBanner_desc{
+			padding: 0;
+			text-align: center;
+		}
 	}
 }
+
+.subscribeForm{
+	text-align: center;
+	margin: 10% 25%;
+	padding: 5% 5%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: c.$mainColor;
+	border-radius: 1rem;
+	@include media('<=tablet'){
+		margin: 5% 15%;
+	}
+  }

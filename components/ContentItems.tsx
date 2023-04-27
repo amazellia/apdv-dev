@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic'
 const ArticleTeaser = dynamic(() => import("../components/ArticleTeaser"))
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Grid from "@mui/material/Unstable_Grid2"
 import styles from '../styles/Home.module.scss';
 import Link from "next/link";
 import Header from "./Header";
 import { getContentItems } from "../pages/api/apollo";
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useInView } from "react-intersection-observer";
 
 export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
@@ -16,10 +16,16 @@ const ArticleItems = ( {blok} :any) => {
   const [mode, setMode] = useState((blok.mode === "work") ? "projects/*,artworks/*" : `${blok.mode}/*`);
   const buttons = [] as any; var buttonModes = [] as any;
   const limit = 9;
+  const { ref, inView, entry } = useInView({threshold:0});
+  useEffect(() => {
+    if( hasMore && inView) {fetchMoreButton()}
+  });
   const {data, error, loading, fetchMore} = useQuery(getContentItems, {
     variables: { tag: tag, limit: limit, slugs: mode, page: 1 },  });
   if (error) return <div>errors</div>;
-
+  var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
+  var hasMore = (setPage < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)
+  
 	var content_all = data?.ContentNodes?.items;
   if (data && blok.mode === "work") {buttonModes = data?.ConfigItem?.content?.work_buttons}
   if (data && blok.mode == "blog" ) { buttonModes = data?.ConfigItem?.content?.blog_buttons;}
@@ -32,8 +38,7 @@ const ArticleItems = ( {blok} :any) => {
     else if (filter ==="art") {setTag(''); setMode("artworks/*");} 
     else {setTag(filter); setMode((blok.mode === "work") ? "projects/*,artworks/*" : `${blok.mode}/*`)}
   };
-  const fetchMoreButton = () => {
-    var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
+   const fetchMoreButton = () => {
     fetchMore({
       variables: {  page: setPage },
       updateQuery: (prevResult, {fetchMoreResult}) => {
@@ -41,8 +46,7 @@ const ArticleItems = ( {blok} :any) => {
         return fetchMoreResult;
       }
     })
-  }
-  
+  } 
   return ( <>
     <Header name={blok.headerName} meta={blok.meta}/> 
     {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
@@ -54,17 +58,10 @@ const ArticleItems = ( {blok} :any) => {
         <Link href='/archive'>🗂️ view in archive</Link> |  
         <Link href="https://dashboard.mailerlite.com/forms/406995/85796975888303772/share"> 💌 subscribe</Link>
       </p>
-      <div className={styles.filterNav}> 
+      <div className={styles.filterNav} > 
          <button value="" onClick={(e) => handleTag(e)}><b>all</b></button>
          {buttons}
        </div>
-       <InfiniteScroll
-          dataLength={data?.ContentNodes?.items.length}
-          next={fetchMoreButton}
-          hasMore={(Math.ceil(data?.ContentNodes?.items.length/limit) + 1 < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)}
-          loader={<div className="loading"><div className="lds-heart"><div></div></div></div>}
-          endMessage={<h3 className={styles.centerHeading}>★・・・・・・★・・・・・・★・・・・・・★</h3>}
-        >
       {(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
         <Grid container columns={3}>
           {content_all.map((x:any) => (
@@ -73,7 +70,8 @@ const ArticleItems = ( {blok} :any) => {
             </Grid>
           ))}
         </Grid>
-      </>}</InfiniteScroll>
+      </>}
+      {(hasMore == true) ? <div ref={ref} className="loading"><div className="lds-heart"><div></div></div></div> : <h3 className={styles.centerHeading}>★・・・END・・・★</h3> }
     </>}
   </>
   );

@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import Link from "next/link";
 import Grid from "@mui/material/Unstable_Grid2"
 import { useQuery } from "@apollo/client"; 
@@ -9,7 +9,7 @@ import ArticleTeaser from "../../components/ArticleTeaser";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header";
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useInView } from "react-intersection-observer";
 import Footer from "../../components/Footer";
 
 export const getStaticProps = async ({params}:any) => {
@@ -24,26 +24,31 @@ const ArchiveSlug = (props:any) => {
 	const {src} = props
 	const limit = 9;
 	const [tag, setTag] = useState("projects/*,artworks/*,blog/*")
+	const { ref, inView, entry } = useInView({threshold:0});
+	useEffect(() => {
+		if( hasMore && inView) {fetchMoreButton()}
+	});
 	const {data, error, loading, fetchMore} = useQuery(getContentItems, {
         variables: { after: src?.after, before: src?.before, limit: limit,	slugs: tag,	tag: src?.tag,	page: 1}
       });
-	if (error) return <div>errors</div>;
+	  if (error) return <div>errors</div>;
+	var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
+	var hasMore = (setPage < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)
+	
+	
 	var content_all = data?.ContentNodes?.items;
 	  const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const filter = e?.currentTarget.value
 		setTag(`${filter}/*`); }
-	  
 	const fetchMoreButton = () => {
-		var setPage = Math.ceil(data?.ContentNodes?.items.length/limit) + 1
 		fetchMore({
 		variables: {  page: setPage },
 		updateQuery: (prevResult, {fetchMoreResult}) => {
 			fetchMoreResult.ContentNodes.items =[...prevResult.ContentNodes.items, ...fetchMoreResult.ContentNodes.items]; 
 			return fetchMoreResult;
-		}
+			}
 		})
-		
 	}
 	return (
 		<>
@@ -60,22 +65,17 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
-			 <InfiniteScroll
-          dataLength={data?.ContentNodes?.items.length}
-          next={fetchMoreButton}
-          hasMore={(Math.ceil(data?.ContentNodes?.items.length/limit) + 1 < Math.ceil(data?.ContentNodes?.total/limit) || data?.ContentNodes?.items.length !== data?.ContentNodes?.total)}
-          loader={<div className="loading"><div className="lds-heart"><div></div></div></div>}
-        >
-				{(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
-				<Grid container columns={3}>
-					{content_all.map((x:any) => (
-					<Grid xs={3} sm={1.5} md={1} lg={1} xl={1} key={x._uid}>
-					<ArticleTeaser article={x.content} slug={x.full_slug}/>
-					</Grid>
-					))}
+			{(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
+			<Grid container columns={3}>
+				{content_all.map((x:any) => (
+				<Grid xs={3} sm={1.5} md={1} lg={1} xl={0.5} key={x._uid}>
+				<ArticleTeaser article={x.content} slug={x.full_slug}/>
 				</Grid>
-				</>}
-				</InfiniteScroll>
+				))}
+			</Grid>
+			</>}
+			{(hasMore == true) ? <div ref={ref} className="loading"><div className="lds-heart"><div></div></div></div> : <h3 className={styles.centerHeading}>★・・・END・・・★</h3> }
+    
 			</>}
 		</main> 
 		<Footer/>
