@@ -1,7 +1,14 @@
 @use "./mediaQueries.scss" as *;
 @use "./_color-themes.scss" as c;
 // https://www.youtube.com/watch?v=r9fZZpcfdXg
-
+//PAGINATION CUTOMISATION ===================================
+//Text Color
+button.MuiPaginationItem-root {color: white;}
+//Border Color
+button.MuiPaginationItem-outlined {border: 1px solid c.$mainColor;}
+//Selection active
+button.MuiPaginationItem-page.Mui-selected {background-color: c.$mainColor;}
+// PAGINATION CUSTOMISATION END ============================
 .loading{
     display: flex;
     justify-content: center;
