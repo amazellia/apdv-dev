@@ -3,7 +3,7 @@ import styles from '/styles/Home.module.scss'
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const ArticleTeaser = ({ article, slug, tag, view}:any) => {
+const ArticleTeaser = ({ article, slug, tag, view, key}:any) => {
   var ref:any = (tag === true) ?  "/archive/[archive]": "/[...slug]";
   var asURL:any = (tag === true) ? `/archive/${slug}` : `/${slug}`;
   var filename:any = (article.cover_image === undefined) ?  article.content[0].images[0].filename : article.cover_image.filename;
@@ -15,7 +15,7 @@ return (
   transition={{ duration: 0.5 }}
 > 
 {(view == "grid") ?
-  <div className={styles.itemContainer}>
+  <div className={styles.itemContainer} key={key}>
     <div className={styles.postitem}>
       <Link href={ref} as={asURL} aria-label={article.title || article.name}>
         <Image 
@@ -38,7 +38,7 @@ return (
     </div>
   </div>
   :
-  <div className={styles.listContainer}>
+  <div className={styles.listContainer} key={key}>
     <div className={styles.listImage}>
     <Link href={ref} as={asURL} aria-label={article.title || article.name}>
       <Image 

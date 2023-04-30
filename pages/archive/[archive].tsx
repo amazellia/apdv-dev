@@ -46,7 +46,7 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
-			<Content tag={src?.tag} slugs={tag} after={src?.after} before={src?.before}/>
+			<Content tag={src?.tag} slugs={tag} after={src?.after} before={src?.before} key={src?.uuid}/>
 			</>}
 		</main> 
 		<Footer/>

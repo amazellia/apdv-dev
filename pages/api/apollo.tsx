@@ -6,7 +6,6 @@ import {
   HttpLink,
   gql
 } from "@apollo/client";
-import { offsetLimitPagination } from "@apollo/client/utilities";
 const httpLink = new HttpLink({ uri: "https://gapi-us.storyblok.com/v1/api" });
  
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -21,8 +20,26 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const Apollo_Client = new ApolloClient({
-  cache: new InMemoryCache(),
   link: concat(authMiddleware, httpLink),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          feed: {
+            // Don't cache separate results based on
+            // any of this field's arguments.
+            keyArgs: false,
+  
+            // Concatenate the incoming list items with
+            // the existing list items.
+            merge(existing = [], incoming) {
+              return [...existing, ...incoming];
+            },
+          }
+        }
+      }
+    }
+  })
 });
 export default Apollo_Client;
 

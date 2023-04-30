@@ -93,8 +93,14 @@
 		.desc{padding-left: 0;}
 	}
 }
-
 .itemGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	@include media('<=tablet'){
+		grid-template-columns: 1fr;
+	}
+}
+.itemGridExpand {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	@include media('>desktop'){
@@ -104,6 +110,9 @@
 	@include media('>=LGdesktop'){
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 		}
+	@include media('<=tablet'){
+		grid-template-columns: 1fr;
+	}
 }
 .itemContainer {
 	position: relative;
@@ -306,7 +315,7 @@ a:hover + .postTitle {
   .loadingPref {
 	font-family: var(--sunroll-font);
 	font-weight: "bold";
-	margin: 0 10%;
+	margin: 3% 10%;
 	display: grid;
 	justify-content: center;
 	text-align: center;
@@ -314,6 +323,7 @@ a:hover + .postTitle {
 	button {
 		font-family: var(--sunroll-font);
 		font-weight: "bold";
+		font-size: xx-small;
 		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
 		animation: animate 7s ease infinite;
 		background-size: 200%;
@@ -359,6 +369,7 @@ a:hover + .postTitle {
 
 .viewPref{
 	height: 2rem;
+	font-size: medium;
 	display: flex;
 	justify-content: center;
 	button {
