@@ -29,7 +29,7 @@
     margin: 0 15%;
     align-items: center;
 	text-align: center;
-	h1 {font-size: 6.5vw;} //4rem
+	h1 {font-size: 6vw;} //4rem
 
 	@include media('<=tablet'){
 		justify-content:center;
@@ -108,7 +108,7 @@
 	}
 	
 	@include media('>=LGdesktop'){
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 		}
 	@include media('<=tablet'){
 		grid-template-columns: 1fr;
@@ -119,13 +119,13 @@
 	width: auto;
 	height: auto;
 	pointer-events: all;
-	
+	list-style: none;
   }
 .postitem {	
 	margin: 0.5rem;
 	position: relative;
-	overflow:hidden;
 	border-radius: 7%;
+	overflow:hidden;
 	aspect-ratio: 1 / 1;
 	:hover {
 		opacity: 0.5;
@@ -145,7 +145,7 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
 	@include media('<desktop'){
-		font-size: 125%;
+		font-size: 80%;
 	}
 }
 a:hover + .postTitle {
@@ -239,28 +239,21 @@ a:hover + .postTitle {
     display:flex;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 100%;
-    margin: 0 auto;
+	justify-content: center;
+	flex-wrap: wrap;
     button {
-        font-size: 130%;
+        font-size: medium;
         text-decoration: none;
         border: none;
-        color: white;
-        background-color: c.$mainColor;
+        color: c.$mainColor;
+        background-color: c.$mainBG;
         border-radius: 30px;
-        padding: 0.7vw 3vw;
-        margin: 1vw;
+        padding: 0.5rem 1rem;
         display: block;
     }
     button:hover {
-        color: c.$mainBG;
+        color: white;
         transition: 0.7s;
-    }
-    a:active, button:focus {
-        background-color: white;
-        color: c.$mainColor;
     }
 	@media (hover: none) {
 		cursor:'pointer'
@@ -354,7 +347,8 @@ a:hover + .postTitle {
 	overflow:hidden;
 	margin: 0 10%;
 	align-items: center;
-		
+	list-style: none;
+	
 }
 
 .listImage {
@@ -369,7 +363,7 @@ a:hover + .postTitle {
 
 .viewPref{
 	height: 2rem;
-	font-size: medium;
+	margin-top: 0.5rem;
 	display: flex;
 	justify-content: center;
 	button {

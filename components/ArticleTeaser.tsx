@@ -3,7 +3,7 @@ import styles from '/styles/Home.module.scss'
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const ArticleTeaser = ({ article, slug, tag, view, key}:any) => {
+const ArticleTeaser = ({ article, slug, tag, view, id}:any) => {
   var ref:any = (tag === true) ?  "/archive/[archive]": "/[...slug]";
   var asURL:any = (tag === true) ? `/archive/${slug}` : `/${slug}`;
   var filename:any = (article.cover_image === undefined) ?  article.content[0].images[0].filename : article.cover_image.filename;
@@ -15,7 +15,7 @@ return (
   transition={{ duration: 0.5 }}
 > 
 {(view == "grid") ?
-  <div className={styles.itemContainer} key={key}>
+  <li className={styles.itemContainer} key={id}>
     <div className={styles.postitem}>
       <Link href={ref} as={asURL} aria-label={article.title || article.name}>
         <Image 
@@ -36,9 +36,9 @@ return (
         {/* <p>{p?.custom_excerpt}</p> */}
       </div>
     </div>
-  </div>
+  </li>
   :
-  <div className={styles.listContainer} key={key}>
+  <li className={styles.listContainer} key={id}>
     <div className={styles.listImage}>
     <Link href={ref} as={asURL} aria-label={article.title || article.name}>
       <Image 
@@ -60,7 +60,7 @@ return (
        <p>{article.published_at || ''}</p>
       <p>{article?.custom_excerpt}</p> 
      </div>
-   </div>
+   </li>
   }
 </motion.div>
 )

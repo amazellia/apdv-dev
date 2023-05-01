@@ -20,7 +20,7 @@ const ArticleItems = ( {blok} :any) => {
   if (data && blok.mode === "work") {buttonModes = data?.ConfigItem?.content?.work_buttons}
   if (data && blok.mode == "blog" ) { buttonModes = data?.ConfigItem?.content?.blog_buttons;}
   if (data && blok.mode == "artworks") {buttonModes = data?.ConfigItem?.content?.artwork_buttons;}
-  buttonModes.forEach((x:string) => {buttons.push(<button key={x} value={x} onClick={(e) => handleTag(e)}><b>{x}</b></button>);})
+  buttonModes.forEach((x:string) => {buttons.push(<button key={x} value={x} onClick={(e) => handleTag(e)}>{x}</button>);})
  
   const handleTag = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation(); const filter = e?.currentTarget.value;
@@ -40,7 +40,7 @@ const ArticleItems = ( {blok} :any) => {
         <Link href="https://dashboard.mailerlite.com/forms/406995/85796975888303772/share"> 💌 subscribe</Link>
       </p>
       <div className={styles.filterNav} > 
-         <button value="" onClick={(e) => handleTag(e)}><b>all</b></button>
+         <button value="" onClick={(e) => handleTag(e)}>all</button>
          {buttons}
        </div>
        <Content tag={tag} slugs={mode}/>

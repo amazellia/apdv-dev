@@ -6,6 +6,7 @@ import { Pagination} from "@mui/material";
 import styles from '../styles/Home.module.scss';
 import { getContentItems } from "../pages/api/apollo";
 import { useInView } from "react-intersection-observer";
+import Footer from './Footer';
 
 export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
@@ -14,12 +15,11 @@ type ViewPreference = "grid" | "list";
 
 const Content = ( {tag, slugs, after, before} :any) => {
   const [showButtons, setShowButtons] = useState<boolean>(true);
-  const [settings, setSettings] = useState<boolean>(false);
   const [fetch, setFetch] = useState<boolean>(false);
   const [scrollPref, setScrollPref] = useState<ScrollPreference | null>(null);
   const [viewPref, setViewPref] = useState<ViewPreference>("grid");
   const [page, setPage]= useState(1)
-  const limit = 9;
+  const limit = 12;
   const { ref, inView } = useInView({threshold:0.8});
   
   const fetchMoreButton = async () => {
@@ -56,7 +56,6 @@ const Content = ( {tag, slugs, after, before} :any) => {
 
   const handleViewPrefClick = (selectedPreference: ViewPreference) => {
     setViewPref(selectedPreference);
-    setSettings(false);
   };
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -64,28 +63,16 @@ const Content = ( {tag, slugs, after, before} :any) => {
     window.scrollTo({top: 0, behavior: 'smooth'})
   };
 
-  const handleSettingsClick = () => {
-    (!settings) ? setSettings(true) : setSettings(false)
-  };
-
   return ( <>
-    {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
-      { settings ?  
-        <div className={styles.viewPref} >
-        <button onClick={() => handleSettingsClick()}>{`[ X ]`}</button>
-          <button  onClick={() => handleViewPrefClick("grid")}>📦 Grid view</button>
-          <button onClick={() => handleViewPrefClick("list")}>📃 List view</button>
-        </div>
-      :
-        <div className={styles.viewPref} >
-          <button onClick={() => handleSettingsClick()}>⚙️ Settings</button>
-        </div>
-      }
-
+      <div className={styles.viewPref} >
+        <button  onClick={() => handleViewPrefClick("grid")}>📦 Grid view</button>
+        <button onClick={() => handleViewPrefClick("list")}>📃 List view</button>
+      </div>
+      {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
       {(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
         <div className={(viewPref == "grid") ? styles.itemGridExpand : styles.itemList}>
           {content_all.map((x:any) => (
-            <ArticleTeaser article={x.content} key={x.uuid} slug={x.full_slug} view={viewPref}/>
+            <ArticleTeaser article={x.content} id={x.uuid} slug={x.full_slug} view={viewPref}/>
           ))}
         </div>
       
@@ -97,6 +84,7 @@ const Content = ( {tag, slugs, after, before} :any) => {
           </div>
           ) :
           (scrollPref == 'page') ? //pagination 
+          <>
             <Pagination
             className="pagination"
             count={Math.ceil(data?.ContentNodes?.total/limit)}
@@ -107,6 +95,8 @@ const Content = ( {tag, slugs, after, before} :any) => {
             shape="rounded"
             onChange={handleChangePage}
             />
+            <Footer/>
+          </>
           : //scrolling 
           (hasMore == true) ? <div ref={ref} className="loading"><div className="lds-heart"><div></div></div></div> : <h3 className={styles.centerHeading}>★・・・END・・・★</h3> 
         }
