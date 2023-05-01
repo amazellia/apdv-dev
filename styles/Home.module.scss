@@ -3,7 +3,8 @@
 
 .gradient {
 	font-family: var(--sunroll-font);
-	font-weight: bold;
+	font-weight: 300;
+	font-style: bold;
 	  background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);
 	  background-color: c.$mainBG;
 	  background-size: 300% 300%;
@@ -166,7 +167,9 @@ a:hover + .postTitle {
 	display: flex;
 	margin-top: 5vmin;
 	button {
-	font-family: var(--sunroll-font);
+		font-family: var(--sunroll-font);
+		font-weight: normal;
+		font-style: bold;
 		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
 		animation: animate 7s ease infinite;
 		background-size: 200%;
