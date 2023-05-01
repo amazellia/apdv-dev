@@ -30,7 +30,10 @@
     margin: 0 15%;
     align-items: center;
 	text-align: center;
-	h1 {font-size: 6vw;} //4rem
+	h1 {
+		font-size: 6vw;
+		font-weight: bold;
+	} //4rem
 
 	@include media('<=tablet'){
 		justify-content:center;
