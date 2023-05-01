@@ -21,7 +21,7 @@ const Content = ( {tag, slugs, after, before} :any) => {
   const [page, setPage]= useState(1)
   const limit = 12;
   const { ref, inView } = useInView({threshold:0.8});
-  
+
   const fetchMoreButton = async () => {
     const fetchMorePages = (scrollPref == "scroll") ? newPages : page;
     await fetchMore({
@@ -48,7 +48,6 @@ const Content = ( {tag, slugs, after, before} :any) => {
   var hasMore = (newPages < Math.ceil(data?.ContentNodes.total/limit) || data?.ContentNodes.items.length !== data?.ContentNodes.total);
   var content_all = data?.ContentNodes.items;
 
-
   const handlePreferenceClick = (selectedPreference: ScrollPreference) => {
     setScrollPref(selectedPreference);
     setShowButtons(false);
@@ -65,14 +64,14 @@ const Content = ( {tag, slugs, after, before} :any) => {
 
   return ( <>
       <div className={styles.viewPref} >
-        <button  onClick={() => handleViewPrefClick("grid")}>📦 Grid view</button>
+        <button onClick={() => handleViewPrefClick("grid")}>📦 Grid view</button>
         <button onClick={() => handleViewPrefClick("list")}>📃 List view</button>
       </div>
       {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
       {(content_all.length === 0 ) ? <h2 className={styles.centerHeading}>no data found, still a work in progress!</h2>: <>
         <div className={(viewPref == "grid") ? styles.itemGridExpand : styles.itemList}>
           {content_all.map((x:any) => (
-            <ArticleTeaser article={x.content} id={x.uuid} slug={x.full_slug} view={viewPref}/>
+            <ArticleTeaser article={x.content} key={x.uuid} slug={x.full_slug} view={viewPref}/>
           ))}
         </div>
       

@@ -20,7 +20,7 @@ export const getStaticPaths = async (props:any) => {return {paths: [], fallback:
 
 const ArchiveSlug = (props:any) => {
 	const {src} = props
-	const limit = 9;
+	const limit = 12;
 	const [tag, setTag] = useState("projects/*,artworks/*,blog/*")
 	const {data, error, loading} = useQuery(getContentItems, {
         variables: { after: src?.after, before: src?.before, limit: limit,	slugs: tag,	tag: src?.tag,	page: 1}
@@ -46,7 +46,7 @@ const ArchiveSlug = (props:any) => {
 			</div>
 			{(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : 
 			<>
-			<Content tag={src?.tag} slugs={tag} after={src?.after} before={src?.before} id={src?.uuid}/>
+			<Content tag={src?.tag} slugs={tag} after={src?.after} before={src?.before}/>
 			</>}
 		</main> 
 		<Footer/>

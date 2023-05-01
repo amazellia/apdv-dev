@@ -7,7 +7,7 @@ import Link from "next/link";
   const featuredItems = [] as any;
   blok.articles.forEach((article:any) => {
     featuredItems.push(
-    <ArticleTeaser article={article.content} slug={article.full_slug} view="grid" id={article.uuid}/>)
+    <ArticleTeaser article={article.content} slug={article.full_slug} view="grid" key={article.uuid}/>)
   })
 
    return (

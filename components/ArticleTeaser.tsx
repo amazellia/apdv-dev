@@ -3,7 +3,7 @@ import styles from '/styles/Home.module.scss'
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const ArticleTeaser = ({ article, slug, tag, view, id}:any) => {
+const ArticleTeaser = ({ article, slug, tag, view}:any) => {
   var ref:any = (tag === true) ?  "/archive/[archive]": "/[...slug]";
   var asURL:any = (tag === true) ? `/archive/${slug}` : `/${slug}`;
   var filename:any = (article.cover_image === undefined) ?  article.content[0].images[0].filename : article.cover_image.filename;
@@ -15,9 +15,9 @@ return (
   transition={{ duration: 0.5 }}
 > 
 {(view == "grid") ?
-  <li className={styles.itemContainer} key={id}>
-    <div className={styles.postitem}>
-      <Link href={ref} as={asURL} aria-label={article.title || article.name}>
+  <div className={styles.itemContainer}>
+      <Link href={ref} as={asURL} aria-label={article.title || article.name} >
+        <div className={styles.postitem}>
         <Image 
         alt={article.title || article.name}
         src={filename}
@@ -29,6 +29,7 @@ return (
         quality={70}
         priority
         />
+        </div>
       </Link>
       <div className={styles.postTitle}>
         <span>{article.title || article.name}</span>
@@ -36,11 +37,10 @@ return (
         {/* <p>{p?.custom_excerpt}</p> */}
       </div>
     </div>
-  </li>
   :
-  <li className={styles.listContainer} key={id}>
+  <div className={styles.listContainer}>
+    <Link href={ref}  as={asURL} aria-label={article.title || article.name}>
     <div className={styles.listImage}>
-    <Link href={ref} as={asURL} aria-label={article.title || article.name}>
       <Image 
       alt={article.title || article.name}
       src={filename}
@@ -50,17 +50,16 @@ return (
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 700))}`} //475
       quality={70}
       priority
-      />
+      /></div>
     </Link> 
-    </div>
    <div className={styles.listText}>
-       <Link href={ref} as={asURL} aria-label={article.title || article.name}>
+       <Link href={ref}  as={asURL} aria-label={article.title || article.name}> 
        <h2>{article.title || article.name}</h2>
        </Link>
        <p>{article.published_at || ''}</p>
       <p>{article?.custom_excerpt}</p> 
      </div>
-   </li>
+   </div>
   }
 </motion.div>
 )

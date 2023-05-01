@@ -119,7 +119,6 @@
 	width: auto;
 	height: auto;
 	pointer-events: all;
-	list-style: none;
   }
 .postitem {	
 	margin: 0.5rem;
@@ -131,10 +130,6 @@
 		opacity: 0.5;
 		transition: 0.2s ease;
 	}
-	span {
-		color: white;
-		font-weight: bold;
-	}
 }
 //for the post title in the middle of the picture
 .postTitle {
@@ -144,8 +139,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+	span {
+		color: white;
+		font-weight: bold;
+	}
 	@include media('<desktop'){
-		font-size: 80%;
+		font-size: 1rem;
 	}
 }
 a:hover + .postTitle {
@@ -346,9 +345,7 @@ a:hover + .postTitle {
 	grid-template-rows: 1fr 0.2fr;
 	overflow:hidden;
 	margin: 0 10%;
-	align-items: center;
-	list-style: none;
-	
+	align-items: center;	
 }
 
 .listImage {
@@ -371,4 +368,8 @@ a:hover + .postTitle {
 		color: c.$mainColor;
 		border: none;
 	}
+}
+
+.imageFix{
+	position:relative;
 }
