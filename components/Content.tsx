@@ -69,8 +69,8 @@ const Content = ( {tag, slugs, after, before} :any) => {
     else if (slugs === "work" && filter ==="art") {setTag(''); setMode("artworks/*");} 
     else if (slugs === "work" && filter === "" ) {setTag(""); setMode( "projects/*,artworks/*");}
     else if (slugs === "blog") {setTag(filter); setMode("blog/*")}
-    else {setTag(filter); setMode("projects/*,artworks/*" )} // should change this - if none of the filtering requested fits the criteria
-    // console.log(mode + " | " + getTag + " | " + slugs);
+    else if (slugs === "artworks") {setTag(filter); setMode("artworks/*")}
+    else {console.log(mode + " | " + getTag + " | " + slugs);} // if none of the filtering requested fits the criteria
   }
 
   const handlePreferenceClick = (selectedPreference: ScrollPreference) => {
