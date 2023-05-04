@@ -66,7 +66,6 @@ export async function getStaticPaths({locales}: any) {
     for (const locale of locales) {
       paths.push({ params: { slug: splittedSlug }, locale });
     }
-    //paths.push({ params: { slug: splittedSlug } });
   });
 
   return {

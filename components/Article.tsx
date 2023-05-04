@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Container } from '@mui/material';
 import Video from "./Video";
 import { useRouter } from 'next/router';
-import ArticleImage from './ArticleImage'
+import SingleImage from './Picture'
 import styles from '../styles/Home.module.scss'
 import Header from './Header';
 import SubscribeForm from './Subscribe';
@@ -70,7 +70,7 @@ const Article = ({ blok }:any) => {
         ['video']: (props) => <div className="made-in-ny"><Video {...props}/></div>,
       },
       nodeResolvers: {
-        [NODE_IMAGE]: (blok, props) => <ArticleImage blok={props}/> 
+        [NODE_IMAGE]: (blok, props) => <SingleImage blok={props}/> 
       },
 
     })}
