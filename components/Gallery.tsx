@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import ImageGallery from 'react-image-gallery';
+import {shimmer, toBase64} from '../styles/blur'
 
 const Gallery = ({blok}:any) => {
-  var columns:any = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
-  var type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
+  const type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
+  const columns:number = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
+  const rowHeight:number = Number(blok.rowHeight);
+  const gap:number = (blok.gap === undefined) ? 8 : Number(blok.gap);
   
   let images = [] as any; 
   blok.images.map((img:any) =>
@@ -22,10 +25,11 @@ const Gallery = ({blok}:any) => {
   ))
   return ( 
 
-    ( (blok.type === "gallery") ?
+    ( (blok.type === "carousel") ?
+    <div className='carousel-gallery-container'>
     <ImageGallery 
       items={images} 
-      additionalClass="image-gallery"
+      additionalClass="carousel-gallery"
       showIndex= {false}
       showBullets= {true}
       infinite= {true}
@@ -39,9 +43,13 @@ const Gallery = ({blok}:any) => {
       slideOnThumbnailOver= {false}
       thumbnailPosition= {'bottom'}
     />
+    </div>
     :
     <ImageList 
-    variant={type} cols={columns} gap={8}
+    variant={type} 
+    cols={columns} 
+    gap={gap} 
+    // rowHeight={rowHeight}
     >
       {blok.images.map((img:any) => (
         <ImageListItem key={img.filename}  >
@@ -59,7 +67,7 @@ const Gallery = ({blok}:any) => {
               actionIcon={
                 <a target="_blank" href={img.filename} rel="noopener noreferrer" >
                   <IconButton
-                    sx={{ color: 'white', fontSize: '130%',"&:hover": 'transform: scale(1.5)'}}
+                    sx={{ color: 'white', fontSize: '130%'}}
                     aria-label={`zoom ${img.filename}`}
                   >
                     <FontAwesomeIcon icon={faExpand}/>
@@ -71,27 +79,6 @@ const Gallery = ({blok}:any) => {
          </ImageListItem>
       ))}
     </ImageList>)
-
   );
 };
 export default Gallery;
-
-
-const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <linearGradient id="g">
-      <stop stop-color="#333" offset="20%" />
-      <stop stop-color="#222" offset="50%" />
-      <stop stop-color="#333" offset="70%" />
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="#333" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`
-
-const toBase64 = (str: string) =>
-  typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
