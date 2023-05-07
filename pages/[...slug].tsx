@@ -70,6 +70,6 @@ export async function getStaticPaths({locales}: any) {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: false, //blocking
   };
 }

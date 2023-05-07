@@ -22,19 +22,14 @@
 	100%{background-position: 0% 50%;}  
   }
 
-.storyboard {
-	display: flex;
-	flex-direction: column;
-	justify-content:space-between;
-    height: 80vh;
-    margin: 0 15%;
+.introSection {
+    height: 100vh;
     align-items: center;
 	text-align: center;
 	h1 {
 		font-size: 6vw;
 		font-weight: bold;
 	} //4rem
-
 	@include media('<=tablet'){
 		justify-content:center;
 		margin: 0 5%;
@@ -45,7 +40,8 @@
 		h1 {font-size: 5vw;}
 	}
     .aboutnav {
-        font-size: 200%;
+        font-size: 200%;		
+		align-items: end;
 		flex-direction: row;
 		justify-content: center;
         svg {
@@ -64,6 +60,25 @@
 		}
     }
 }
+
+.fullscreen_section {
+	height: 100vh;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	.containerAbout{
+		width: 30%;
+		text-align: center;
+		font-size: large;
+		h2{font-size: xx-large;font-weight: bolder;}
+		h3{font-size: larger;font-weight: bolder;}
+		@include media('<=tablet'){
+            width: 80%
+        }
+	}
+}
+
 
 .aboutSNS {
 	font-size: 150%;
