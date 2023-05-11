@@ -14,7 +14,7 @@ const Archive = ({blok} :any) => {
   });
   if (error) return <div>errors</div>;
   return (
-    <>
+    <div className="section">
     <Header name={blok.metaName} meta={blok.metaDescription}/>
     {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> :
     <>
@@ -29,7 +29,7 @@ const Archive = ({blok} :any) => {
       <h2>Dates</h2>
       <ArchivesDates data={data}/>
     </>}
-  </>
+  </div>
   )
 };
 

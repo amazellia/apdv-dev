@@ -11,8 +11,9 @@ import Link from "next/link";
   })
 
    return (
-     <>
-     <h2 className="centerTitle" {...storyblokEditable(blok)}><span className={styles.gradient}>{blok.name}</span></h2>
+     <div className="featureArticles">
+      <div className="featureArticles_item">   
+      <h2 className="centerTitle" {...storyblokEditable(blok)}><span className={styles.gradient}>{blok.name}</span></h2>
       <div className={styles.itemGrid}>
       {featuredItems}
       </div>
@@ -21,7 +22,9 @@ import Link from "next/link";
             View more
         </button></Link>
       </div>
-     </>
+      </div>
+
+     </div>
    );
  };
  export default FeaturedArticles;

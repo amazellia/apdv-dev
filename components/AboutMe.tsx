@@ -12,7 +12,7 @@ import SingleImage from './Picture'
 const About = ( {blok} :any) => {
 	// ⌛ TO-DO: Add new section called 'education' + 'experience' & a button called 'resume'
 	return (
-	<div>
+	<div className='section'>
 		<Header name='amanda viray | about' meta={blok.meta}/>
 		<h1 className={styles.centerHeading}>About her.</h1>
 		<div className={styles.about}>

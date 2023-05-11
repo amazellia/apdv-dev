@@ -23,7 +23,7 @@ const Article = ({ blok }:any) => {
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   
   return (
-    <>
+    <div className='section'>
     <Script async src="https://talk.hyvor.com/embed/embed.js" type="module" strategy='lazyOnload'/>
     <div key={blok.title}>
     <Header name={blok.title} meta={blok.metaDescription}/>
@@ -81,8 +81,7 @@ const Article = ({ blok }:any) => {
   </Container>
   </>}
   </div>
-    </>
-    
+    </div>
   );
 };
 export default Article;

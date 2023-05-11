@@ -16,7 +16,7 @@ const Artwork = ({blok}:any) => {
   const { asPath } = useRouter()
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   return (
-    <>
+    <div className='section'>
     <Script async src="https://talk.hyvor.com/embed/embed.js" type="module" strategy='lazyOnload'/>
     <Header name={blok.name} meta={blok.metaDescription}/>
 
@@ -42,7 +42,7 @@ const Artwork = ({blok}:any) => {
       </ListItem>
         </Grid>
     </Grid>
-  </>
+  </div>
   );
 };
 export default Artwork;

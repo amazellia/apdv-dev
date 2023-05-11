@@ -8,14 +8,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from'@fortawesome/free-solid-svg-icons'
 
 function openMobileNav(e: any) {
-	e.preventDefault();
 	const x:any = document.getElementById("responsiveNav");
+	e.preventDefault();
 	if (x.className === "Config_Menu") {
 	  x.className += " responsive";
 	} else {
 	  x.className = "Config_Menu";
 	}
-}
+};
+
 const Config = ({blok}:any) => {
   return (
     <div {...storyblokEditable(blok)} className="Config_Menu" id='responsiveNav' >

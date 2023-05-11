@@ -1,5 +1,6 @@
 @use "./_color-themes.scss" as c;
 @import "./mediaQueries.scss";
+@import 'typed';
 
 .gradient {
 	font-family: var(--sunroll-font);
@@ -22,16 +23,20 @@
 	100%{background-position: 0% 50%;}  
   }
 
-.introSection {
+.storyboard {
+	display: flex;
+	flex-direction: column;
+	justify-content:space-between;
     height: 100vh;
     align-items: center;
-	text-align: center;
+	//border: c.$mainColor;
+	//border-style: dashed;
 	h1 {
-		font-size: 6vw;
+		margin-top: 20vh;
+		font-size: 6.5vh;
 		font-weight: bold;
 	} //4rem
 	@include media('<=tablet'){
-		justify-content:center;
 		margin: 0 5%;
 		h1 {font-size: 8.5vw;} //2.5rem
 	}
@@ -40,8 +45,8 @@
 		h1 {font-size: 5vw;}
 	}
     .aboutnav {
-        font-size: 200%;		
-		align-items: end;
+		margin-bottom: 10% ;
+        font-size: 200%;
 		flex-direction: row;
 		justify-content: center;
         svg {
@@ -394,3 +399,40 @@ a:hover + .postTitle {
 .imageFix{
 	position:relative;
 }
+
+
+.input_wrapper {
+	display: block;
+	> input,
+	> .placeholder {
+	  display: block;
+	  appearance: none;
+	  width: 100%;
+	  height: 100%;
+	  background-color: transparent;
+	  border: none;
+	}
+	> .placeholder {
+	  pointer-events: none;
+	  @include typed(
+		"DIGItAL & CREATIVE\ATECHNOloGIST",
+		"NERDY REARCHER",
+		"STORYTELLING\A AFicIOnadO",
+		(type: .1, pause-deleted: .5),
+		(
+		  caret-width: 2px,
+		  caret-space: 2px,
+		  caret-speed: 3,
+		  caret-color: c.$mainColor
+		)
+	  );
+	}
+	> input {
+	  &:focus,
+	  &:active {
+		+ .placeholder {
+		  display: none;
+		}
+	  }
+	}
+  }
