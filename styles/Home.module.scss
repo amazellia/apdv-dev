@@ -33,7 +33,7 @@
 	//border-style: dashed;
 	h1 {
 		margin-top: 20vh;
-		font-size: 6.5vh;
+		font-size: 6.5vw;
 		font-weight: bold;
 	} //4rem
 	@include media('<=tablet'){
@@ -45,10 +45,10 @@
 		h1 {font-size: 5vw;}
 	}
     .aboutnav {
-		margin-bottom: 10% ;
+		margin-bottom: 1.5% ;
         font-size: 200%;
-		flex-direction: row;
-		justify-content: center;
+		display: flexbox;
+		padding: 0 5% ;
         svg {
             text-align: center;
 		padding: 0 1.8rem;
@@ -191,8 +191,8 @@ a:hover + .postTitle {
 	margin-top: 5vmin;
 	button {
 		font-family: var(--sunroll-font);
-		font-weight: normal;
-		font-style: bold;
+		font-weight: bolder;
+		font-style:normal;
 		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
 		animation: animate 7s ease infinite;
 		background-size: 200%;

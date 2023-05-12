@@ -169,7 +169,7 @@ footer {
   top: 0;
   transition: top 0.3s ease-in-out;
   font-family: var(--sunroll-font);
-  font-weight: bolder;
+  font-weight: normal;
   font-style: normal;
   a.icon, a.closeIcon {display: none;}
   overflow:hidden;
@@ -216,9 +216,9 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  @include media('>=tablet'){
-		height: 100vh;
-	}
+  // @include media('>=tablet'){
+	// 	height: 100vh;
+	// }
 }
 .featureArticles_item{
   padding: auto 0;
