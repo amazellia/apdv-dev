@@ -27,7 +27,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content:space-between;
-    height: 100vh;
+    height: 80vh;//100vh to cover the entire screen but 80vh for fixed navigation
     align-items: center;
 	//border: c.$mainColor;
 	//border-style: dashed;
@@ -44,13 +44,13 @@
 		padding: 0 20%;
 	}
     .aboutnav {
-		margin-bottom: 2% ;
-        font-size: 200%;
+		font-size: 200%;
+		display: flexbox;
 		flex-direction: row;
 		justify-content: space-evenly;
         svg {
             text-align: center;
-		padding: 0 2vw;
+		padding: 0 1.8rem;
 		color: c.$mainColor;
 		@include media('<=phone'){padding: 0 1rem}
         }
