@@ -5,13 +5,51 @@ import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import ImageGallery from 'react-image-gallery';
+import {shimmer, toBase64} from '../styles/blur'
 
 const Gallery = ({blok}:any) => {
-  var columns:any = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
-  var type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
+  const type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
+  const columns:number = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
+  const rowHeight:number = Number(blok.rowHeight);
+  const gap:number = (blok.gap === undefined) ? 8 : Number(blok.gap);
+  
+  let images = [] as any; 
+  blok.images.map((img:any) =>
+  images.push( 
+    {
+      original: img.filename,
+      thumbnail:img.filename,
+      originalAlt: img.alt,
+    }
+  ))
   return ( 
+
+    ( (blok.type === "carousel") ?
+    <div className='carousel-gallery-container'>
+    <ImageGallery 
+      items={images} 
+      additionalClass="carousel-gallery"
+      showIndex= {false}
+      showBullets= {true}
+      infinite= {true}
+      showThumbnails= {true}
+      showFullscreenButton= {true}
+      showPlayButton= {true}
+      showNav= {true}
+      isRTL= {false}
+      slideDuration= {450}
+      slideInterval= {2000}
+      slideOnThumbnailOver= {false}
+      thumbnailPosition= {'bottom'}
+    />
+    </div>
+    :
     <ImageList 
-    variant={type} cols={columns} gap={8}
+    variant={type} 
+    cols={columns} 
+    gap={gap} 
+    // rowHeight={rowHeight}
     >
       {blok.images.map((img:any) => (
         <ImageListItem key={img.filename}  >
@@ -21,24 +59,26 @@ const Gallery = ({blok}:any) => {
             width={800}
             height={800}
             loading="lazy"
-            quality={80}
+            placeholder="blur"
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
             />
             <ImageListItemBar
+             sx={{  background: 'none', fontSize: '130%', marginBottom: '1%', marginRight: '1%'}}
               actionIcon={
-                <a target="_blank" href={img.filename} rel="noopener noreferrer">
-                <IconButton
-                  sx={{ color: 'white' }}
-                  aria-label={`zoom ${img.filename}`}
-                >
-                  <FontAwesomeIcon icon={faExpand}/>
-                </IconButton>
+                <a target="_blank" href={img.filename} rel="noopener noreferrer" >
+                  <IconButton
+                    sx={{ color: 'white', fontSize: '130%'}}
+                    aria-label={`zoom ${img.filename}`}
+                  >
+                    <FontAwesomeIcon icon={faExpand}/>
+                  </IconButton>
                 </a>
               }
               actionPosition="right"
             />
          </ImageListItem>
       ))}
-    </ImageList>
+    </ImageList>)
   );
 };
 export default Gallery;

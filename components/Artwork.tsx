@@ -3,9 +3,9 @@ import {
     StoryblokComponent,
     storyblokEditable
   } from "@storyblok/react";
-import { Embed } from 'hyvor-talk-react'
 import { useRouter } from 'next/router';
 import Header from './Header';
+import Script from 'next/script';
 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
@@ -16,12 +16,13 @@ const Artwork = ({blok}:any) => {
   const { asPath } = useRouter()
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   return (
-    <>
-    <Header name={blok.name} meta={blok.name}/>
+    <div className='section'>
+    <Script async src="https://talk.hyvor.com/embed/embed.js" type="module" strategy='lazyOnload'/>
+    <Header name={blok.name} meta={blok.metaDescription}/>
+
     <Grid container columns={2}>
-      
       <Grid xs={3} sm={2} md={1.4} lg={1.5} xl={1.5} item={true}>
-      <ListItem >
+      <ListItem>
             <Container maxWidth="md"  {...storyblokEditable(blok)}>
                 {blok.content.map((blok:any) => (
                     <StoryblokComponent blok={blok} key={blok._uid}/>
@@ -35,17 +36,13 @@ const Artwork = ({blok}:any) => {
             <h1 className='title'>{blok.name}</h1>
             <p>{blok.description}</p>
             <div className='hyvorTalk'>
-            <Embed 
-            websiteId={HYVOR_ID}
-            id={slug}
-            loadMode="onLoad"
-            />
+            <hyvor-talk-comments website-id={HYVOR_ID} page-id={slug} />
             </div>
             </Container>
       </ListItem>
         </Grid>
     </Grid>
-  </>
+  </div>
   );
 };
 export default Artwork;

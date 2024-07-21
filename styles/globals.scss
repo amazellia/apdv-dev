@@ -1,22 +1,16 @@
 @use "./mediaQueries.scss" as *;
 @use "./_color-themes.scss" as c;
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
 // https://www.youtube.com/watch?v=r9fZZpcfdXg
+//PAGINATION CUTOMISATION ===================================
+//Text Color
+button.MuiPaginationItem-root {color: white;}
+//Border Color
+button.MuiPaginationItem-outlined {border: 1px solid c.$mainColor;}
+//Selection active
+button.MuiPaginationItem-page.Mui-selected {background-color: c.$mainColor;}
+// PAGINATION CUSTOMISATION END ============================
 
-@font-face {
-	font-family: Sunroll-Bold;
-	src: url(../public/sunroll/Sunroll_Bold.ttf) format("truetype");
-  font-weight: bold;
-  font-display: swap;
-	// url(../styles/fonts/sunroll/Sunroll_Bold.otf) format("otf"),
-	// url(../styles/fonts/sunroll/Sunroll.ttf) format("ttf"),
-	// url(../styles/fonts/sunroll/Sunroll_Bold.ttf) format("ttf"),
-  }
-
-  @font-face {
-    font-family: Sunroll-Regular;
-    src: url(../public/sunroll/Sunroll.ttf) format("truetype");
-    font-display: swap;
-  }
 .loading{
     display: flex;
     justify-content: center;
@@ -75,9 +69,10 @@
 html, body {
 	padding: 0;
 	margin: 0;
-	font-family: Segoe UI;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+  Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: c.$mainBG;
-    color: #f0f6f9;
+    color: #d3d3d3;
 }
 
 main {
@@ -112,8 +107,7 @@ img {
 }
 footer {
   text-align: center;
-  font-family: Sunroll-Regular;
-    margin: 2em 0 2em 0;
+  margin: 2em 0 2em 0;
 }
 
 
@@ -172,50 +166,69 @@ footer {
 }
   
 .Config_Menu {
-  font-family: Sunroll-Regular;
-    a.icon, a.closeIcon {display: none;}
-    overflow: hidden;
-    justify-content: center;
-    display: flex;
-    // position: fixed;
-    // align-items: center;
-    // width: 100vw;
-    font-size: 170%;
-    padding: 0;
-    a{
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        padding: 2rem 3rem;
-    }
-    @include media ('<=tablet') {
-        display: block; transition: 0.5s ease-out; margin:0;padding: 0;
-        a {display: none; }
-        a.icon {display:flex; font-size: 150%; padding: 2rem 2rem 0 0; float: right;}
-    }
-    @include media ('>LGdesktop') {
-      font-size: 1.8vw;
-      a{padding: 3.2vw 3.2vw;}
+  top: 0;
+  transition: top 0.3s ease-in-out;
+  font-family: var(--sunroll-font);
+  font-weight: normal;
+  font-style: normal;
+  a.icon, a.closeIcon {display: none;}
+  overflow:hidden;
+  display: flex;
+  //position: fixed;
+  justify-content: center;
+  //width: 100vw;
+  font-size: 170%;
+  padding: 1% 0;
+  z-index: 1;
+  background-color: c.$mainBG;
+  a{
+    display: block;
+    text-decoration: none;
+    padding: 1% 3%;
   }
+  @include media ('<=tablet') {
+      display: block; transition: 0.5s ease-out; margin:0;padding: 0;
+      a {display: none; }
+      background-color: transparent;
+      a.icon {display:block; font-size: 150%; padding: 2rem 2rem 0 0; float: right;}
+  }
+  @include media ('>LGdesktop') {
+    font-size: 1.8vw;
+    a{padding: 1% 3%;}
+}
 }
 .Config_Menu.responsive {
-    position: relative; 
+    position: sticky;
     flex-direction: column;
+    float: right;
     height: 100vh; 
     background-color: rgb(33, 28, 59);
     margin:0;
     transition: 0.5s ease-in;
-    a {display: block;}
+    a {display: block; padding: 10%} 
     a.icon {display: none;}
     a.closeIcon {display:block; padding: 2rem 2rem 0 0; float: right; font-size: 130%;}
 }
+
+.featureArticles_item{
+  padding: auto 0;
+  width: 100%;
+  @include media('<=tablet'){
+    width: 90%;
+    margin: auto;
+  }
+  
+}
+
+.section{
+  padding-top: 10%;
+}
   
 .centerTitle {
-    padding-top: 3rem;
-      font-size: 5rem;
-      text-align: center;
-      @include media('<=tablet'){
-        font-size: 3.5rem;
+    font-size: 270%;
+    text-align: center;
+      @include media('>=tablet'){
+        font-size: 500%;
       }
   }
   /* Add a color to the active/current link */
@@ -238,4 +251,3 @@ footer {
 .reactions-title {
   color: white;
 }
-

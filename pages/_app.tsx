@@ -11,6 +11,7 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.scss'; //styles of nprogress
+import { Analytics } from'@vercel/analytics/react';
 
 //Binding events. 
 Router.events.on('routeChangeStart', () => NProgress.start()); 
@@ -21,6 +22,29 @@ import { ApolloProvider} from "@apollo/client";
 import Apollo_Client from './api/apollo';
 import dynamic from 'next/dynamic'
 import { storyblokInit, apiPlugin } from "@storyblok/react";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "hyvor-talk-comments": any;
+    }
+  }
+}
+import localFont from '@next/font/local'
+
+const sunroll = localFont({
+  variable: "--sunroll-font",
+  src:[
+    {
+      path:'../styles/fonts/sunroll/Sunroll_Bold.ttf',
+      style: 'bold',
+    },
+    {
+      path:'../styles/fonts/sunroll/Sunroll.ttf',
+      style: 'normal'
+    }
+  ]
+})
 
 const Feature = dynamic(() => import('../components/Feature'))
 const Grid = dynamic(() => import("../components/Grid"))
@@ -41,6 +65,7 @@ const About = dynamic(() => import("../components/AboutMe"))
 const ArticleItems = dynamic(() => import("../components/ContentItems"))
 const Intro = dynamic(() => import("../components/Intro"))
 const Footer = dynamic(()=> import("../components/Footer"))
+const SubButton = dynamic(()=> import("../components/Subscribe"))
 
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
@@ -68,6 +93,7 @@ storyblokInit({
     ArticleItems: ArticleItems,
     intro: Intro,   
     footer: Footer,   
+    signUpButton: SubButton,
   },
 });
 
@@ -75,7 +101,10 @@ export default function App({ Component, pageProps }: AppProps) {
   
   return (
     <ApolloProvider client={Apollo_Client}>
-      <Component {...pageProps} />
+      <div className={sunroll.variable}>
+        <Component {...pageProps} />
+      </div>
+      <Analytics/>
     </ApolloProvider>
   )
   }

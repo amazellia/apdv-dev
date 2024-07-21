@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faInstagram, faLinkedinIn, faTumblr, faTwitter} from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faInstagram, faLinkedinIn, faTumblr, faTwitter, faItchIo} from '@fortawesome/free-brands-svg-icons'
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { storyblokEditable } from "@storyblok/react";
 import styles from '../styles/Home.module.scss'
@@ -29,6 +29,10 @@ export default function aboutLinks({ blok }:any) {
 
         <a href="https://www.instagram.com/_amazellia/" aria-label='Instagram'>
         <FontAwesomeIcon icon={faInstagram}/>
+        </a>
+
+        <a href="https://amazellia.itch.io/" aria-label='itch.io Game Store'>
+        <FontAwesomeIcon icon={faItchIo}/>
         </a>
     </div>
 )}

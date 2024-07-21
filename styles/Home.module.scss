@@ -1,8 +1,11 @@
 @use "./_color-themes.scss" as c;
 @import "./mediaQueries.scss";
+@import 'typed';
 
 .gradient {
-	font-family: Sunroll-Bold;
+	font-family: var(--sunroll-font);
+	font-weight: 300;
+	font-style: bold;
 	  background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);
 	  background-color: c.$mainBG;
 	  background-size: 300% 300%;
@@ -23,29 +26,31 @@
 .storyboard {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-    height: 80vh;
-    margin: 0 20%;
+	justify-content:space-between;
+    height: 80vh;//100vh to cover the entire screen but 80vh for fixed navigation
     align-items: center;
-	text-align: center;
-	h1 {font-size: 5.5vw;} 
-
+	//border: c.$mainColor;
+	//border-style: dashed;
+	h1 {
+		margin-top: 20vh;
+		font-size: 8vh;
+		font-weight: bold;
+	} //4rem
 	@include media('<=tablet'){
-		margin: 0 20%;
-		h1 {font-size: 3rem;}
-
+		padding: 0 2%;
+		h1 {font-size: 5.5vh;} 
 	}
 	@include media('>=LGdesktop'){
-		margin: 0 20%;
-		h1 {font-size: 5vw;}
+		padding: 0 20%;
 	}
     .aboutnav {
-        font-size: 200%;
+		font-size: 200%;
+		display: flexbox;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: space-evenly;
         svg {
             text-align: center;
-		padding: 0 2rem;
+		padding: 0 1.8rem;
 		color: c.$mainColor;
 		@include media('<=phone'){padding: 0 1rem}
         }
@@ -59,6 +64,25 @@
 		}
     }
 }
+
+.fullscreen_section {
+	height: 100vh;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	.containerAbout{
+		width: 30%;
+		text-align: center;
+		font-size: large;
+		h2{font-size: xx-large;font-weight: bolder;}
+		h3{font-size: larger;font-weight: bolder;}
+		@include media('<=tablet'){
+            width: 80%
+        }
+	}
+}
+
 
 .aboutSNS {
 	font-size: 150%;
@@ -92,25 +116,42 @@
 		.desc{padding-left: 0;}
 	}
 }
-
+.itemGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	@include media('<=tablet'){
+		grid-template-columns: 1fr;
+	}
+}
+.itemGridExpand {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	@include media('>desktop'){
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	
+	@include media('>=LGdesktop'){
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+	@include media('<=tablet'){
+		grid-template-columns: 1fr;
+	}
+}
 .itemContainer {
 	position: relative;
 	width: auto;
 	height: auto;
+	pointer-events: all;
   }
-.postitem {
+.postitem {	
 	margin: 0.5rem;
 	position: relative;
-	overflow:hidden;
 	border-radius: 7%;
+	overflow:hidden;
 	aspect-ratio: 1 / 1;
 	:hover {
 		opacity: 0.5;
 		transition: 0.2s ease;
-	}
-	span {
-		color: white;
-		font-weight: bold;
 	}
 }
 //for the post title in the middle of the picture
@@ -121,6 +162,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+	span {
+		color: white;
+		font-weight: bold;
+	}
+	@include media('<desktop'){
+		font-size: 1rem;
+	}
 }
 a:hover + .postTitle {
   display:initial;
@@ -141,7 +189,9 @@ a:hover + .postTitle {
 	display: flex;
 	margin-top: 5vmin;
 	button {
-	font-family: Sunroll-Bold;
+		font-family: var(--sunroll-font);
+		font-weight: bolder;
+		font-style:normal;
 		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
 		animation: animate 7s ease infinite;
 		background-size: 200%;
@@ -157,6 +207,29 @@ a:hover + .postTitle {
 	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
 
 } 	
+
+.SubButton {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	button {
+	font-family: var(--sunroll-font);
+		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
+		animation: animate 7s ease infinite;
+		background-size: 200%;
+		-webkit-background-clip:initial;
+		-moz-background-clip:initial;
+		background-clip:initial;
+		border-radius: 3rem;
+		padding: 1rem 7vmin;
+		color: white;
+		font-size: large;
+		cursor: pointer; 
+	}
+	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
+
+} 	
+
 
 .main {
 	padding: 5rem 0;
@@ -190,28 +263,21 @@ a:hover + .postTitle {
     display:flex;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 100%;
-    margin: 0 auto;
+	justify-content: center;
+	flex-wrap: wrap;
     button {
-        font-size: 130%;
+        font-size: medium;
         text-decoration: none;
         border: none;
-        color: white;
-        background-color: c.$mainColor;
+        color: c.$mainColor;
+        background-color: c.$mainBG;
         border-radius: 30px;
-        padding: 0.7vw 3vw;
-        margin: 1vw;
+        padding: 0.5rem 1rem;
         display: block;
     }
     button:hover {
-        color: c.$mainBG;
+        color: white;
         transition: 0.7s;
-    }
-    a:active, button:focus {
-        background-color: white;
-        color: c.$mainColor;
     }
 	@media (hover: none) {
 		cursor:'pointer'
@@ -228,3 +294,144 @@ a:hover + .postTitle {
 	align-items: center;
 	align-content: center;
 }
+
+.articleBanner{
+	margin: 0 10%;
+	align-items: center;
+	display: grid;
+	grid-template-columns: 1.5fr 2fr;
+	padding: 2rem;
+	.articleBanner_desc{
+		padding: 1.5rem;
+	}
+	@include media('<=tablet'){
+	grid-template-columns: 2fr;
+	padding: 1rem ;
+	display: block;
+	margin: 0;
+		.articleBanner_desc{
+			padding: 0;
+			text-align: center;
+		}
+	}
+}
+
+.subscribeForm{
+	text-align: center;
+	margin: 10% 25%;
+	padding: 5% 5%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: c.$mainColor;
+	border-radius: 1rem;
+	@include media('<=tablet'){
+		margin: 5% 15%;
+	}
+  }
+
+  .loadingPref {
+	font-family: var(--sunroll-font);
+	font-weight: "bold";
+	margin: 3% 10%;
+	display: grid;
+	justify-content: center;
+	text-align: center;
+	grid-template-columns: 1fr 1fr 1fr;
+	button {
+		font-family: var(--sunroll-font);
+		font-weight: "bold";
+		font-size: xx-small;
+		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
+		animation: animate 7s ease infinite;
+		background-size: 200%;
+		-webkit-background-clip:initial;
+		-moz-background-clip:initial;
+		background-clip:initial;
+		border-radius: 3vmin;
+		padding: 2vmin 2vmin;
+		color: white;
+		font-size: large;
+		cursor: pointer; 
+	}
+	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
+  }
+
+.itemList {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	position: relative;
+	width: auto;
+}
+
+.listContainer{
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 0.2fr;
+	overflow:hidden;
+	margin: 0 10%;
+	align-items: center;	
+}
+
+.listImage {
+	position: relative;
+	aspect-ratio: 1.2/1;
+	overflow:hidden;
+}
+
+.listText{
+	margin: 0 5%;
+}
+
+.viewPref{
+	height: 2rem;
+	margin-top: 0.5rem;
+	display: flex;
+	justify-content: center;
+	button {
+		background-color: c.$mainBG;
+		color: c.$mainColor;
+		border: none;
+	}
+}
+
+.imageFix{
+	position:relative;
+}
+
+
+.input_wrapper {
+	display: block;
+	> input,
+	> .placeholder {
+	  display: block;
+	  appearance: none;
+	  width: 100%;
+	  height: 100%;
+	  background-color: transparent;
+	  border: none;
+	}
+	> .placeholder {
+	  pointer-events: none;
+	  @include typed(
+		"DIGItAL & CREATIVE\ATECHNOloGIST",
+		"NERDY REARCHER",
+		"STORYTELLING\A AFicIOnadA",
+		(type: .1, pause-deleted: .5),
+		(
+		  caret-width: 2px,
+		  caret-space: 2px,
+		  caret-speed: 3,
+		  caret-color: c.$mainColor
+		)
+	  );
+	}
+	> input {
+	  &:focus,
+	  &:active {
+		+ .placeholder {
+		  display: none;
+		}
+	  }
+	}
+  }

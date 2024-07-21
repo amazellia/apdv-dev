@@ -22,13 +22,14 @@ export default function Page({ story, preview, config }:any) {
   );
 }
 
-export async function getStaticProps({ params}:any, context?:any) {
+export async function getStaticProps({params, locales}:any, context?:any) {
   let slug = params.slug ? params.slug.join("/") : "home";
 
   let sbParams = {
     version: "published", // version: "draft",
     resolve_links:"url",
     resolve_relations: ["featured-articles.articles"],
+    language: locales,
   };
 
   if (context?.preview) {
@@ -41,6 +42,7 @@ export async function getStaticProps({ params}:any, context?:any) {
 
   return {
     props: {
+      locales,
       story: data ? data.story : false,
       key: data ? data.story.id : false,
       config: config ? config.story : false,
@@ -50,7 +52,7 @@ export async function getStaticProps({ params}:any, context?:any) {
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locales}: any) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/");
   let paths:any[] = [];
@@ -61,11 +63,13 @@ export async function getStaticPaths() {
     const slug = data.links[linkKey].slug;
     let splittedSlug = slug.split("/");
 
-    paths.push({ params: { slug: splittedSlug } });
+    for (const locale of locales) {
+      paths.push({ params: { slug: splittedSlug }, locale });
+    }
   });
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: false, //blocking
   };
 }
