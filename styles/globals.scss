@@ -174,12 +174,13 @@ footer {
   a.icon, a.closeIcon {display: none;}
   overflow:hidden;
   display: flex;
-  //position: fixed;
+  position: fixed;
   justify-content: center;
-  //width: 100vw;
+  width: 100vw;
   font-size: 170%;
   padding: 1% 0;
   z-index: 1;
+  -webkit-transition: rgba(33, 28, 59, 0.459) 1000ms linear; 
   background-color: c.$mainBG;
   a{
     display: block;
