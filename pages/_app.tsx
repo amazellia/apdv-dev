@@ -20,8 +20,29 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 import { ApolloProvider} from "@apollo/client";
 import Apollo_Client from './api/apollo';
-import dynamic from 'next/dynamic'
 import { storyblokInit, apiPlugin } from "@storyblok/react";
+
+import Feature from '../components/Feature'
+import Grid from "../components/Grid"
+import Gallery from  "../components/Gallery"
+import Page from "../components/Page"
+import Teaser from   "../components/Teaser"
+import Article from  "../components/Article"
+import Config from "../components/Config"
+import HeaderMenu from "../components/HeaderMenu"
+import MenuLink from "../components/MenuLink"
+import Layout from "../components/Layout"
+import ArticleTeaser from "../components/ArticleTeaser"
+import FeaturedArticles from "../components/FeaturedArticles"
+import Video from "../components/Video"
+import Artwork from '../components/Artwork'
+import Archive from "../components/Archive"
+import About from "../components/AboutMe"
+import ArticleItems from "../components/ContentItems"
+import Intro from "../components/Intro"
+import Footer from "../components/Footer"
+import SubButton from "../components/Subscribe";
+
 
 declare global {
   namespace JSX {
@@ -46,26 +67,6 @@ const sunroll = localFont({
   ]
 })
 
-const Feature = dynamic(() => import('../components/Feature'))
-const Grid = dynamic(() => import("../components/Grid"))
-const Gallery = dynamic(() => import("../components/Gallery"))
-const Page = dynamic(() => import("../components/Page"))
-const Teaser = dynamic(() => import("../components/Teaser"))
-const Article = dynamic(() => import("../components/Article"))
-const Config = dynamic(() => import("../components/Config"))
-const HeaderMenu = dynamic(() => import("../components/HeaderMenu"))
-const MenuLink = dynamic(() => import("../components/MenuLink"))
-const Layout = dynamic(() => import("../components/Layout"))
-const ArticleTeaser = dynamic(() => import("../components/ArticleTeaser"))
-const FeaturedArticles = dynamic(() => import("../components/FeaturedArticles"))
-const Video = dynamic(() => import("../components/Video"))
-const Artwork = dynamic(() => import('../components/Artwork'))
-const Archive = dynamic(() => import("../components/Archive"))
-const About = dynamic(() => import("../components/AboutMe"))
-const ArticleItems = dynamic(() => import("../components/ContentItems"))
-const Intro = dynamic(() => import("../components/Intro"))
-const Footer = dynamic(()=> import("../components/Footer"))
-const SubButton = dynamic(()=> import("../components/Subscribe"))
 
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
