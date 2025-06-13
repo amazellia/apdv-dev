@@ -11,7 +11,9 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.scss'; //styles of nprogress
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
+injectSpeedInsights();
 //Binding events. 
 Router.events.on('routeChangeStart', () => NProgress.start()); 
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
