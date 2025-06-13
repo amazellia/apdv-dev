@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
+import type { ISbStoriesParams } from 'storyblok-js-client';
 import {
   useStoryblokState,
   getStoryblokApi,
   StoryblokComponent,
 } from "@storyblok/react";
 
-export default function Page({ story, preview, config }:any) {
-  story = useStoryblokState(story, {}, preview);
+export default function Page({ story, config }:any) {
+  story = useStoryblokState(story);
 
   return (
     <div>
@@ -23,22 +24,21 @@ export default function Page({ story, preview, config }:any) {
 }
 
 export async function getStaticProps({params, locales}:any, context?:any) {
-  let slug = params.slug ? params.slug.join("/") : "home";
+  const slug = params.slug ? params.slug.join("/") : "home";
+  const storyblokApi = getStoryblokApi();
 
-  let sbParams = {
-    version: "published", // version: "draft",
-    resolve_links:"url",
+  const sbParams: ISbStoriesParams = {
+    version: 'published', // version: "draft",
     resolve_relations: ["featured-articles.articles"],
     language: locales,
   };
 
   if (context?.preview) {
-    sbParams.version = "draft";
+    sbParams.version = 'draft';
   }
 
-  const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  let { data:config } = await storyblokApi.get('cdn/stories/config');
+  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  const { data:config } = await storyblokApi.get('cdn/stories/config');
 
   return {
     props: {

@@ -11,9 +11,8 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.scss'; //styles of nprogress
-import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-injectSpeedInsights();
 //Binding events. 
 Router.events.on('routeChangeStart', () => NProgress.start()); 
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
@@ -52,7 +51,7 @@ declare global {
     }
   }
 }
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 
 const sunroll = localFont({
   variable: "--sunroll-font",
@@ -105,6 +104,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ApolloProvider client={Apollo_Client}>
       <div className={sunroll.variable}>
         <Component {...pageProps} />
+        <SpeedInsights />
       </div>
     </ApolloProvider>
   )

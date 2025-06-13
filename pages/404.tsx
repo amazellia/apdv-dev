@@ -1,8 +1,9 @@
 import Layout from '../components/Layout';
 import { getStoryblokApi, StoryblokComponent, useStoryblokState  } from "@storyblok/react"
+import type { ISbStoriesParams } from 'storyblok-js-client';
 
 export default function Error404({story, preview, config}:any) {
-  story = useStoryblokState(story, {}, preview);
+  story = useStoryblokState(story, preview);
   return (
   <Layout story={config}>     
     <StoryblokComponent blok={story.content} />
@@ -11,11 +12,11 @@ export default function Error404({story, preview, config}:any) {
 }
 export async function getStaticProps(context?:any) {
   // home is the default slug for the homepage in Storyblok
+  
   let slug = "home";
  
-  let sbParams = {
+  let sbParams: ISbStoriesParams = {
     version: "published",
-    resolve_links: "url",
     resolve_relations: ["featured-articles.articles"],
   };
  
