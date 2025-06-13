@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:
