@@ -1,6 +1,5 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:
@@ -12,7 +11,6 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.scss'; //styles of nprogress
-import { Analytics } from'@vercel/analytics/react';
 
 //Binding events. 
 Router.events.on('routeChangeStart', () => NProgress.start()); 
@@ -106,7 +104,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={sunroll.variable}>
         <Component {...pageProps} />
       </div>
-      <Analytics/>
     </ApolloProvider>
   )
   }
