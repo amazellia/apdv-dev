@@ -16,7 +16,7 @@ const About = ( {blok} :any) => {
 		<Header name='amanda viray | about' meta={blok.meta}/>
 		<h1 className={styles.centerHeading}>About her.</h1>
 		<div className={styles.about}>
-			<Image alt="Picture of Amanda - dressed in pink checkered shirt" className={styles.pfp} src="/pfp.png" width={433} height={577}/>
+			<Image alt={blok.profilePicture.alt} className={styles.pfp} src={blok.profilePicture.filename} width={433} height={577}/>
 		<div className={styles.desc}>
 		{render(blok.description, {
 			blokResolvers: {
