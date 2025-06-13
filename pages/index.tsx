@@ -1,42 +1,64 @@
+// pages/index.tsx
+import { GetStaticProps } from 'next';
 import Layout from '../components/Layout';
-import { getStoryblokApi, StoryblokComponent, useStoryblokState  } from "@storyblok/react"
 import Header from '../components/Header';
+import {
+  getStoryblokApi,
+  StoryblokComponent,
+  useStoryblokState,
+} from '@storyblok/react';
 import type { ISbStoriesParams } from 'storyblok-js-client';
 
-export default function Home({story, preview, config}:any) {
-  story = useStoryblokState(story, preview);
+interface HomeProps {
+  story: any;
+  config: any;
+  preview: any;
+}
+
+export default function Home({ story, config, preview }: HomeProps) {
+  const liveStory = useStoryblokState(story, preview);
+
   return (
     <>
-    <Header/>
-    <Layout story={config}>     
-      <StoryblokComponent blok={story.content} />
-    </Layout>
+      <Header />
+      <Layout story={config}>
+        <StoryblokComponent blok={story.content} />
+      </Layout>
     </>
-  )
+  );
 }
-export async function getStaticProps(context?:any) {
-  // home is the default slug for the homepage in Storyblok
-  let slug = "home";
- 
-  let sbParams: ISbStoriesParams = {
-    version: 'published',
+
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ preview = false }) => {
+  const slug = 'home'; // default homepage slug in Storyblok
+  const storyblokApi = getStoryblokApi();
+
+  // Build Storyblok params
+  const sbParams: ISbStoriesParams = {
+    version: preview ? 'draft' : 'published',
     resolve_relations: ['featured-articles.articles'],
   };
- 
-  if (context.preview) {
-    sbParams.version = 'draft';
+
+  try {
+    // Fetch homepage and config
+    const [{ data: homeData }, { data: configData }] = await Promise.all([
+      storyblokApi.get(`cdn/stories/${slug}`, sbParams),
+      storyblokApi.get('cdn/stories/config', {
+        version: sbParams.version,
+      }),
+    ]);
+
+    return {
+      props: {
+        story: homeData.story,
+        config: configData.story,
+        preview,
+      },
+      revalidate: 3600, // hourly ISR
+    };
+  } catch (error) {
+    // On error, render 404
+    return {
+      notFound: true,
+    };
   }
- 
-  const storyblokApi = getStoryblokApi();
-  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  const { data: config } = await storyblokApi.get('cdn/stories/config');
-  return {
-    props: {
-      story: data ? data.story : false,
-      key: data ? data.story.id : false,
-      preview: context.preview || false,
-      config: config ? config.story : false,
-    },
-    revalidate: 3600, // revalidate every hour
-  };
-}
+};
