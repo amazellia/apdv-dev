@@ -57,7 +57,7 @@ const sunroll = localFont({
   variable: "--sunroll-font",
   src:[
     {
-      path:'../styles/fonts/sunroll/Sunroll_Bold.ttf',
+      path:'../styles/fonts/sunroll/Sunroll Bold.ttf',
       style: 'bold',
     },
     {

@@ -40,8 +40,10 @@
     "react-dom": "18.2.0",
     "react-image-gallery": "^1.2.11",
     "react-intersection-observer": "^9.4.3",
+    "react-typed": "^2.0.12",
     "sass": "^1.56.1",
     "storyblok-rich-text-react-renderer": "^2.8.0",
+    "typed.js": "^2.1.0",
     "typescript": "4.8.4"
   },
   "devDependencies": {
