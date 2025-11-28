@@ -7,8 +7,10 @@ import { useRouter } from 'next/router';
 import Header from './Header';
 import Script from 'next/script';
 
+/* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
+*/
 
 export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
@@ -35,9 +37,6 @@ const Artwork = ({blok}:any) => {
             <Container maxWidth="xs">
             <h1 className='title'>{blok.name}</h1>
             <p>{blok.description}</p>
-            <div className='hyvorTalk'>
-            <hyvor-talk-comments website-id={HYVOR_ID} page-id={slug} />
-            </div>
             </Container>
       </ListItem>
         </Grid>
@@ -46,3 +45,10 @@ const Artwork = ({blok}:any) => {
   );
 };
 export default Artwork;
+
+/*
+<p>{blok.description}</p> ... add after this line
+<div className='hyvorTalk'> 
+<hyvor-talk-comments website-id={HYVOR_ID} page-id={slug} />
+</div>
+*/

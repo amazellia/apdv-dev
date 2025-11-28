@@ -12,8 +12,10 @@ import SubscribeForm from './Subscribe';
 import Script from 'next/script';
 import Link from 'next/link';
 
+/* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
 const HYVOR_ID: number = HYVOR_PROCESS
+*/
 
 export const getStaticPaths = async (props:any) => {return {paths: [], fallback: true,}}
 
@@ -75,9 +77,6 @@ const Article = ({ blok }:any) => {
 
     })}
     <SubscribeForm/>
-    <div className='hyvorTalk'>
-    <hyvor-talk-comments website-id={HYVOR_ID} page-id={slug} />
-     </div>
   </Container>
   </>}
   </div>
@@ -85,3 +84,10 @@ const Article = ({ blok }:any) => {
   );
 };
 export default Article;
+
+/*
+<SubscribeForm/> ...THEN ADD THE FOLLOWING ONCE YOU DECEIDE TO ADD HYVOR BACK
+    <div className='hyvorTalk'>
+    <hyvor-talk-comments website-id={HYVOR_ID} page-id={slug} />
+     </div>
+*/
