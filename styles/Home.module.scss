@@ -1,5 +1,5 @@
 @use "./_color-themes.scss" as c;
-@import "./mediaQueries.scss";
+@use "./mediaQueries.scss" as *;
 
 .gradient {
 	font-family: var(--sunroll-font);

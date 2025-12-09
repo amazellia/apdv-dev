@@ -1,5 +1,6 @@
 //add component to _app.tsx
 import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 // import ImageList from '@mui/material/ImageList';
 // import ImageListItem from '@mui/material/ImageListItem';
 // import ImageListItemBar from '@mui/material/ImageListItemBar';

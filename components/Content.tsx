@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 const ArticleTeaser = dynamic(() => import("../components/ArticleTeaser"))
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { useState, useEffect} from "react";
 import { Pagination} from "@mui/material";
 import styles from '../styles/Home.module.scss';
@@ -29,7 +29,7 @@ const Content = ( {tag, slugs, after, before} :any) => {
     const fetchMorePages = (scrollPref == "scroll") ? newPages : page;
     await fetchMore({
         variables: {  page: fetchMorePages },
-        updateQuery: (prevResult, {fetchMoreResult}) => {
+        updateQuery: (prevResult: any, {fetchMoreResult}: {fetchMoreResult: any}) => {
           fetchMoreResult.ContentNodes.items =[...prevResult.ContentNodes.items, ...fetchMoreResult.ContentNodes.items]; 
           setFetch(false);
           return fetchMoreResult;
@@ -49,14 +49,15 @@ const Content = ( {tag, slugs, after, before} :any) => {
       tag: (slugs =="projects/*,artworks/*,blog/*") ? tag : getTag, 
       limit: limit, slugs: mode, page: page },  });
   if (error) return <div>errors</div>;
-  var newPages = Math.ceil(data?.ContentNodes.items.length/limit) + 1;
-  var hasMore = (newPages < Math.ceil(data?.ContentNodes.total/limit) || data?.ContentNodes.items.length !== data?.ContentNodes.total);
-  var content_all = data?.ContentNodes.items;
+  const queryData = data as any;
+  var newPages = Math.ceil(queryData?.ContentNodes?.items?.length/limit) + 1;
+  var hasMore = (newPages < Math.ceil(queryData?.ContentNodes?.total/limit) || queryData?.ContentNodes?.items?.length !== queryData?.ContentNodes?.total);
+  var content_all = queryData?.ContentNodes?.items || [];
 
-  if (data && slugs === "work") {buttonModes = data?.ConfigItem?.content?.work_buttons}
-  if (data && slugs == "blog" ) { buttonModes = data?.ConfigItem?.content?.blog_buttons;}
-  if (data && slugs == "artworks") {buttonModes = data?.ConfigItem?.content?.artwork_buttons;}
-  if (data && slugs == "projects/*,artworks/*,blog/*") {buttonModes = ["blog", "projects", "artworks"]}
+  if (queryData && slugs === "work") {buttonModes = queryData?.ConfigItem?.content?.work_buttons}
+  if (queryData && slugs == "blog" ) { buttonModes = queryData?.ConfigItem?.content?.blog_buttons;}
+  if (queryData && slugs == "artworks") {buttonModes = queryData?.ConfigItem?.content?.artwork_buttons;}
+  if (queryData && slugs == "projects/*,artworks/*,blog/*") {buttonModes = ["blog", "projects", "artworks"]}
   buttonModes.forEach((x:string) => {buttons.push(<button key={x} value={x} onClick={(e) => handleTag(e)}>{x}</button>);})
  
   const handleTag = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -88,7 +89,7 @@ const Content = ( {tag, slugs, after, before} :any) => {
   };
 
   return ( <>
-   {(loading || !data) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
+   {(loading || !queryData) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
       <div className={styles.viewPref} >
         <button onClick={() => handleViewPrefClick("grid")}>📦 Grid view</button>
         <button onClick={() => handleViewPrefClick("list")}>📃 List view</button>
@@ -116,7 +117,7 @@ const Content = ( {tag, slugs, after, before} :any) => {
           <>
             <Pagination
             className="pagination"
-            count={Math.ceil(data?.ContentNodes?.total/limit)}
+            count={Math.ceil(queryData?.ContentNodes?.total/limit)}
             page={page}
             siblingCount={1}
             boundaryCount={1}

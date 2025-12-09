@@ -1,6 +1,6 @@
 import ArticleTeaser from "./ArticleTeaser";
 import { storyblokEditable } from "@storyblok/react";
-import styles from '/styles/Home.module.scss'
+import styles from '../styles/Home.module.scss'
 import Link from "next/link";
 
  const FeaturedArticles = ({ blok }:any) => {

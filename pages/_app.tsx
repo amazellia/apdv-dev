@@ -18,7 +18,7 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
 Router.events.on('routeChangeError', () => NProgress.done());
 
-import { ApolloProvider} from "@apollo/client";
+import { ApolloProvider} from "@apollo/client/react";
 import Apollo_Client from './api/apollo';
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 

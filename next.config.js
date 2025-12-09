@@ -18,7 +18,10 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  }
+  },
+  sassOptions: {
+    includePaths: [require('path').join(__dirname, 'node_modules')],
+  },
 }
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',

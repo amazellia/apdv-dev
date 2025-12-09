@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 import {shimmer, toBase64} from '../styles/blur'
 
 const Gallery = ({blok}:any) => {

@@ -1,4 +1,4 @@
-import styles from '/styles/Home.module.scss'
+import styles from '../styles/Home.module.scss'
 import Link from "next/link";
 import { storyblokEditable } from "@storyblok/react";
  const SubButton = ({blok}:any) => {

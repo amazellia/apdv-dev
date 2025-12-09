@@ -22,8 +22,8 @@ const Artwork = ({blok}:any) => {
     <Script async src="https://talk.hyvor.com/embed/embed.js" type="module" strategy='lazyOnload'/>
     <Header name={blok.name} meta={blok.metaDescription}/>
 
-    <Grid container columns={2}>
-      <Grid xs={3} sm={2} md={1.4} lg={1.5} xl={1.5} item={true}>
+    <Grid container spacing={2}>
+      <Grid size={{ xs: 12, sm: 6, md: 7, lg: 7.5, xl: 7.5 }}>
       <ListItem>
             <Container maxWidth="md"  {...storyblokEditable(blok)}>
                 {blok.content.map((blok:any) => (
@@ -33,7 +33,7 @@ const Artwork = ({blok}:any) => {
       </ListItem>
         </Grid>
       
-      <Grid xs={3} sm={2} md={0.6} lg={0.5} xl={0.5} item={true}><ListItem>
+      <Grid size={{ xs: 12, sm: 6, md: 5, lg: 4.5, xl: 4.5 }}><ListItem>
             <Container maxWidth="xs">
             <h1 className='title'>{blok.name}</h1>
             <p>{blok.description}</p>
