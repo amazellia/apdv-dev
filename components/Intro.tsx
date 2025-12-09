@@ -38,7 +38,7 @@ export default function Intro() {
 
   return (
     <div className={styles.storyboard}>
-      <div>
+      <div className={styles.introText}>
         <h1 className={styles.gradient}>
           <div>AmanDA VIraY</div>
           <TypedIntro

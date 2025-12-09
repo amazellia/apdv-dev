@@ -30,19 +30,14 @@ export default function TypedIntro({ text1, text2, text3 }: TypedIntroProps) {
       backSpeed: 30,
       backDelay: 2000,
       loop: true,
-      cursorChar: '|',
+      cursorChar: '⋆',
       showCursor: true,
       startDelay: 0,
       smartBackspace: true,
       fadeOut: false,
       fadeOutClass: 'typed-fade-out',
       fadeOutDelay: 500,
-      autoInsertCss: true,
-      preStringTyped: () => {
-        if (el.current) {
-          (el.current as HTMLElement).style.display = 'inline-block';
-        }
-      },
+      autoInsertCss: true
     });
 
     return () => {

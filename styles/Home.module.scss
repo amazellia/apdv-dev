@@ -19,11 +19,25 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 0.5rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 @keyframes animate {
 	0%{background-position: 0 50%;}
 	50%{background-position: 100% 50%;}  
 	100%{background-position: 0% 50%;}  
+}
+
+.introText {
+	width: 50vw;
+	@include media('<=tablet'){
+		width: 90vw;
+	}
+	@include media('>=LGdesktop'){
+		padding: 0 20%;
+	}
 }
 
 .storyboard {

@@ -5,13 +5,19 @@ const nextConfig = {
     defaultLocale: 'en',
   },
   reactStrictMode: true,
-  swcMinify: true,
   env: {
     storyblokApiToken: process.env.STORYBLOK_API_TOKEN,
     hyvorTalkId: process.env.HYVOR_TALK_ID,
   },
   images: {
-    domains: ['res.cloudinary.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   }
 }
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

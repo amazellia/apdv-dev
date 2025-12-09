@@ -167,6 +167,10 @@ footer {
   
 .Config_Menu {
   top: 0;
+  -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
   transition: top 0.3s ease-in-out;
   font-family: var(--sunroll-font);
   font-weight: normal;
