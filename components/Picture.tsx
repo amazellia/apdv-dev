@@ -44,6 +44,7 @@ const SingleImage = (blok:any) => {
           alt={data.alt || 'Image'}
           width={imgWidth}
           height={imgHeight}
+          loading="lazy"
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(imgWidth, imgHeight))}`}
           quality={85}
