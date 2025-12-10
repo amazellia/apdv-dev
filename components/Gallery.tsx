@@ -1,85 +1,131 @@
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
 import {shimmer, toBase64} from '../styles/blur'
+import { useState } from 'react';
 
 const Gallery = ({blok}:any) => {
-  const type:any = (blok.variant === undefined) ?  "masonry" : blok.variant;
-  const columns:number = (blok.colums === undefined) ?  (Math.ceil(((blok.images).length)/3)): Number(blok.columns) ;
-  const rowHeight:number = Number(blok.rowHeight);
-  const gap:number = (blok.gap === undefined) ? 8 : Number(blok.gap);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   
-  let images = [] as any; 
-  blok.images.map((img:any) =>
-  images.push( 
-    {
-      original: img.filename,
-      thumbnail:img.filename,
-      originalAlt: img.alt,
-    }
-  ))
-  return ( 
+  const columns:number = (blok.colums === undefined) ? 3 : Number(blok.columns);
+  const rowHeight:number = (blok.rowHeight === undefined) ? 164 : Number(blok.rowHeight);
+  
+  // Calculate responsive sizes based on columns
+  const getSizes = () => {
+    if (columns === 1) return '100vw';
+    if (columns === 2) return '(max-width: 768px) 100vw, 50vw';
+    return '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
+  };
 
-    ( (blok.type === "carousel") ?
-    <div className='carousel-gallery-container'>
-    <ImageGallery 
-      items={images} 
-      additionalClass="carousel-gallery"
-      showIndex= {false}
-      showBullets= {true}
-      infinite= {true}
-      showThumbnails= {true}
-      showFullscreenButton= {true}
-      showPlayButton= {true}
-      showNav= {true}
-      isRTL= {false}
-      slideDuration= {450}
-      slideInterval= {2000}
-      slideOnThumbnailOver= {false}
-      thumbnailPosition= {'bottom'}
-    />
-    </div>
-    :
-    <ImageList 
-    variant={type} 
-    cols={columns} 
-    gap={gap} 
-    // rowHeight={rowHeight}
-    >
-      {blok.images.map((img:any) => (
-        <ImageListItem key={img.filename}  >
-            <Image 
-            src={img.filename}
-            alt={img.alt}
-            width={800}
-            height={800}
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+  const handleImageClick = (img: any) => {
+    setSelectedImage(img.filename);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage(null);
+  };
+
+  return ( 
+    <>
+      <div style={{ width: '100%' }}>
+        <ImageList 
+          cols={columns} 
+          rowHeight={rowHeight}
+          sx={{ 
+            width: '100%',
+            height: 'auto'
+          }}
+        >
+          {blok.images.map((img:any, index:number) => (
+            <ImageListItem 
+              key={img.filename}
+              sx={{ cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
+              onClick={() => handleImageClick(img)}
+            >
+              <Image 
+                src={img.filename}
+                alt={img.alt || `Gallery image ${index + 1}`}
+                fill
+                sizes={getSizes()}
+                loading={index < 6 ? "eager" : "lazy"}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(rowHeight, rowHeight))}`}
+                quality={85}
+                style={{ 
+                  objectFit: 'cover'
+                }}
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </div>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth={false}
+        sx={{
+          '& .MuiDialog-paper': {
+            maxWidth: '95vw',
+            maxHeight: '95vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          },
+        }}
+      >
+        <DialogContent
+          sx={{
+            padding: 0,
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '95vh',
+          }}
+        >
+          <IconButton
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              color: 'white',
+              zIndex: 1,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              },
+            }}
+            aria-label="close"
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </IconButton>
+          {selectedImage && (
+            <Image
+              src={selectedImage}
+              alt="Fullscreen view"
+              width={1920}
+              height={1080}
+              sizes="95vw"
+              quality={90}
+              priority
+              style={{
+                maxWidth: '95vw',
+                maxHeight: '95vh',
+                objectFit: 'contain',
+              }}
             />
-            <ImageListItemBar
-             sx={{  background: 'none', fontSize: '130%', marginBottom: '1%', marginRight: '1%'}}
-              actionIcon={
-                <a target="_blank" href={img.filename} rel="noopener noreferrer" >
-                  <IconButton
-                    sx={{ color: 'white', fontSize: '130%'}}
-                    aria-label={`zoom ${img.filename}`}
-                  >
-                    <FontAwesomeIcon icon={faExpand}/>
-                  </IconButton>
-                </a>
-              }
-              actionPosition="right"
-            />
-         </ImageListItem>
-      ))}
-    </ImageList>)
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 export default Gallery;

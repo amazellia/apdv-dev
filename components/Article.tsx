@@ -8,9 +8,9 @@ import { useRouter } from 'next/router';
 import SingleImage from './Picture'
 import styles from '../styles/Home.module.scss'
 import Header from './Header';
-import SubscribeForm from './Subscribe';
 import Script from 'next/script';
 import Link from 'next/link';
+import Giscus from './Giscus';
 
 /* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
@@ -76,8 +76,8 @@ const Article = ({ blok }:any) => {
       },
 
     })}
-    <SubscribeForm/>
   </Container>
+  <Giscus />
   </>}
   </div>
     </div>

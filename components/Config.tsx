@@ -8,12 +8,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from'@fortawesome/free-solid-svg-icons'
 
 function openMobileNav(e: any) {
-	const x:any = document.getElementById("responsiveNav");
 	e.preventDefault();
+	const x:any = document.getElementById("responsiveNav");
+	if (!x) return;
+	
 	if (x.className === "Config_Menu") {
 	  x.className += " responsive";
+	  document.body.style.overflow = 'hidden'; // Prevent background scrolling
 	} else {
 	  x.className = "Config_Menu";
+	  document.body.style.overflow = ''; // Restore scrolling
 	}
 };
 

@@ -6,6 +6,7 @@ import {
 import { useRouter } from 'next/router';
 import Header from './Header';
 import Script from 'next/script';
+import Giscus from './Giscus';
 
 /* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
@@ -41,6 +42,7 @@ const Artwork = ({blok}:any) => {
       </ListItem>
         </Grid>
     </Grid>
+    <Giscus />
   </div>
   );
 };

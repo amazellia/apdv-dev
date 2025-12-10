@@ -165,53 +165,142 @@ footer {
 }
   
 .Config_Menu {
-  top: 0;
-  -webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-  transition: top 0.3s ease-in-out;
-  font-family: var(--sunroll-font);
-  font-weight: normal;
-  font-style: normal;
-  a.icon, a.closeIcon {display: none;}
-  overflow:hidden;
-  display: flex;
   position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100vw;
-  font-size: 170%;
-  padding: 1% 0;
-  z-index: 1;
-  -webkit-transition: rgba(33, 28, 59, 0.459) 1000ms linear; 
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
   background-color: c.$mainBG;
-  a{
-    display: block;
+  font-size: 1.25rem;
+  user-select: none;
+  transition: all 0.3s ease;
+
+  // Hamburger menu icon (hidden on desktop)
+  a.icon,
+  a.closeIcon {
+    display: none;
+  }
+
+  // Navigation links
+  a.nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    min-width: 44px;
     text-decoration: none;
-    padding: 1% 3%;
+    color: c.$mainColor;
+    font-family: var(--sunroll-font);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    
+    &:hover {
+      color: pink;
+      transform: translateY(-2px);
+    }
   }
-  @include media ('<=tablet') {
-      display: block; transition: 0.5s ease-out; margin:0;padding: 0;
-      a {display: none; }
-      background-color: transparent;
-      a.icon {display:block; font-size: 150%; padding: 2rem 2rem 0 0; float: right;}
+
+  // Mobile styles
+  @include media('<=tablet') {
+    top: 1rem;
+    right: 1rem;
+    left: auto;
+    transform: none;
+    padding: 0;
+    background-color: transparent;
+    width: auto;
+
+    // Show hamburger icon
+    a.icon {
+      display: block;
+      font-size: 1.5rem;
+      color: c.$mainColor;
+      padding: 0.5rem;
+      cursor: pointer;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    // Hide nav buttons on mobile (until menu is opened)
+    a.nav-button {
+      display: none;
+    }
   }
-  @include media ('>LGdesktop') {
-    font-size: 1.8vw;
-    a{padding: 1% 3%;}
-}
-}
-.Config_Menu.responsive {
-    position: sticky;
-    flex-direction: column;
-    float: right;
-    height: 100vh; 
-    background-color: rgb(33, 28, 59);
-    margin:0;
-    transition: 0.5s ease-in;
-    a {display: block; padding: 10%} 
-    a.icon {display: none;}
-    a.closeIcon {display:block; padding: 2rem 2rem 0 0; float: right; font-size: 130%;}
+
+  // Large desktop styles
+  @include media('>LGdesktop') {
+    font-size: 1.5rem;
+    gap: 2rem;
+    padding: 1rem 2rem;
+  }
+
+  // Responsive/opened state (mobile menu)
+  &.responsive {
+    @include media('<=tablet') {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      background-color: c.$mainBG;
+      padding: 0;
+      gap: 0;
+      transform: none;
+      z-index: 2000;
+      overflow-y: auto;
+
+      // Show close icon
+      a.icon {
+        display: none;
+      }
+
+      a.closeIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: c.$mainColor;
+        padding: 1rem;
+        margin: 1rem 1rem 0 auto;
+        cursor: pointer;
+        min-height: 44px;
+        min-width: 44px;
+        align-self: flex-end;
+        width: auto;
+      }
+
+      // Show nav buttons in mobile menu
+      a.nav-button {
+        display: flex;
+        width: calc(100% - 2rem);
+        padding: 1rem 1.5rem;
+        margin: 0.5rem 1rem;
+        border-radius: 8px;
+        justify-content: flex-start;
+        font-size: 1.25rem;
+        font-family: var(--sunroll-font);
+
+        &:hover {
+          transform: translateX(5px);
+        }
+      }
+    }
+  }
 }
 
 .featureArticles_item{
@@ -254,4 +343,56 @@ footer {
 
 .reactions-title {
   color: white;
+}
+
+// Giscus Comments Styling
+.giscus-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 3rem auto;
+  padding: 2rem 0;
+  max-width: 100%;
+
+  @include media('<=tablet') {
+    margin: 2rem auto;
+    padding: 1.5rem 0;
+  }
+}
+
+.giscus {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  
+  @include media('<=tablet') {
+    padding: 0 1rem;
+  }
+}
+
+// Giscus iframe styling
+.giscus-frame {
+  width: 100% !important;
+  border: none !important;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 400px;
+  
+  // Ensure proper spacing and visibility
+  margin: 0 auto;
+  display: block;
+}
+
+// Additional container styling for better integration
+.giscus-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 0;
+  
+  // Match container styling with article content
+  @include media('>=tablet') {
+    padding: 0 2rem;
+  }
 }

@@ -50,35 +50,57 @@
 	//border: c.$mainColor;
 	//border-style: dashed;
 	h1 {
-		margin-top: 20vh;
-		font-size: 8vh;
+		margin-top: 15vh;
+		font-size: 5rem;
 		font-weight: bold;
 	} //4rem
 	@include media('<=tablet'){
 		padding: 0 2%;
-		h1 {font-size: 5.5vh;} 
+		h1 {font-size: 3rem;} 
 	}
 	@include media('>=LGdesktop'){
 		padding: 0 20%;
 	}
     .aboutnav {
-		font-size: 200%;
-		display: flexbox;
+		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5rem;
+		width: 100%;
+		font-size: 200%;
+		margin: 2rem auto;
+		
+        a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			
+			&:hover {
+				transform: translateY(-3px);
+				opacity: 0.8;
+			}
+		}
+		
         svg {
-            text-align: center;
-		padding: 1rem 1.8rem;
-		color: c.$mainColor;
-		@include media('<=phone'){padding: 0 1rem}
+			text-align: center;
+			padding: 1rem;
+			color: c.$mainColor;
+			width: 1em;
+			height: 1em;
         }
+		
         @include media('<=phone'){
             font-size: 10vw;
-            justify-content:center;
+			gap: 1rem;
         }
+		
 		@include media('>=LGdesktop') {
 			font-size: 2.5vw;
-            justify-content:center;
+			gap: 2rem;
 		}
     }
 }

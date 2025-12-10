@@ -1,60 +1,146 @@
-//add component to _app.tsx
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
-// import ImageListItemBar from '@mui/material/ImageListItemBar';
-// import IconButton from '@mui/material/IconButton';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faExpand } from '@fortawesome/free-solid-svg-icons';
-// import Image from 'next/image';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
+import {shimmer, toBase64} from '../styles/blur'
+import { useState } from 'react';
 
 const SingleImage = (blok:any) => {
-  let data = blok.blok;
-  let img = [
-    {
-      original: data.src,
-      thumbnail: data.src,
-      originalAlt: data.alt,
-    },
-  ]
+  const data = blok.blok;
+  const [open, setOpen] = useState(false);
+
+  // Use actual image dimensions if available, otherwise use sensible defaults
+  const imgWidth = data.width || 1200;
+  const imgHeight = data.height || 800;
+  const aspectRatio = imgWidth / imgHeight;
+
+  const handleImageClick = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div>
-       <ImageGallery 
-      items={img} 
-      additionalClass="image-gallery"
-      showIndex= {false}
-      showFullscreenButton= {true}
-      showPlayButton= {false}
-      showThumbnails= {false}
-    />
-      {/* <ImageList variant="masonry" cols={1} gap={0}>
-        <ImageListItem >
+    <>
+      <span 
+        style={{ 
+          cursor: 'pointer', 
+          display: 'block', 
+          maxWidth: '100%',
+          touchAction: 'manipulation',
+          WebkitTapHighlightColor: 'transparent'
+        }}
+        onClick={handleImageClick}
+        onTouchStart={handleImageClick}
+      >
         <Image 
+          src={data.src}
+          alt={data.alt || 'Image'}
+          width={imgWidth}
+          height={imgHeight}
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(imgWidth, imgHeight))}`}
+          quality={85}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          style={{ 
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block',
+            pointerEvents: 'auto'
+          }}
+        />
+      </span>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth={false}
+        fullScreen={false}
+        sx={{
+          '& .MuiDialog-paper': {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            borderRadius: 0,
+          },
+          '& .MuiBackdrop-root': {
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          },
+        }}
+      >
+        <DialogContent
+          sx={{
+            padding: 0,
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            minHeight: '100vh',
+            margin: 0,
+            overflow: 'hidden',
+          }}
+        >
+          <IconButton
+            onClick={handleClose}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+              handleClose();
+            }}
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              color: 'white',
+              zIndex: 1001,
+              backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              minWidth: '48px',
+              minHeight: '48px',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              },
+              '@media (max-width: 768px)': {
+                top: 12,
+                right: 12,
+                minWidth: '44px',
+                minHeight: '44px',
+              },
+            }}
+            aria-label="close"
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </IconButton>
+          <Image
             src={data.src}
-            alt={data.alt}
-            width={800}
-            height={800}placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-            quality={80}
-            />
-            <ImageListItemBar
-               sx={{  background: 'none', fontSize: '130%', marginBottom: '1%', marginRight: '1%'}}
-              actionIcon={
-                <a target="_blank" href={data.src} rel="noopener noreferrer">
-                <IconButton
-                   sx={{ color: 'white', fontSize: '130%',"&:hover": 'transform: scale(1.5)'}}
-                  aria-label={`zoom ${data.alt}`}
-                >
-                  <FontAwesomeIcon icon={faExpand}/>
-                </IconButton>
-                </a>
-              }
-              actionPosition="right"
-            />
-         </ImageListItem>
-    </ImageList> */}
-    </div>    
+            alt={data.alt || 'Fullscreen view'}
+            width={imgWidth}
+            height={imgHeight}
+            sizes="100vw"
+            quality={90}
+            priority
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              width: 'auto',
+              height: 'auto',
+              objectFit: 'contain',
+              touchAction: 'manipulation',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 export default SingleImage;

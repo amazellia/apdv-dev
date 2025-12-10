@@ -34,7 +34,6 @@
     "nprogress": "^0.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-image-gallery": "^1.4.0",
     "react-intersection-observer": "^10.0.0",
     "sass": "^1.95.0",
     "storyblok-rich-text-react-renderer": "^3.0.1",
@@ -42,7 +41,6 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@types/nprogress": "^0.2.3",
-    "@types/react-image-gallery": "^1.2.4"
+    "@types/nprogress": "^0.2.3"
   }
 }
