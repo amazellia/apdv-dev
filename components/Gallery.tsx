@@ -74,8 +74,15 @@ const Gallery = ({blok}:any) => {
         maxWidth={false}
         sx={{
           '& .MuiDialog-paper': {
-            maxWidth: '95vw',
-            maxHeight: '95vh',
+            width: '100vw',
+            height: '100vh',
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            margin: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            borderRadius: 0,
+          },
+          '& .MuiBackdrop-root': {
             backgroundColor: 'rgba(0, 0, 0, 0.95)',
           },
         }}
@@ -87,7 +94,10 @@ const Gallery = ({blok}:any) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '95vh',
+            width: '100vw',
+            height: '100vh',
+            margin: 0,
+            overflow: 'hidden',
           }}
         >
           <IconButton

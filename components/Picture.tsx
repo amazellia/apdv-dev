@@ -64,10 +64,10 @@ const SingleImage = (blok:any) => {
         fullScreen={false}
         sx={{
           '& .MuiDialog-paper': {
+            width: '100vw',
+            height: '100vh',
             maxWidth: '100vw',
             maxHeight: '100vh',
-            width: '100%',
-            height: '100%',
             margin: 0,
             backgroundColor: 'rgba(0, 0, 0, 0.95)',
             borderRadius: 0,
@@ -84,9 +84,8 @@ const SingleImage = (blok:any) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            minHeight: '100vh',
+            width: '100vw',
+            height: '100vh',
             margin: 0,
             overflow: 'hidden',
           }}
