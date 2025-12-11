@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import Header from './Header';
 import Giscus from './Giscus';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -73,6 +73,39 @@ const Artwork = ({blok}:any) => {
   const imageCount = allImages.length;
   const isSingleImage = imageCount === 1;
   const isMultipleImages = imageCount > 1;
+  const [imagesLoading, setImagesLoading] = useState<Set<string>>(new Set());
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+  
+  // Initialize loading state for all images
+  useEffect(() => {
+    if (imageCount > 0) {
+      const initialLoadingSet = new Set(allImages.map((img, index) => `${img.src}-${index}`));
+      setImagesLoading(initialLoadingSet);
+      setAllImagesLoaded(false);
+    }
+  }, [imageCount, blok.content]);
+  
+  const handleImageLoad = (imageKey: string) => {
+    setImagesLoading((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(imageKey);
+      if (newSet.size === 0) {
+        setAllImagesLoaded(true);
+      }
+      return newSet;
+    });
+  };
+  
+  const handleImageError = (imageKey: string) => {
+    setImagesLoading((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(imageKey);
+      if (newSet.size === 0) {
+        setAllImagesLoaded(true);
+      }
+      return newSet;
+    });
+  };
 
   const handleImageClick = (src: string) => {
     setSelectedImage(src);
@@ -92,7 +125,12 @@ const Artwork = ({blok}:any) => {
       {isSingleImage ? (
         // Full screen layout for single image
         <Container maxWidth={false} {...storyblokEditable(blok)} sx={{ padding: 0 }}>
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem 0' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem 0', position: 'relative', minHeight: '400px' }}>
+            {imagesLoading.has(`${allImages[0].src}-0`) && (
+              <div className="loading" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>
+                <div className="lds-heart"><div></div></div>
+              </div>
+            )}
             <Image
               src={optimizeCloudinaryImage(allImages[0].src, {
                 width: allImages[0].width,
@@ -104,12 +142,16 @@ const Artwork = ({blok}:any) => {
               width={allImages[0].width}
               height={allImages[0].height}
               quality={100}
+              onLoad={() => handleImageLoad(`${allImages[0].src}-0`)}
+              onError={() => handleImageError(`${allImages[0].src}-0`)}
               style={{
                 maxWidth: '100%',
                 maxHeight: '90vh',
                 height: 'auto',
                 objectFit: 'contain',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                opacity: imagesLoading.has(`${allImages[0].src}-0`) ? 0 : 1,
+                transition: 'opacity 0.3s ease-in-out'
               }}
               onClick={() => handleImageClick(allImages[0].src)}
             />
@@ -118,39 +160,58 @@ const Artwork = ({blok}:any) => {
       ) : isMultipleImages ? (
         // Masonry grid layout for multiple images using MUI
         <Container {...storyblokEditable(blok)}>
+          {!allImagesLoaded && imagesLoading.size > 0 && (
+            <div className="loading" style={{ padding: '2rem' }}>
+              <div className="lds-heart"><div></div></div>
+            </div>
+          )}
           <ImageList 
             variant="masonry" 
             cols={getCols()} 
             gap={16}
             sx={{
               width: '100%',
+              opacity: allImagesLoaded ? 1 : 0.3,
+              transition: 'opacity 0.3s ease-in-out'
             }}
           >
-            {allImages.map((img: any, index: number) => (
-              <ImageListItem 
-                key={`${img.src}-${index}`}
-                sx={{ cursor: 'pointer' }}
-                onClick={() => handleImageClick(img.src)}
-              >
-                <Image
-                  src={optimizeCloudinaryImage(img.src, {
-                    width: img.width || 800,
-                    quality: 85,
-                    crop: 'limit'
-                  })}
-                  alt={img.alt}
-                  width={img.width}
-                  height={img.height}
-                  quality={85}
-                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                  }}
-                />
-              </ImageListItem>
-            ))}
+            {allImages.map((img: any, index: number) => {
+              const imageKey = `${img.src}-${index}`;
+              return (
+                <ImageListItem 
+                  key={imageKey}
+                  sx={{ cursor: 'pointer', position: 'relative' }}
+                  onClick={() => handleImageClick(img.src)}
+                >
+                  {imagesLoading.has(imageKey) && (
+                    <div className="loading" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>
+                      <div className="lds-heart"><div></div></div>
+                    </div>
+                  )}
+                  <Image
+                    src={optimizeCloudinaryImage(img.src, {
+                      width: img.width || 800,
+                      quality: 85,
+                      crop: 'limit'
+                    })}
+                    alt={img.alt}
+                    width={img.width}
+                    height={img.height}
+                    quality={85}
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    onLoad={() => handleImageLoad(imageKey)}
+                    onError={() => handleImageError(imageKey)}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block',
+                      opacity: imagesLoading.has(imageKey) ? 0 : 1,
+                      transition: 'opacity 0.3s ease-in-out'
+                    }}
+                  />
+                </ImageListItem>
+              );
+            })}
           </ImageList>
         </Container>
       ) : (

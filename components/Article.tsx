@@ -12,7 +12,7 @@ import Script from 'next/script';
 import Link from 'next/link';
 import Giscus from './Giscus';
 import { optimizeCloudinaryImage } from '../utils/cloudinary';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 /* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
@@ -41,6 +41,15 @@ const Article = ({ blok }:any) => {
   // Fallback values for image attributes - ensure consistent values between server and client
   const imageAlt = blok?.cover_image?.alt || blok?.title || 'Article cover image';
   const hasValidImage = coverImageUrl && coverImageUrl.length > 0;
+  const [imageLoading, setImageLoading] = useState(hasValidImage);
+  
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+  
+  const handleImageError = () => {
+    setImageLoading(false);
+  };
   
   return (
     <div className='section'>
@@ -50,7 +59,12 @@ const Article = ({ blok }:any) => {
     {(!blok) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
 
       <div className={styles.articleBanner}>
-        <div>
+        <div style={{ position: 'relative', minHeight: hasValidImage ? '400px' : 'auto' }}>
+          {imageLoading && hasValidImage && (
+            <div className="loading" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>
+              <div className="lds-heart"><div></div></div>
+            </div>
+          )}
           {hasValidImage && (
             <Image 
               alt={imageAlt}
@@ -58,6 +72,9 @@ const Article = ({ blok }:any) => {
               width={800}
               height={800}
               quality={100}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+              style={{ opacity: imageLoading ? 0 : 1, transition: 'opacity 0.3s ease-in-out' }}
             />
           )}
         </div>

@@ -27,11 +27,11 @@ export function optimizeCloudinaryImage(
   // Remove w_auto from transformation strings and clean up resulting artifacts
   let cleanedUrl = url;
   // Match transformation strings in the URL path (between /upload/ and version or public_id)
-  cleanedUrl = cleanedUrl.replace(/(\/upload\/)([^\/]+)(\/)/g, (match, prefix, transformations, suffix) => {
+  cleanedUrl = cleanedUrl.replace(/(\/upload\/)([^\/]+)(\/)/g, (match: string, prefix: string, transformations: string, suffix: string) => {
     // Remove w_auto from transformation string and clean up commas
     const cleaned = transformations
       .split(',')
-      .filter(t => t.trim() !== '' && !t.trim().startsWith('w_auto') && !t.trim().includes('w_auto'))
+      .filter((t: string) => t.trim() !== '' && !t.trim().startsWith('w_auto') && !t.trim().includes('w_auto'))
       .join(',');
     return cleaned ? `${prefix}${cleaned}${suffix}` : `${prefix}${suffix}`;
   });
