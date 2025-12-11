@@ -39,6 +39,13 @@
 	overflow-y: auto;
 	width: 75vw;
 	max-width: 1200px;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+	
 	@include media('<=tablet'){
 		width: 90vw;
 	}
