@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.scss'
 export default function aboutLinks({ blok }:any) {
 
     return (
-    <div className={styles.aboutnav} {...storyblokEditable(blok)}>
+    <div className={styles.SocialMedia} {...storyblokEditable(blok)}>
         <a href="https://www.linkedin.com/in/apdv" aria-label='LinkedIn' target='_blank'>
             <FontAwesomeIcon icon={faLinkedinIn}/>
         </a>

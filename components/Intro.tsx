@@ -37,7 +37,7 @@ export default function Intro() {
   }, []);
 
   return (
-    <div className={styles.storyboard}>
+    <div className={styles.landingSection}>
       <div className={styles.introText}>
         <h1 className={styles.gradient}>
           <div>AmanDA VIraY</div>
