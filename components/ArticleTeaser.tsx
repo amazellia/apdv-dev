@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.scss'
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {shimmer, toBase64} from '../styles/blur'
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
 
 const ArticleTeaser = ({ article, slug, tag, view}:any) => {
   var ref:any = (tag === true) ?  "/archive/[archive]": "/[...slug]";
@@ -21,7 +22,11 @@ return (
         <div className={styles.postitem}>
         <Image 
         alt={article.title || article.name}
-        src={filename}
+        src={optimizeCloudinaryImage(filename, {
+          width: 800,
+          quality: 70,
+          crop: 'limit'
+        })}
         fill
         sizes="70vw"
         style={{objectFit:"cover", objectPosition: "center center"}}
@@ -44,13 +49,18 @@ return (
     <div className={styles.listImage}>
       <Image 
       alt={article.title || article.name}
-      src={filename}
+      src={optimizeCloudinaryImage(filename, {
+        width: 800,
+        quality: 70,
+        crop: 'limit'
+      })}
       fill
       style={{objectFit:"cover", objectPosition: "center center"}}
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 700))}`} //475
       quality={70}
       priority
+      unoptimized={true}
       /></div>
     </Link> 
    <div className={styles.listText}>

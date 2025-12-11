@@ -6,6 +6,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import {shimmer, toBase64} from '../styles/blur'
 import { useState } from 'react';
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
 
 const SingleImage = (blok:any) => {
   const data = blok.blok;
@@ -40,7 +41,12 @@ const SingleImage = (blok:any) => {
         onTouchStart={handleImageClick}
       >
         <Image 
-          src={data.src}
+          src={optimizeCloudinaryImage(data.src, {
+            width: imgWidth,
+            height: imgHeight,
+            quality: 85,
+            crop: 'limit'
+          })}
           alt={data.alt || 'Image'}
           width={imgWidth}
           height={imgHeight}
@@ -121,7 +127,12 @@ const SingleImage = (blok:any) => {
             <FontAwesomeIcon icon={faTimes} />
           </IconButton>
           <Image
-            src={data.src}
+            src={optimizeCloudinaryImage(data.src, {
+              width: imgWidth,
+              height: imgHeight,
+              quality: 90,
+              crop: 'limit'
+            })}
             alt={data.alt || 'Fullscreen view'}
             width={imgWidth}
             height={imgHeight}

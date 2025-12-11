@@ -15,6 +15,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
 
 /* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
@@ -93,7 +94,12 @@ const Artwork = ({blok}:any) => {
         <Container maxWidth={false} {...storyblokEditable(blok)} sx={{ padding: 0 }}>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem 0' }}>
             <Image
-              src={allImages[0].src}
+              src={optimizeCloudinaryImage(allImages[0].src, {
+                width: allImages[0].width,
+                height: allImages[0].height,
+                quality: 90,
+                crop: 'limit'
+              })}
               alt={allImages[0].alt}
               width={allImages[0].width}
               height={allImages[0].height}
@@ -127,7 +133,11 @@ const Artwork = ({blok}:any) => {
                 onClick={() => handleImageClick(img.src)}
               >
                 <Image
-                  src={img.src}
+                  src={optimizeCloudinaryImage(img.src, {
+                    width: img.width || 800,
+                    quality: 85,
+                    crop: 'limit'
+                  })}
                   alt={img.alt}
                   width={img.width}
                   height={img.height}
@@ -199,7 +209,11 @@ const Artwork = ({blok}:any) => {
           </IconButton>
           {selectedImage && (
             <Image
-              src={selectedImage}
+              src={optimizeCloudinaryImage(selectedImage, {
+                width: 1920,
+                quality: 90,
+                crop: 'limit'
+              })}
               alt="Fullscreen view"
               width={1920}
               height={1080}

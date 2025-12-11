@@ -30,7 +30,6 @@ export async function getStaticProps(context?:any) {
   return {
     props: {
       story: data ? data.story : false,
-      key: data ? data.story.id : false,
       preview: context.preview || false,
       config: config ? config.story : false,
     },

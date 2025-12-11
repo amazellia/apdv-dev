@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import {shimmer, toBase64} from '../styles/blur'
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
 
 const Gallery = ({blok}:any) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -23,8 +24,8 @@ const Gallery = ({blok}:any) => {
     return '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
   };
 
-  const handleImageClick = (img: any) => {
-    setSelectedImage(img.filename);
+  const handleImageClick = (filename: string) => {
+    setSelectedImage(filename);
     setOpen(true);
   };
 
@@ -32,6 +33,19 @@ const Gallery = ({blok}:any) => {
     setOpen(false);
     setSelectedImage(null);
   };
+
+  // Memoize optimized image URLs to ensure consistency between server and client
+  const optimizedImages = useMemo(() => 
+    blok.images.map((img: any) => ({
+      ...img,
+      optimizedUrl: optimizeCloudinaryImage(img.filename, {
+        width: 800,
+        quality: 85,
+        crop: 'limit'
+      })
+    })),
+    [blok.images]
+  );
 
   return ( 
     <>
@@ -44,14 +58,14 @@ const Gallery = ({blok}:any) => {
             height: 'auto'
           }}
         >
-          {blok.images.map((img:any, index:number) => (
+          {optimizedImages.map((img:any, index:number) => (
             <ImageListItem 
               key={img.filename}
               sx={{ cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
-              onClick={() => handleImageClick(img)}
+              onClick={() => handleImageClick(img.filename)}
             >
               <Image 
-                src={img.filename}
+                src={img.optimizedUrl}
                 alt={img.alt || `Gallery image ${index + 1}`}
                 fill
                 sizes={getSizes()}
@@ -107,7 +121,7 @@ const Gallery = ({blok}:any) => {
               top: 8,
               right: 8,
               color: 'white',
-              zIndex: 1,
+              zIndex: 1001,
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
               '&:hover': {
                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -119,18 +133,26 @@ const Gallery = ({blok}:any) => {
           </IconButton>
           {selectedImage && (
             <Image
-              src={selectedImage}
+              src={optimizeCloudinaryImage(selectedImage, {
+                width: 1920,
+                quality: 90,
+                crop: 'limit'
+              })}
               alt="Fullscreen view"
               width={1920}
               height={1080}
-              sizes="95vw"
+              sizes="100vw"
               quality={90}
               priority
               style={{
-                maxWidth: '95vw',
-                maxHeight: '95vh',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
+                height: 'auto',
                 objectFit: 'contain',
+                display: 'block',
               }}
+              onClick={(e) => e.stopPropagation()}
             />
           )}
         </DialogContent>

@@ -8,6 +8,7 @@ import Gallery from './Gallery';
 import Teaser from './Teaser';
 import Video from "./Video";
 import SingleImage from './Picture'
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
 
 const About = ( {blok} :any) => {
 	// ⌛ TO-DO: Add new section called 'education' + 'experience' & a button called 'resume'
@@ -16,7 +17,12 @@ const About = ( {blok} :any) => {
 		<Header name='amanda viray | about' meta={blok.meta}/>
 		<h1 className={styles.centerHeading}>About her.</h1>
 		<div className={styles.about}>
-			<Image alt={blok.profilePicture.alt} className={styles.pfp} src={blok.profilePicture.filename} width={433} height={577}/>
+			<Image alt={blok.profilePicture.alt} className={styles.pfp} src={optimizeCloudinaryImage(blok.profilePicture.filename, {
+				width: 433,
+				height: 577,
+				quality: 85,
+				crop: 'limit'
+			})} width={433} height={577}/>
 		<div className={styles.desc}>
 		{render(blok.description, {
 			blokResolvers: {

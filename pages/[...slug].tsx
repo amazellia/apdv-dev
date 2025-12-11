@@ -51,7 +51,6 @@ export async function getStaticProps(context: {
         locales,
         preview,
         story: data.story,
-        key: data.story.id,
         config: configData.story,
       },
       revalidate: 3600,

@@ -10,6 +10,10 @@ const nextConfig = {
     hyvorTalkId: process.env.HYVOR_TALK_ID,
   },
   images: {
+    // Disable Next.js image optimization since all images are from Cloudinary
+    // Cloudinary already handles optimization (format conversion, quality, responsive sizing)
+    unoptimized: true,
+    // Keep remotePatterns for reference, though not needed with unoptimized
     remotePatterns: [
       {
         protocol: 'https',

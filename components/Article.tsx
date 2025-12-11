@@ -11,6 +11,8 @@ import Header from './Header';
 import Script from 'next/script';
 import Link from 'next/link';
 import Giscus from './Giscus';
+import { optimizeCloudinaryImage } from '../utils/cloudinary';
+import { useMemo } from 'react';
 
 /* 
 const HYVOR_PROCESS:any = process.env.hyvorTalkId 
@@ -24,27 +26,45 @@ const Article = ({ blok }:any) => {
   const { asPath } = useRouter()
   const slug = asPath.substring(asPath.lastIndexOf('/') + 1)
   
+  // Memoize optimized image URL to ensure consistency between server and client
+  const coverImageUrl = useMemo(() => {
+    const filename = blok?.cover_image?.filename;
+    if (!filename) return '';
+    return optimizeCloudinaryImage(filename, {
+      width: 800,
+      height: 800,
+      quality: 85,
+      crop: 'limit'
+    });
+  }, [blok?.cover_image?.filename]);
+  
+  // Fallback values for image attributes - ensure consistent values between server and client
+  const imageAlt = blok?.cover_image?.alt || blok?.title || 'Article cover image';
+  const hasValidImage = coverImageUrl && coverImageUrl.length > 0;
+  
   return (
     <div className='section'>
     <Script async src="https://talk.hyvor.com/embed/embed.js" type="module" strategy='lazyOnload'/>
-    <div key={blok.title}>
-    <Header name={blok.title} meta={blok.metaDescription}/>
+    <div>
+    <Header name={blok?.title || ''} meta={blok?.metaDescription || ''}/>
     {(!blok) ? <div className="loading"><div className="lds-heart"><div></div></div></div> : <>
 
       <div className={styles.articleBanner}>
         <div>
-          <Image 
-            alt={blok?.cover_image?.alt}
-            src={blok?.cover_image?.filename}
-            width={800}
-            height={800}
-            quality={100}
-          />
+          {hasValidImage && (
+            <Image 
+              alt={imageAlt}
+              src={coverImageUrl}
+              width={800}
+              height={800}
+              quality={100}
+            />
+          )}
         </div>
         <div className={styles.articleBanner_desc}>
-          <h1 className='title'>{blok.title}</h1>
-          <h2>{blok.subtitle}</h2>
-          <b>Published at {blok.published_at}</b>
+          <h1 className='title'>{blok?.title || ''}</h1>
+          <h2>{blok?.subtitle || ''}</h2>
+          <b>Published at {blok?.published_at || ''}</b>
         </div>
       </div>
   <hr/>
