@@ -5,7 +5,8 @@ next-env.d.ts
 .vercel
 node_modules
 .env
-
+.claude
+.claire
 
 # dependencies
 /node_modules
