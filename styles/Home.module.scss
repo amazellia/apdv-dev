@@ -177,23 +177,29 @@
 }
 .itemGrid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+	padding: 0 1rem;
 	@include media('<=tablet'){
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@include media('<=phone'){
 		grid-template-columns: 1fr;
 	}
 }
 .itemGridExpand {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	@include media('>desktop'){
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem;
+	padding: 0 1rem;
+	@include media('>phone'){
+		grid-template-columns: repeat(3, 1fr);
 	}
-	
+	@include media('>desktop'){
+		grid-template-columns: repeat(4, 1fr);
+	}
 	@include media('>=LGdesktop'){
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-		}
-	@include media('<=tablet'){
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(5, 1fr);
 	}
 }
 .itemContainer {
@@ -202,8 +208,7 @@
 	height: auto;
 	pointer-events: all;
   }
-.postitem {	
-	margin: 0.5rem;
+.postitem {
 	position: relative;
 	border-radius: 7%;
 	overflow:hidden;
@@ -317,28 +322,33 @@ a:hover + .postTitle {
 }
 
 .filterNav {
-    display:flex;
+    display: flex;
     align-items: center;
     flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
+	gap: 0.4rem;
+	padding: 1rem 1rem 0.5rem;
     button {
-        font-size: medium;
+        font-size: 0.875rem;
+        font-family: var(--sunroll-font);
         text-decoration: none;
-        border: none;
+        border: 1px solid transparent;
         color: c.$mainColor;
         background-color: c.$mainBG;
         border-radius: 30px;
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 1.1rem;
         display: block;
+        cursor: pointer;
+        transition: color 0.3s, border-color 0.3s;
     }
     button:hover {
         color: white;
-        transition: 0.7s;
+        border-color: c.$mainColor;
     }
 	@media (hover: none) {
-		cursor:'pointer'
-	  }
+		button { cursor: pointer; }
+	}
 }
 
 .closeArchive {
@@ -350,6 +360,10 @@ a:hover + .postTitle {
 	text-align: center;
 	align-items: center;
 	align-content: center;
+	max-width: 800px;
+	margin: 0.5rem auto;
+	padding: 0 1rem;
+	line-height: 1.6;
 }
 
 .articleBanner{
@@ -388,67 +402,92 @@ a:hover + .postTitle {
 
   .loadingPref {
 	font-family: var(--sunroll-font);
-	font-weight: "bold";
-	margin: 3% 10%;
-	display: grid;
+	margin: 2rem 0;
+	display: flex;
 	justify-content: center;
-	text-align: center;
-	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	p {
+		margin: 0;
+		color: c.$mainColor;
+		opacity: 0.6;
+		font-size: 0.875rem;
+	}
 	button {
 		font-family: var(--sunroll-font);
-		font-weight: "bold";
-		font-size: xx-small;
-		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);	
+		background-image: linear-gradient(35deg, c.$mainColor, #ac60ab, #6a60a0, #385880);
 		animation: animate 7s ease infinite;
 		background-size: 200%;
-		-webkit-background-clip:initial;
-		-moz-background-clip:initial;
-		background-clip:initial;
+		-webkit-background-clip: initial;
+		-moz-background-clip: initial;
+		background-clip: initial;
 		border-radius: 3vmin;
-		padding: 2vmin 2vmin;
+		padding: 0.75rem 1.75rem;
 		color: white;
-		font-size: large;
-		cursor: pointer; 
+		font-size: 1rem;
+		cursor: pointer;
 	}
-	button:hover {color: rgb(26, 3, 56); transition: 0.3s ease; }
+	button:hover { color: rgb(26, 3, 56); transition: 0.3s ease; }
   }
 
 .itemList {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr;
 	position: relative;
 	width: auto;
+	padding: 0 5%;
 }
 
 .listContainer{
 	display: grid;
 	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 1fr 0.2fr;
-	overflow:hidden;
-	margin: 0 10%;
-	align-items: center;	
+	gap: 1.5rem;
+	overflow: hidden;
+	padding: 1.25rem 0;
+	align-items: center;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+	&:first-child { border-top: 1px solid rgba(255, 255, 255, 0.07); }
+	@include media('<=tablet'){
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+		padding: 1rem 0;
+	}
 }
 
 .listImage {
 	position: relative;
 	aspect-ratio: 1.2/1;
 	overflow:hidden;
+	border-radius: 8px;
 }
 
 .listText{
-	margin: 0 5%;
+	padding: 0 1rem;
+	@include media('<=tablet'){
+		padding: 0;
+	}
 }
 
 .viewPref{
-	height: 2rem;
-	margin-top: 0.5rem;
 	display: flex;
 	justify-content: center;
+	gap: 0.5rem;
+	padding: 1.5rem 1rem 0;
 	button {
 		background-color: c.$mainBG;
 		color: c.$mainColor;
-		border: none;
+		border: 1px solid c.$mainColor;
+		border-radius: 20px;
+		padding: 0.4rem 1.1rem;
+		font-family: var(--sunroll-font);
+		font-size: 0.875rem;
+		cursor: pointer;
+		transition: background-color 0.3s, color 0.3s;
+		&:hover {
+			background-color: c.$mainColor;
+			color: c.$mainBG;
+		}
 	}
 }
 

@@ -12,18 +12,15 @@ import Link from "next/link";
 
    return (
      <div className="featureArticles">
-      <div className="featureArticles_item">   
-      <h2 className="centerTitle" {...storyblokEditable(blok)}><span className={styles.gradient}>{blok.name}</span></h2>
-      <div className={styles.itemGrid}>
-      {featuredItems}
+      <div className="featureArticles_item">
+        <h2 className="centerTitle" {...storyblokEditable(blok)}><span className={styles.gradient}>{blok.name}</span></h2>
+        <div className={styles.itemGrid}>
+          {featuredItems}
+        </div>
+        <div className={styles.seeMoreButton}>
+          <Link href={blok.url}><button>View more</button></Link>
+        </div>
       </div>
-      <div className={styles.seeMoreButton} > 
-      <Link href={blok.url}><button>
-            View more
-        </button></Link>
-      </div>
-      </div>
-
      </div>
    );
  };

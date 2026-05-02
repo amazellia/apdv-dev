@@ -298,18 +298,23 @@ footer {
   }
 }
 
+.featureArticles {
+  padding: 4rem 0 2rem;
+  @include media('<=tablet'){
+    padding: 3rem 0 1.5rem;
+  }
+}
+
 .featureArticles_item{
-  padding: auto 0;
   width: 100%;
   @include media('<=tablet'){
     width: 90%;
     margin: auto;
   }
-  
 }
 
 .section{
-  padding-top: 10%;
+  padding: clamp(2rem, 8vw, 5rem) 0 2rem;
 }
   
 .centerTitle {
