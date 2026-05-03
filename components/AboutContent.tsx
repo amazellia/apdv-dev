@@ -19,6 +19,7 @@ const AboutContent = ({ blok }: { blok: any }) => {
 	return (
 		<>
 			<h1 className={`${styles.centerHeading} ${styles.aboutTitle}`}>{blok.title}</h1>
+			{blok.subtitle && <p className={`${styles.centerHeading} ${styles.aboutSubtitle}`}>{blok.subtitle}</p>}
 			<div className={styles.about}>
 				<div className={styles.pfpWrapper}>
 					<Image

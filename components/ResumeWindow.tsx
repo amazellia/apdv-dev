@@ -212,7 +212,7 @@ const ResumeWindow = ({ items }: { items: ResumeItem[] }) => {
 					<span className={styles.tlYellow} />
 					<span className={styles.tlGreen} />
 				</div>
-				<span className={styles.resumeWindowTitle}>resume</span>
+				<span className={styles.resumeWindowTitle}>resume.exe</span>
 			</div>
 			<div className={styles.resumeTabs}>
 				{TABS.map(tab => (
