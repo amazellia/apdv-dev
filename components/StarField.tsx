@@ -54,11 +54,10 @@ const FLY_PX   = 72; // horizontal slide distance
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const easeInCubic  = (t: number) => t * t * t;
 
-const EXO2_URL = 'https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap';
 
 export default function StarField({
   title = 'AmanDA patrICIa VIraY',
-  greeting = "[ hello world - my name is ]",
+  greeting = " hello world! my name is ",
   subtitles = [
     '[ creative technologist by day ]',
     '[ story and game gobbler by night ]',
@@ -103,16 +102,6 @@ export default function StarField({
     const cssFont = getComputedStyle(canvas).getPropertyValue('--sunroll-font').trim();
     titleFontRef.current = cssFont || 'sans-serif';
 
-    // Load Exo 2 via Google Fonts <link> — reliable cross-browser approach
-    if (!document.querySelector(`link[href="${EXO2_URL}"]`)) {
-      const link = Object.assign(document.createElement('link'), {
-        rel: 'stylesheet', href: EXO2_URL,
-      });
-      link.onload = () => document.fonts.ready.then(() => { exo2Ref.current = true; });
-      document.head.appendChild(link);
-    } else {
-      document.fonts.ready.then(() => { exo2Ref.current = true; });
-    }
 
     const resize = () => {
       canvas.width  = canvas.offsetWidth;
