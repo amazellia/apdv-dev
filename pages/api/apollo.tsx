@@ -43,9 +43,11 @@ const Apollo_Client = new ApolloClient({
 });
 export default Apollo_Client;
 
+// Storyblok GraphQL rejects sort_by "items.content.published_at" (returns 0 results);
+// use "content.published_at:desc" instead.
 export const getContentItems =gql`
 query ContentItems($page: Int, $limit: Int, $after: String, $before: String, $tag: String, $slugs: String) {
-  ContentNodes(filter_query: {component: {not_in: "page"}}, per_page: $limit, by_slugs: $slugs, page: $page, first_published_at_gt: $after, first_published_at_lt: $before, with_tag: $tag, sort_by: "items.content.published_at") {
+  ContentNodes(filter_query: {component: {not_in: "page"}}, per_page: $limit, by_slugs: $slugs, page: $page, first_published_at_gt: $after, first_published_at_lt: $before, with_tag: $tag, sort_by: "content.published_at:desc") {
     total
     items {
       name
