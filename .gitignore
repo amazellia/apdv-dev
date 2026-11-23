@@ -38,3 +38,7 @@ environment.d.ts
 
 # vercel
 .vercel
+
+# local env files
+.env.local
+.env*.local
